@@ -11,41 +11,43 @@
     <link rel="stylesheet" href="./css/guest.css">
     <script src="./js/jquery.min.js"></script>
     <script src="./js/owl.carousel.min.js"></script> 
-    <script src="./js/guest.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <title>RISOTTO - Home</title>
 </head>
 <body>
     
-    <div class="home">
+    <div id="home" class="home">
         <div class="sticky-top">
             <div class="nav-header">
                 <div class="container">
                     <div class="logo animated infinite rubberBand slower ">
-                        <a href="#"><img src="./img/logo.png" alt="logo"></a>
+                        <a href="#home" class="menu-item"><img class="logo-img" src="./img/logo.png" alt="logo"></a>
                     </div>
                     <div class="social-header">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
             <div class="nav-menu">
                 <div class="container">
                     <div class="menu">
-                        <ul>
-                            <li><a class="menu-item active" href="#">HOME</a></li>
-                            <li><a class="menu-item" href="#">ABOUT</a></li>
-                            <li><a class="menu-item" href="#">GALLERY</a></li>
-                            <li><a class="menu-item" href="#">MENU</a></li>
-                            <li><a class="menu-item" href="#">RESERVATION</a></li>
-                            <li><a class="menu-item" href="#">EVENTS</a></li>
-                            <li><a class="menu-item" href="#">CONTACT</a></li>
-                        </ul>
+                        <div class="toggle-menu"><span></span></div>
+                        <div class="menu-list">
+                            <ul>
+                                <li><a class="menu-item menu-home" href="#home">HOME</a></li>
+                                <li><a class="menu-item menu-about" href="#about">ABOUT</a></li>
+                                <li><a class="menu-item menu-gallery" href="#gallery">GALLERY</a></li>
+                                <li><a class="menu-item menu-menu" href="#menu">MENU</a></li>
+                                <li><a class="menu-item menu-reservation" href="#reservation">RESERVATION</a></li>
+                                <li><a class="menu-item menu-events" href="#events">EVENTS</a></li>
+                                <li><a class="menu-item menu-contact" href="#contact">CONTACT</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="reserve-button">
-                        <a class="btn-reserve" href="#">RESERVE</a>
+                        <a class="btn-reserve menu-item" href="#reservation">RESERVE</a>
                     </div>
                 </div>
             </div>
@@ -54,6 +56,11 @@
         <div class="nav-welcome">
 
         </div>
+
+
+
+        
+        <script src="./js/guest.js"></script>
     </div>
     
 
