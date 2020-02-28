@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QLNH.Infrastructure.Entities
 {
-    public class Employee
+    public class Employee : DomainEntity<int>
     {
-        [Key] 
-        public int ID { get; set; }
-
         public string FullName { get; set; }
 
         public EmployeeType EmployeeType { get; set; }

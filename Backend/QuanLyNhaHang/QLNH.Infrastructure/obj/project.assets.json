@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {
+    ".NETCoreApp,Version=v2.2": {
       "Microsoft.EntityFrameworkCore/2.2.1": {
         "type": "package",
         "dependencies": {
@@ -3460,7 +3460,11 @@
     }
   },
   "projectFileDependencyGroups": {
+<<<<<<< HEAD
     ".NETCoreApp,Version=v3.1": [
+=======
+    ".NETCoreApp,Version=v2.2": [
+>>>>>>> thang/BE-02-build-infrastructure
       "Microsoft.EntityFrameworkCore >= 2.2.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.2.1",
       "Microsoft.NETCore.App >= 2.2.0"
@@ -3490,7 +3494,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp3.1"
+        "netcoreapp2.2"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -3498,7 +3502,7 @@
         "https://vsonline.orientsoftware.net/tfs/DefaultCollection/_packaging/Common/nuget/v3/index.json": {}
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netcoreapp2.2": {
           "projectReferences": {}
         }
       },
@@ -3509,7 +3513,11 @@
       }
     },
     "frameworks": {
+<<<<<<< HEAD
       "netcoreapp3.1": {
+=======
+      "netcoreapp2.2": {
+>>>>>>> thang/BE-02-build-infrastructure
         "dependencies": {
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",

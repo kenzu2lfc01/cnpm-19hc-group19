@@ -1,4 +1,6 @@
-﻿using QLNH.Infrastructure.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using QLNH.Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,9 +13,10 @@ namespace QLNH.Infrastructure.Data
         {
 
         }
-        public virtual DbSet<BookTable> Employees { get; set; }
-        public virtual DbSet<PayslipDetail> PayslipDetails { get; set; }
-        public virtual DbSet<RequestDetail> RequestDetail { get; set; }
-
+        public virtual DbSet<BookTable> BookTables { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Food> Foods { get; set; }
+        public virtual DbSet<RestaurantInformation> RestaurantInformations { get; set; }
+        public virtual DbSet<Table> Tables { get; set; }
     }
 }
