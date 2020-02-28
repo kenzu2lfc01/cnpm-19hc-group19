@@ -1,24 +1,94 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\CCLaptop.com\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\QLNH.Service.csproj": {}
+    "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\QLNH.Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\CCLaptop.com\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\QLNH.Service.csproj": {
+    "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Business\\QLNH.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\CCLaptop.com\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\QLNH.Service.csproj",
-        "projectName": "QLNH.Service",
-        "projectPath": "C:\\Users\\CCLaptop.com\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\QLNH.Service.csproj",
-        "packagesPath": "C:\\Users\\CCLaptop.com\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\CCLaptop.com\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\obj\\",
+        "projectUniqueName": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Business\\QLNH.Business.csproj",
+        "projectName": "QLNH.Business",
+        "projectPath": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Business\\QLNH.Business.csproj",
+        "packagesPath": "C:\\Users\\thang.nguyen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\thang.nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://vsonline.orientsoftware.net/tfs/DefaultCollection/_packaging/Common/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Infrastructure\\QLNH.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Infrastructure\\QLNH.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Infrastructure\\QLNH.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Infrastructure\\QLNH.Infrastructure.csproj",
+        "projectName": "QLNH.Infrastructure",
+        "projectPath": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Infrastructure\\QLNH.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\thang.nguyen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\thang.nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://vsonline.orientsoftware.net/tfs/DefaultCollection/_packaging/Common/nuget/v3/index.json": {}
+        },
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {}
@@ -32,22 +102,86 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
             "Microsoft.NETCore.App": {
-              "privateAssets": "all"
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\QLNH.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\QLNH.Service.csproj",
+        "projectName": "QLNH.Service",
+        "projectPath": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\QLNH.Service.csproj",
+        "packagesPath": "C:\\Users\\thang.nguyen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\thang.nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://vsonline.orientsoftware.net/tfs/DefaultCollection/_packaging/Common/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Business\\QLNH.Business.csproj": {
+                "projectPath": "C:\\Users\\thang.nguyen\\Desktop\\cnpm-19hc-group19\\Backend\\QuanLyNhaHang\\QLNH.Business\\QLNH.Business.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
         }
       }
     }

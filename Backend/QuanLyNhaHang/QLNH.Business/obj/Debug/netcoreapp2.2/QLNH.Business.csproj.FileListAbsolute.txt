@@ -1,0 +1,12 @@
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\bin\Debug\netcoreapp2.2\QLNH.Business.deps.json
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\bin\Debug\netcoreapp2.2\QLNH.Business.dll
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\bin\Debug\netcoreapp2.2\QLNH.Business.pdb
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\obj\Debug\netcoreapp2.2\QLNH.Business.csproj.CoreCompileInputs.cache
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\obj\Debug\netcoreapp2.2\QLNH.Business.AssemblyInfoInputs.cache
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\obj\Debug\netcoreapp2.2\QLNH.Business.AssemblyInfo.cs
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\obj\Debug\netcoreapp2.2\QLNH.Business.dll
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\obj\Debug\netcoreapp2.2\QLNH.Business.pdb
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\bin\Debug\netcoreapp2.2\QLNH.Infrastructure.dll
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\bin\Debug\netcoreapp2.2\QLNH.Infrastructure.pdb
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\obj\Debug\netcoreapp2.2\QLNH.Business.csprojAssemblyReference.cache
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Business\obj\Debug\netcoreapp2.2\QLNH.Business.csproj.CopyComplete

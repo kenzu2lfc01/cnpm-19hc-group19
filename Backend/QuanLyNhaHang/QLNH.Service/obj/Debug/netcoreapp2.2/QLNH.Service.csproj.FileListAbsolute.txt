@@ -1,0 +1,14 @@
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\bin\Debug\netcoreapp2.2\QLNH.Service.deps.json
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\bin\Debug\netcoreapp2.2\QLNH.Service.dll
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\bin\Debug\netcoreapp2.2\QLNH.Service.pdb
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\obj\Debug\netcoreapp2.2\QLNH.Service.csprojAssemblyReference.cache
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\obj\Debug\netcoreapp2.2\QLNH.Service.csproj.CoreCompileInputs.cache
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\obj\Debug\netcoreapp2.2\QLNH.Service.AssemblyInfoInputs.cache
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\obj\Debug\netcoreapp2.2\QLNH.Service.AssemblyInfo.cs
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\obj\Debug\netcoreapp2.2\QLNH.Service.dll
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\obj\Debug\netcoreapp2.2\QLNH.Service.pdb
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\bin\Debug\netcoreapp2.2\QLNH.Business.dll
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\bin\Debug\netcoreapp2.2\QLNH.Infrastructure.dll
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\bin\Debug\netcoreapp2.2\QLNH.Business.pdb
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\bin\Debug\netcoreapp2.2\QLNH.Infrastructure.pdb
+C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Service\obj\Debug\netcoreapp2.2\QLNH.Service.csproj.CopyComplete
