@@ -5,11 +5,8 @@ using System.Text;
 
 namespace QLNH.Infrastructure.Entities
 {
-    public class Food
+    public class Food : DomainEntity<int>
     {
-        [Key]
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Country { get; set; }

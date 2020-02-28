@@ -5,11 +5,8 @@ using System.Text;
 
 namespace QLNH.Infrastructure.Entities
 {
-    public class RestaurantInformation
+    public class RestaurantInformation : DomainEntity<int>
     {
-        [Key]
-        public int ID { get; set; }
-
         public string Name { get; set; }
 
         public string Adresss { get; set; }

@@ -6,16 +6,13 @@ using System.Text;
 
 namespace QLNH.Infrastructure.Entities
 {
-    public class BookTable
+    public class BookTable : DomainEntity<int>
     {
-        [Key]
-        public int ID { get; set; }
-
         public int Amount { get; set; }
 
         public DateTime TimeBooking { get; set; }
 
-        public IEnumerable<int> CustomerBookingId { get; set; }
+        public int CustomerBookingId { get; set; }
 
         public TypeBooking TypeBooking { get; set; }
     }
