@@ -1,3 +1,19 @@
+let webInfo;
+function loadInfo(){
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) { 
+            webInfo = JSON.parse(this.responseText);
+            console.log(webInfo);
+
+            $('.logo-img').attr('src', webInfo.logo);
+        }
+    };
+    xhttp.open("GET", "http://5e5a5ce16a71ea0014e61d69.mockapi.io/infoWeb", true); 
+    xhttp.send();
+}
+loadInfo();
+
 let toggle = $('.toggle-menu');
 let menu = $('.menu-list');
 let navHeader = $('.nav-header');
@@ -41,6 +57,7 @@ $('.gallery .owl-carousel').owlCarousel({
     nav: true,
     navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
     autoplay: true,
+    autoplayTimeout: 2000,
     responsiveClass: true,
     responsive: {
         0: {
@@ -61,14 +78,20 @@ $('.owl-carousel.list-food').owlCarousel({
     autoWidth: true,
     callbacks: true,
     margin: -130,
-    autoplay: false,
+    autoplay: true,
     autoplayTimeout: 1000,
     autoplayHoverPause: true
+}); 
+
+$('.owl-carousel.events-list').owlCarousel({     
+    autoWidth: true,
+    margin: 10, 
+    dots: true
 }); 
 
 
 
 $('.tab-food-item').click(function(){
-    $('.tab-food-item').removeClass('active');
+    $('.tab-food-item.active').removeClass('active');
     $(this).addClass('active');
 })

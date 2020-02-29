@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="reserve-button">
-                        <a class="btn-reserve" href="#reservation">RESERVE</a>
+                        <a class="btn-reserve btn-custom" href="#reservation">RESERVE</a>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                 <div class="content-welcome">
                     <div class="title-welcome">Welcome To Risotto Restaurant</div>
                     <div class="greeting-welcome">Nec solet elaboraret eu, ea usu vidit accusam. Ea per legimus singulis percipitur. Graecis ullamcorper nec ex, vix euismod detraxit voluptaria at.</div>
-                    <div class="discover-menu-button"><a class="btn-discover-menu menu-item" href="#menu">DISCOVER MENU</a></div>
+                    <div class="discover-menu-button"><a class="btn-discover-menu btn-custom" href="#menu">DISCOVER MENU</a></div>
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
         <div class="menu-food">
             <div class="container">
                 <div class="orange-title">Discover</div>
-                <div class="title title-menu-food">Our Menu</div>
+                <div class="title white-title">Our Menu</div>
                 <div class="tab-food"> 
                     <div class="tab-food-item active" category='dinner'>Dinner</div>
                     <div class="tab-food-item" category='drinks'>Drinks</div>
@@ -129,8 +129,150 @@
             </div>
         </div>
     </div>
-    <div id="reservation" class="reservation section">RESERVATION</div>
-    <div id="events" class="events section">EVENTS</div>
+    <div id="reservation" class="reservation section">
+        <div class="container">
+            <div class="book-table">
+                <div class="orange-title">Reservation</div>
+                <div class="title white-title">Book Your Table</div>
+                <div class="form-book-table">
+                    <div class="input-group-left">
+                        <div class="input-group">
+                            <label for="">Name:</label>
+                            <input type="text" id="full-name-reservation" placeholder="Name">
+                        </div>
+                        <div class="input-group">
+                            <label for="">Phone:</label>
+                            <input type="text" id="phone-reservation" placeholder="Phone">
+                        </div>
+                        <div class="input-group">
+                            <label for="">Date:</label>
+                            <input type="text" id="date-reservation" placeholder="MM/DD/YYYY">
+                        </div>
+                    </div>
+                    <div class="input-group-right">
+                        <div class="input-group">
+                            <label for="">Email:</label>
+                            <input type="text" id="email-reservation" placeholder="Email">
+                        </div>
+                        <div class="input-group">
+                            <label for="">Number of Guests:</label>
+                            <select id="guests-number-reservation">
+                                <option value="1">1 Person</option>
+                                <option value="2">2 Persons</option>
+                                <option value="3">3 Persons</option>
+                                <option value="4">4 Persons</option>
+                                <option value="5">5 Persons</option>
+                                <option value="6">6 Persons</option>
+                                <option value="7">7 Persons</option>
+                                <option value="8">8 Persons</option>
+                                <option value="9">9 Persons</option>
+                                <option value="10">10 Persons</option>
+                                <option value="11">Greater 10 Persons</option>
+                                <option value="21">Greater 20 Persons</option>
+                                <option value="31">Greater 30 Persons</option>                             
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="">Time:</label>
+                            <input type="text" id="time-reservation" placeholder="HH:MM">
+                        </div>
+                    </div>
+                    <div class="book-now-button">
+                        <button class="btn-book-now btn-custom">BOOK NOW</button>
+                    </div>
+                </div>
+            </div>
+            <div class="opening-time">
+                <div class="title white-title">Opening Time</div>
+                <div class="working-time">
+                        <ul>
+                            <li><span>Monday</span><span>8:00 am - 11:00 pm</span></li>
+                            <li><span>Tuesday</span><span>8:00 am - 11:00 pm</span></li>
+                            <li><span>Wednesday</span><span>8:00 am - 11:00 pm</span></li>
+                            <li><span>Thusday</span><span>8:00 am - 11:00 pm</span></li>
+                            <li><span>Friday</span><span>8:00 am - 11:00 pm</span></li>
+                            <li><span>Saturday</span><span>8:00 am - 11:00 pm</span></li>
+                            <li><span>Sunday</span><span>8:00 am - 11:00 pm</span></li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="events" class="events section">
+        <div class="container">
+            <div class="special-events">
+                <div class="orange-title">Special Event</div>
+                <div class="title">Upcoming Event</div>
+            </div>
+            <div class="owl-carousel events-list">
+                    <div class="event-item">
+                        <div class="event-detail">
+                            <div class="event-date">08-July-2020 8.00PM - 10.00PM</div>
+                            <div class="event-title">te vero tritani iuvaret vis. Nec odio periculis adipiscing an. 1231231232213</div>
+                            <div class="event-content">Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum.</div>
+                            <div class="read-more"><a href="#">Read More -></a></div>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-detail">
+                            <div class="event-date">08-July-2020 8.00PM - 10.00PM</div>
+                            <div class="event-title">te vero tritani iuvaret vis. Nec odio periculis adipiscing an. 1231231232213</div>
+                            <div class="event-content">Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum.</div>
+                            <div class="read-more"><a href="#">Read More -></a></div>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-detail">
+                            <div class="event-date">08-July-2020 8.00PM - 10.00PM</div>
+                            <div class="event-title">te vero tritani iuvaret vis. Nec odio periculis adipiscing an. 1231231232213</div>
+                            <div class="event-content">Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum.</div>
+                            <div class="read-more"><a href="#">Read More -></a></div>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-detail">
+                            <div class="event-date">08-July-2020 8.00PM - 10.00PM</div>
+                            <div class="event-title">te vero tritani iuvaret vis. Nec odio periculis adipiscing an. 1231231232213</div>
+                            <div class="event-content">Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum.</div>
+                            <div class="read-more"><a href="#">Read More -></a></div>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-detail">
+                            <div class="event-date">08-July-2020 8.00PM - 10.00PM</div>
+                            <div class="event-title">te vero tritani iuvaret vis. Nec odio periculis adipiscing an. 1231231232213</div>
+                            <div class="event-content">Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum.</div>
+                            <div class="read-more"><a href="#">Read More -></a></div>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-detail">
+                            <div class="event-date">08-July-2020 8.00PM - 10.00PM</div>
+                            <div class="event-title">te vero tritani iuvaret vis. Nec odio periculis adipiscing an. 1231231232213</div>
+                            <div class="event-content">Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum.</div>
+                            <div class="read-more"><a href="#">Read More -></a></div>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-detail">
+                            <div class="event-date">08-July-2020 8.00PM - 10.00PM</div>
+                            <div class="event-title">te vero tritani iuvaret vis. Nec odio periculis adipiscing an. 1231231232213</div>
+                            <div class="event-content">Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum.</div>
+                            <div class="read-more"><a href="#">Read More -></a></div>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-detail">
+                            <div class="event-date">08-July-2020 8.00PM - 10.00PM</div>
+                            <div class="event-title">te vero tritani iuvaret vis. Nec odio periculis adipiscing an. 1231231232213</div>
+                            <div class="event-content">Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum.</div>
+                            <div class="read-more"><a href="#">Read More -></a></div>
+                        </div>
+                    </div>
+            </div> 
+        </div>
+    </div>
     <div id="contact" class="contact section">CONTACT</div>
 
 
