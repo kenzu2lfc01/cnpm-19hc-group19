@@ -1,0 +1,229 @@
+img{
+    width: 100%;
+    height: 100%;
+}
+.tab-food {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-food-item {
+    padding: 20px 0; 
+    width: 80px;
+    text-align: center; 
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+}
+.tab-food-item.active {
+    color: #fff;
+    background: #f36700; 
+}
+.tab-food-item::before{
+    left: 0;
+    border-width: 20px 70px 0 0;
+    border-color: #f36500 transparent transparent;
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    border-style: solid;
+    z-index: -1;  
+}
+.tab-food-item.active::before {   
+    z-index: 0;
+    bottom: -19px;
+    transition: .5s;  
+}
+.tab-food-item::after { 
+    right: 0;
+    border-width: 0 70px 20px 0;
+    border-color: transparent #f36500 transparent;
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    border-style: solid;
+    z-index: -1;  
+}
+.tab-food-item.active::after {  
+    z-index: 0;
+    bottom: -19px;
+    transition: .5s;  
+}
+
+.tab-food-item:not(:last-child) {
+    border-right: 1px solid #ECECEC;
+}
+
+.tab-food .tab-food-item:not(.active):hover {
+    color: #f36700;
+}
+
+#menu {
+    /* background-image: url(../img/background01.jpg); */
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-clip: content-box; 
+    position: relative; 
+}
+
+.menu-food {
+    background: rgba(0, 0, 0, .6);
+}
+
+
+.white-title {
+    color: #fff;
+} 
+.list-food.owl-carousel{ 
+    margin: 25px auto; 
+    background: transparent;  
+    z-index: 0;  
+    box-shadow: -1rem 0 2rem rgba(255, 255, 255, 0.7);
+} 
+.list-food .owl-item{  
+    box-shadow: -1rem 0 2rem rgba(255, 255, 255, 0.7);
+    background: rgb(95, 0, 56);
+    border-radius: 20px; 
+    transition: .2s; 
+    scroll-snap-align:start;
+    margin: 2rem 0;
+    overflow: hidden;
+}   
+.list-food .owl-item:nth-child(odd){ 
+    animation: animDown 1s;
+}
+.list-food .owl-item:nth-child(even){ 
+    animation: animUp 1s;
+}
+.list-food .item{     
+    height: 300px;
+    width: 300px; 
+    margin: 0;
+    padding: 20px; 
+} 
+.list-food .owl-item:hover~.owl-item{
+    transform: translateX(130px);
+}
+.list-food .owl-item:hover{
+    transform: translateY(-2rem); 
+} 
+.img-food{
+    width: 100%;
+    height: 70%;
+    border-radius: 20px;
+    overflow: hidden; 
+}
+.name-food{
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+.price-food{
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.price-food i{
+    color: yellow;
+}
+.promote-price{
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 5px;
+    text-decoration: line-through;
+}
+.item.promote::before{
+    content: 'PROMOTE';
+    width: 150px;
+    height: 40px; 
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    border: 2px solid rgba(0, 0, 0, 0.808);
+    text-shadow: 2px 2px 2px teal;
+    font-weight: bold;
+    position: absolute;
+    background: rgb(194, 194, 44); 
+    color: #ECECEC;
+    top: 0;
+    left: 0;  
+    transform: rotate(-45deg) translateX(-40px) translateY(-30px);
+}
+.item.new::before{
+    content: 'NEW';
+    width: 150px;
+    height: 40px; 
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    border: 2px solid rgba(0, 0, 0, 0.808);
+    text-shadow: 2px 2px 2px teal;
+    font-weight: bold;
+    position: absolute;
+    background: rgb(219, 54, 54); 
+    color: #ECECEC;
+    top: 0;
+    left: 0;  
+    transform: rotate(-45deg) translateX(-40px) translateY(-30px);
+}
+.item.promote.new::before{
+    content: 'PROMOTE';
+    width: 150px;
+    height: 25px; 
+    text-align: center;
+    line-height: 25px;
+    font-size: 14px;
+    border: 2px solid rgba(0, 0, 0, 0.808);
+    text-shadow: 2px 2px 2px teal;
+    font-weight: bold;
+    position: absolute;
+    background: rgb(194, 194, 44); 
+    color: #ECECEC;
+    top: 0;
+    left: 0;  
+    transform: rotate(-45deg) translateX(-42px) translateY(-18px);
+}
+.item.promote.new::after{
+    content: 'NEW';
+    width: 150px;
+    height: 25px; 
+    text-align: center;
+    line-height: 25px;
+    font-size: 14px;
+    border: 2px solid rgba(0, 0, 0, 0.808);
+    text-shadow: 2px 2px 2px teal;
+    font-weight: bold;
+    position: absolute;
+    background: rgb(219, 54, 54); 
+    color: #ECECEC;
+    top: 0;
+    left: 0;  
+    transform: rotate(-45deg) translateX(-43px) translateY(-43px);
+}
+ 
+@keyframes animDown{
+    0%{
+        transform: translateX(-100%) translateY(100%);
+    }
+    100%{ 
+        transform: translateX(0);
+    }
+}
+@keyframes animUp{
+    0%{
+        transform: translateX(100%) translateY(-100%);
+    }
+    100%{ 
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,144 @@
+ @media(min-width: 950px) {
+    .nav-menu .menu-top .menu-list {
+        max-height: none;
+    }
+    .nav-menu .menu-top ul li {
+        display: inline-block;
+    }
+    .social-item {
+        margin: 0 5px;
+    }
+    .reserve-button {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .btn-reserve {
+        padding: 15px 50px;
+    }
+    .toggle-menu {
+        display: none;
+    }
+    .title-welcome {
+        font-size: 50px;
+    }
+    .greeting-welcome {
+        font-size: 24px;
+    }
+    .btn-discover-menu {
+        font-size: 14px;
+        padding: 20px 40px;
+    }
+    .btn-reserve {
+        font-size: 13px;
+    }
+    .content-about {
+        display: flex;
+    }
+    .about-left {
+        text-align: left;
+        font-size: 21px;
+        flex-basis: 1000px;
+    }
+    .about-right {
+        text-align: justify;
+        font-size: 16px;
+        color: #969696;
+    }
+    .tab-food-item {
+        padding: 25px 0;
+        width: 120px;
+    }
+    .list-food .item{     
+        height: 350px;
+        min-width: 350px; 
+    }    
+    .reservation .container{   
+        flex-direction: row;
+    } 
+    .input-group-left{
+        float: left;
+        width: auto;
+        margin-right: 15px;
+        min-width: auto;
+    }
+    .input-group-right{
+        float: right;
+        width: auto;
+        margin-left: 15px;
+        min-width: auto;
+    }     
+    .input-group{
+        margin-bottom: 15px;
+    }
+    
+    .form-book-table label{ 
+        font-size: 16px;  
+    } 
+    .form-book-table input, .form-book-table select{
+        width: 220px;
+        font-size: 18px;
+    }       
+    .book-now-button{
+        padding: 20px 0; 
+    } 
+    .book-table{
+        width: auto;
+    }    
+    .opening-time{  
+        width: auto;
+    } 
+    
+    .contact .container{ 
+        flex-direction: row-reverse; 
+    }
+    .info-contact{
+        margin-left: 5%;
+    }
+    .form-contact{ 
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    
+    .info-contact .orange-title, .info-contact .title{
+        text-align: left;
+    }
+    .info-contact .title:after{
+        margin: 10px 0 15px;
+    }     
+    
+    .contact-content p, .message-contact p{ 
+        text-align: left;
+    }
+    .contact-content h3{ 
+        text-align: left;
+    }
+    .contact-content .follow-us{ 
+        justify-content: flex-start;
+    }   
+    .form-contact textarea{ 
+        width: calc(100% - 22px); 
+    }
+        
+    .map .map-iframe{ 
+        height: 500px; 
+    } 
+    .message{ 
+        margin-left: 10px;
+        max-width: 250px;
+        position: relative; 
+        min-width: auto;
+    }
+    .form-contact>div:first-child{ 
+        margin-right: 10px;
+        max-width: 250px;
+        min-width: auto;
+    } 
+    .name-food{ 
+        margin-top: 20px;
+    }
+    .promote-price{ 
+        margin-top: 10px; 
+    }
+}

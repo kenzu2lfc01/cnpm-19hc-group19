@@ -1,0 +1,42 @@
+
+
+.gallery{ 
+    padding: 0 20px; 
+}
+.gallery .owl-carousel {
+    z-index: 0;
+    padding-top: 50px;
+}
+
+.gallery .owl-prev,
+.gallery .owl-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid #ECECEC;
+    background: transparent;
+    color: #151515;
+    padding: 0px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    margin: 0;
+    transition: 0.2s all;
+    text-align: center;
+}
+
+.gallery .owl-prev:hover,
+.gallery .owl-next:hover {
+    border: none;
+    background-color: #f36700;
+    color: #fff;
+}
+
+.gallery .owl-prev {
+    left: 0;
+}
+
+.gallery .owl-next {
+    right: 0;
+}

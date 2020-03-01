@@ -1,0 +1,40 @@
+.section:not(:first-child) {
+    padding-top: 70px;
+}
+ 
+
+.section .orange-title {
+    text-align: center;
+    color: #f36700;
+    font-size: 20px;
+    padding-top: 30px;
+}
+
+.section .title {
+    font-size: 36px;
+    text-align: center;
+}
+
+.section .title:after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 2px;
+    background-color: #f36700;
+    margin: 10px auto 40px;
+}
+
+.about { 
+    padding: 0 20px;
+}
+.about-left {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.about-right {
+    text-align: center;
+    font-size: 14px;
+    color: #969696;
+}

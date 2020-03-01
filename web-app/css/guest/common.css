@@ -1,0 +1,125 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Times New Roman', Times, serif, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth; 
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+}
+
+*:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.hide {
+    display: none;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.btn-custom {
+    border: 2px solid #ee9ca7;
+    color: #fff;
+    display: block;
+    padding: 15px 40px;
+    font-weight: 700;
+    margin: 0;
+    font-size: 12px;
+    border-radius: 30px;
+    transition: 1s;
+    background: linear-gradient(90deg, #ff8a00, #e52e71);
+    z-index: 0;
+    position: relative;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.btn-custom::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, #ee9ca7, #ffdde1);
+    z-index: -1;
+    transition: opacity 1s;
+    opacity: 0;
+    border-radius: 30px;
+}
+
+ 
+.btn-custom:hover::before {
+    opacity: 1;
+}
+
+.footer{
+    background-color: #151515;
+    color: #969696;
+    font-size: 14px;
+    padding: 10px 0;
+    text-align: center;
+}
+
+#notification{
+    position: fixed;
+    padding: 20px 15px;
+    z-index: 9999;
+    background: rgb(231, 85, 85);
+    color: #fff;
+    font-size: 15px;
+    width: 290px; 
+    top: 69px;  
+    transition: .2s;
+    transition-timing-function: ease-in;
+    left: 100%;  
+}
+#notification.active::after{
+    content: ''; 
+    position: absolute; 
+    bottom: 3px; 
+    width: calc(100% - 30px);
+    height: 2px;   
+    background: #fff;
+    animation: notiAnim 3s ease-in;
+} 
+#notification.active{ 
+    transform: translateX(-320px);
+} 
+@keyframes notiAnim{
+    0%{
+        width: calc(100% - 30px);
+    }
+    100%{
+        width: 0;
+    }
+}

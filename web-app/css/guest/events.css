@@ -1,0 +1,62 @@
+.events-list{
+    padding: 0 10px;
+    z-index: 0;
+    width: auto;
+}
+.event-item{
+    /* background: url('../../img/event02.jpg') no-repeat; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+}
+.event-detail{
+    background-color: rgba(0, 0, 0, .6);
+    color: #fff;
+    height: 250px;
+    padding: 15px; 
+    transition: .5s;
+    margin-top: 190px;
+}
+.event-item:hover .event-detail{
+    margin-top: 20px;
+    background: #d17c78;
+}
+.event-item:hover .event-date{ 
+    background: rgba(0, 0, 0, .6);
+}
+.event-date{
+    background-color: #d17c78;  
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    transition: .5s;
+}
+.event-title{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    height: 50px;
+    line-height: 23px;  
+    overflow: hidden; 
+}
+.event-content{
+    height: 110px;  
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.read-more{
+    margin-top: 10px;
+    height: 20px;
+}
+.read-more a{
+    height: 20px;
+    line-height: 20px;
+    color: #fff;
+    font-weight: bold;
+}
+.read-more a:hover{ 
+    color: seagreen; 
+}

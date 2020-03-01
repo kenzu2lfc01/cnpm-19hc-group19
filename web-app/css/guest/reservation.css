@@ -1,0 +1,79 @@
+
+.reservation{
+    /* background-image: url('../img/background03.jpg'); */
+    background-clip: content-box;
+    background-attachment: fixed;
+}
+.book-table{
+    background: rgba(0, 0, 0, .7);
+    padding: 10px 20px;
+    width: calc(100% - 40px); 
+}
+.reservation .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.form-book-table label{
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 10px;
+} 
+.form-book-table input, .form-book-table select{
+    width: calc(100% - 30px);
+    height: 36px;
+    padding: 0 15px;
+    font-size: 15px;
+    box-sizing:content-box;
+    margin-top: 5px;
+    border-radius: 40px;
+    background: transparent;
+    outline: none;
+    border: 2px solid #969696;
+    color: #969696;
+}
+.input-group{
+    margin-bottom: 10px;
+}
+
+.input-group-left, .input-group-right{
+    width: 50%;
+    min-width: 280px;
+    margin: 0 auto;
+} 
+
+.btn-book-now { 
+    background: linear-gradient(90deg, #ff8a00, #e52e71); 
+}
+
+.btn-book-now::before { 
+    background: linear-gradient(90deg, #ee9ca7, #ffdde1); 
+}
+.book-now-button{
+    padding: 10px 0;
+    clear: both;
+}
+
+.opening-time{
+    background: rgba(0, 0, 0, .95);
+    padding: 10px 20px;
+    width: calc(100% - 40px);
+} 
+.working-time li{  
+    padding: 10px 0;
+    width: 50%;
+    min-width: 280px;
+    margin: 0 auto;
+}
+.working-time span:first-child{  
+    color: #fff; 
+    display: block;
+    float: left;
+}
+.working-time span:last-child{ 
+    color: #f36700; 
+    display: block;
+    float: right;
+}

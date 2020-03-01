@@ -1,0 +1,88 @@
+.contact .container{
+    display: flex;
+    flex-direction: column; 
+    padding: 0 10px;
+}
+.map{
+    flex: 1;
+    margin-top: 30px;
+}
+.info-contact{
+    flex: 1;  
+    width: 50%;
+    margin: 0 auto;
+    min-width: 300px;
+}
+.map .map-iframe{
+    width: 100%;
+    height: 50vw;
+    border: none;
+} 
+ 
+.contact-content p, .message-contact p{
+    color: #969696;
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.contact-content h3{
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.contact-content .follow-us{
+    color: #969696;
+    display: flex; 
+    justify-content: center;
+}
+.contact-content .follow-us a{
+    padding: 0 10px;
+}
+.contact-content a:hover{
+    color: #f36700;
+}
+.form-contact{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.message-contact{
+    margin-top: 25px; 
+}
+.form-contact>div:first-child{
+    flex: 1;  
+    width: 50%;
+    min-width: 280px;
+}
+.message{  
+    flex: 1;
+    position: relative; 
+    width: 50%;
+    min-width: 280px;
+}
+.form-contact>div>div{ 
+    margin-bottom: 10px; 
+}
+.form-contact input{
+    padding: 5px 10px;
+    width: calc(100% - 24px);
+    box-sizing:content-box;
+}
+.form-contact textarea{
+    height: 100px; 
+    width: calc(100% - 22px);
+    padding: 5px 10px;
+}
+.submit-contact{
+    display: block; 
+    padding: 5px 30px;
+    width: 50%;
+    margin-left: 50%;
+    background:transparent;
+    border: 1px solid #969696;
+    cursor: pointer;
+}
+.submit-contact:hover{
+    background-color: #969696;
+    color: #fff; 
+}
