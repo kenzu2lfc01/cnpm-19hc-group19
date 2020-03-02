@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QLNH.Business.Models;
+using QLNH.Business.Table.Interfaces;
 using QLNH.Infrastructure.Entities.Enums;
 using QLNH.Infrastructure.Repositories.Interfaces;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLNH.Business.Table
 {
-    public class TableBusiness
+    public class TableBusiness : ITableBusiness
     {
         private readonly ITableRepository _tableRepository;
 

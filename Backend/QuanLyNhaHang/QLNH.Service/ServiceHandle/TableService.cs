@@ -1,5 +1,6 @@
 ﻿using QLNH.Business.Models;
 using QLNH.Business.Table.Interfaces;
+using QLNH.Service.ServiceInterface;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QLNH.Service.ServiceHandle
 {
-    public class TableService
+    public class TableService : ITableService
     {
         private ITableBusiness _tableBusiness;
 

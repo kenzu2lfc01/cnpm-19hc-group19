@@ -8,7 +8,7 @@ namespace QLNH.Service.ServiceInterface
     {
         Task<IList<TableDto>> GetAllTable();
 
-        void AddTable(TableDto tableDto);
+        void AddTable(PostTableModel tableDto);
 
         void UpdateTable(TableDto tableDto);
 

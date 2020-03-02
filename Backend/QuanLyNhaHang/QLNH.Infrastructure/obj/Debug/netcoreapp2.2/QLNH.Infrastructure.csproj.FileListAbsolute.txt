@@ -10,3 +10,11 @@ C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infra
 C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Debug\netcoreapp2.2\Newtonsoft.Json.dll
 C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Debug\netcoreapp2.2\Newtonsoft.Json.xml
 C:\Users\thang.nguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.csproj.CopyComplete
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.csprojAssemblyReference.cache
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.AssemblyInfo.cs
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.dll
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.pdb
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Debug\netcoreapp2.2\QLNH.Infrastructure.deps.json
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Debug\netcoreapp2.2\QLNH.Infrastructure.dll
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Debug\netcoreapp2.2\QLNH.Infrastructure.pdb

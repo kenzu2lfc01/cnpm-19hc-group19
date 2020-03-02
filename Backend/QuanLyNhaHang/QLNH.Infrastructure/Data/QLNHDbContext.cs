@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using QLNH.Infrastructure.Entities;
 using System;
 using System.Collections.Generic;

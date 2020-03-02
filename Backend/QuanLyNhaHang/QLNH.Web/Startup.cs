@@ -4,7 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QLNH.Business.Restaurant;
+using QLNH.Business.Restaurant.Interfaces;
+using QLNH.Business.Table;
+using QLNH.Business.Table.Interfaces;
 using QLNH.Infrastructure.Data;
+using QLNH.Infrastructure.Repositories;
+using QLNH.Infrastructure.Repositories.Interfaces;
+using QLNH.Service.ServiceHandle;
+using QLNH.Service.ServiceInterface;
 
 namespace QLNH.Web
 {
@@ -20,7 +28,14 @@ namespace QLNH.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            services.AddSingleton<ITableRepository, TableRepository >();
+            services.AddSingleton<IRestaurantInfoRepository, RestaurantInfoRepository>();
+            services.AddSingleton<ITableBusiness, TableBusiness>();
+            services.AddSingleton<IRestaurantInfoBusiness, RestaurantInfoBusiness>();
+            services.AddSingleton<IRestaurantService, RestaurantService>();
+            services.AddSingleton<ITableService, TableService>();
 
             var conectionString = Configuration.GetConnectionString("Default");
 
