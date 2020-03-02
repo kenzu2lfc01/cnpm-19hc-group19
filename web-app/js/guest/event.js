@@ -82,8 +82,4 @@ $('.btn-book-now').click(function() {
     xhr.open("POST", "http://5e5a5ce16a71ea0014e61d69.mockapi.io/reservation");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(data));
-})
-
-// self.addEventListener('message', function(e) {
-//     console.log(e.data);
-// })
+}) 

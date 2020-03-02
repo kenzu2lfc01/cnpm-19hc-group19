@@ -1,14 +1,22 @@
-let loading = 0;
-// let worker = new Worker('event.js');
-// worker.postMessage("Have a nice day");
+let loading = 0; 
+function loadingProcess(step){
+    loading += step;
+    $('#loading .process-bar .process').width( loading + '%' )
+}
+
+let loadingFunc = setInterval(function(){ 
+    if(loading < 100) return; 
+    $('#loading').addClass('loaded'); 
+    clearInterval(loadingFunc);
+}, 1);
 
 // Web info 
 function loadInfo(){
-    loading += 10;
+    loadingProcess(10);
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) { 
-            loading += 10;
+            loadingProcess(10);
             let webInfo = JSON.parse(this.responseText); 
             
             $('.logo-img').attr('src', webInfo.logo);
@@ -29,7 +37,7 @@ function loadInfo(){
             $('.email').text(`Address: ${webInfo.mail}`);
             
             enableGallery();
-            loading += 10;
+            loadingProcess(10);
         }
     };
     xhttp.open("GET", "http://5e5a5ce16a71ea0014e61d69.mockapi.io/infoWeb", true); 
@@ -39,11 +47,11 @@ loadInfo();
 
 // Load listEvent
 function listEvent(){
-    loading += 10;
+    loadingProcess(10);
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) { 
-            loading += 10;
+            loadingProcess(10);
             let data = JSON.parse(this.responseText);
             
             let events = $('.events-list');
@@ -58,7 +66,7 @@ function listEvent(){
             </div> `));
             
             enableEventList();
-            loading += 10;
+            loadingProcess(10);
         }
     };
     xhttp.open("GET", "http://5e5a5ce16a71ea0014e61d69.mockapi.io/events", true); 
@@ -67,15 +75,12 @@ function listEvent(){
 listEvent();
  
 // Food list
-$('.tab-food-item').click(function(){
-    $('.tab-food-item.active').removeClass('active');
-    $(this).addClass('active');
-
-    loading += 10;
+function loadFood(){
+    loadingProcess(10);
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) { 
-            loading += 10;
+            loadingProcess(10);
             let data = JSON.parse(this.responseText);
             
             let foods = $('.list-food'); 
@@ -91,16 +96,22 @@ $('.tab-food-item').click(function(){
             `)); 
             
             enableListFood();
-            loading += 10;
+            loadingProcess(10);
         }
     }; 
     //${$(this).attr('category')}
     xhttp.open("GET", `http://5e5a5ce16a71ea0014e61d69.mockapi.io/contact`, true); 
     xhttp.send();
+}
+$('.tab-food-item').click(function(){
+    $('.tab-food-item.active').removeClass('active');
+    $(this).addClass('active');
+
+    loadFood();
 })
 $('.tab-food-item')[0].click();
 $('.footer').html(`Copyright &copy; ${new Date().getFullYear()} All rights reserved`);
-loading += 10;
+loadingProcess(10);
 
 // Carousel
 function enableGallery(){
