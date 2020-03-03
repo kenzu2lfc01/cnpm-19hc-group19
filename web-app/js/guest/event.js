@@ -37,7 +37,12 @@ $(window).scroll(function() {
 })
 
 
+let processSubmitContact = false;
 $('.submit-contact').click(function() {
+    if(processSubmitContact) return;
+    $(this).addClass('process');
+    processSubmitContact = true; 
+
     let xhr = new XMLHttpRequest();    
     let data = {
         name: $('#full-name-contact').val(),
@@ -49,9 +54,9 @@ $('.submit-contact').click(function() {
         if (this.readyState == 4 && this.status == 201) {  
             let response = JSON.parse(this.responseText);
 
-            $('#notification').text(response.message);
-            $('#notification').addClass('active');
-            sleep(3000).then(() => $('#notification').removeClass('active'));
+            pushNotify(response.message);
+            processSubmitContact = false; 
+            $('.submit-contact').removeClass('process');
         }
     }; 
     xhr.open("POST", "http://5e5a5ce16a71ea0014e61d69.mockapi.io/contact");
@@ -59,8 +64,13 @@ $('.submit-contact').click(function() {
     xhr.send(JSON.stringify(data));
 })
 
-
+let processBookNow = false;
 $('.btn-book-now').click(function() {
+    if(processBookNow) return;
+    $(this).addClass('process');
+    processBookNow = true;
+    
+
     let xhr = new XMLHttpRequest();    
     let data = {
         name: $('#full-name-reservation').val(),
@@ -74,12 +84,21 @@ $('.btn-book-now').click(function() {
         if (this.readyState == 4 && this.status == 201) {  
             let response = JSON.parse(this.responseText);
 
-            $('#notification').text(response.message);
-            $('#notification').addClass('active');
-            sleep(3000).then(() => $('#notification').removeClass('active'));
+            pushNotify(response.message);
+            processBookNow = false;
+            $('.btn-book-now').removeClass('process');
         }
     }; 
     xhr.open("POST", "http://5e5a5ce16a71ea0014e61d69.mockapi.io/reservation");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(data));
 }) 
+
+function pushNotify(notify){
+    let id = Math.random().toString(36).replace('.', '');
+    $('#notification').append(` <div id=${id}>${notify}</div> `); 
+    $("#notification").animate({
+        scrollTop: $("#notification")[0].scrollHeight
+    }, 100); 
+    sleep(6100).then(() => $(`#${id}`).remove());
+}

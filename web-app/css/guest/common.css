@@ -78,6 +78,9 @@ ul {
 }
 
  
+.btn-submit.process{
+    opacity: .1;
+}
 .btn-custom:hover::before {
     opacity: 1;
 }
@@ -92,29 +95,58 @@ ul {
 
 #notification{
     position: fixed;
-    padding: 20px 15px;
     z-index: 9999;
-    background: rgb(231, 85, 85);
     color: #fff; 
     font-size: 15px;
-    width: 290px; 
-    top: 69px;  
-    transition: .2s;
-    transition-timing-function: ease-in;
-    left: 100%;  
+    width: 320px; 
+    top: 69px;   
+    right: 0;
+    max-height: 90vh;   
+    overflow: scroll;
 }
-#notification.active::after{
+#notification::-webkit-scrollbar {
+    width: 0; 
+  }
+#notification div{ 
+    background: rgb(231, 85, 85);
+    padding: 20px 15px;
+    margin-bottom: 2px;
+    position: relative;
+    width: 290px;  
+    right: -100%;
+    transition: 1s;
+    transition-timing-function: ease-in-out;
+    animation: notiPushAnim 6s ease-in-out;
+}
+#notification div:nth-child(odd){ 
+    background: rgb(231, 85, 85); 
+}
+#notification div:nth-child(even){ 
+    background: rgb(2, 150, 150); 
+}
+#notification div::after{
     content: ''; 
     position: absolute; 
-    bottom: 3px; 
-    width: calc(100% - 30px);
+    bottom: 5px; 
+    width: 0;
     height: 2px;   
     background: #fff;
-    animation: notiAnim 3s ease-in;
-} 
-#notification.active{ 
-    transform: translateX(-320px);
-} 
+    animation: notiAnim 5s ease-in .5s;
+}  
+@keyframes notiPushAnim{
+    0%{
+        right: -100%;
+    }
+    5%{
+        right: 0;
+    }
+    95%{
+        right: 0;
+    }
+    100%{
+        right: -100%;
+    }
+}
 @keyframes notiAnim{
     0%{
         width: calc(100% - 30px);
@@ -132,7 +164,8 @@ ul {
     height: 100vh;
     background: #000;
     z-index: 1;
-    transition: 1s; 
+    transition: .5s; 
+    transition-delay: .5s; 
     overflow: hidden;
 }
 #loading.loaded{

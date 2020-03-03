@@ -85,15 +85,17 @@ img{
     background: transparent;  
     z-index: 0;  
     box-shadow: -1rem 0 2rem rgba(255, 255, 255, 0.7);
+    max-height: 380px;
+    overflow: hidden;
 } 
 .list-food .owl-item{  
     box-shadow: -1rem 0 2rem rgba(255, 255, 255, 0.7);
     background: rgb(95, 0, 56);
-    border-radius: 20px; 
-    transition: .2s; 
+    border-radius: 20px;  
     scroll-snap-align:start;
     margin: 2rem 0;
     overflow: hidden;
+    transition: .2s;
 }   
 .list-food .owl-item:nth-child(odd){ 
     animation: animDown 1s;
@@ -134,6 +136,7 @@ img{
 }
 .price-food i{
     color: yellow;
+    padding: 0 10px;
 }
 .promote-price{
     color: #fff;
@@ -213,17 +216,17 @@ img{
  
 @keyframes animDown{
     0%{
-        transform: translateX(-100%) translateY(100%);
+        transform: scaleX(0);
     }
     100%{ 
-        transform: translateX(0);
+        transform: scaleX(1);
     }
 }
 @keyframes animUp{
     0%{
-        transform: translateX(100%) translateY(-100%);
+        transform: scaleY(0);
     }
     100%{ 
-        transform: translateY(0);
+        transform: scaleY(1);
     }
 }

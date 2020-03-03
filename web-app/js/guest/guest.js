@@ -34,7 +34,7 @@ function loadInfo(){
             $('#reservation').css('background-image', `url(${webInfo.banner.reserve})`);
             $('.phone-number').text(`Tel: ${webInfo.phone}`);
             $('.address').text(`Address: ${webInfo.address}`);
-            $('.email').text(`Address: ${webInfo.mail}`);
+            $('.email').text(`Email: ${webInfo.mail}`);
             
             enableGallery();
             loadingProcess(10);
@@ -46,7 +46,7 @@ function loadInfo(){
 loadInfo();
 
 // Load listEvent
-function listEvent(){
+function loadEvent(){
     loadingProcess(10);
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -72,44 +72,46 @@ function listEvent(){
     xhttp.open("GET", "http://5e5a5ce16a71ea0014e61d69.mockapi.io/events", true); 
     xhttp.send();
 }
-listEvent();
+loadEvent();
  
 // Food list
 function loadFood(){
     loadingProcess(10);
+    let foodList;
     let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function() { 
         if (this.readyState == 4 && this.status == 200) { 
             loadingProcess(10);
-            let data = JSON.parse(this.responseText);
             
-            let foods = $('.list-food'); 
-            foods.trigger('destroy.owl.carousel');
-            foods.html('');
-            data.forEach(item => foods.append(`
-                <div class="item ${item.isPromote? 'promote':''} ${item.isNew? 'new':''}">
-                    <div class="img-food"><img src="${item.image}" alt="food"></div>
-                    <div class="name-food">${item.name}</div>
-                    <div class="price-food"><i class="fa fa-star-o"></i>${item.price}<i class="fa fa-star-o"></i></div>
-                    <div class="promote-price"><i>${item.promote}</i></div>
-                </div> 
-            `)); 
-            
-            enableListFood();
+            foodList = JSON.parse(this.responseText); 
+         
+            $('.tab-food-item').click(function(){
+                $('.tab-food-item.active').removeClass('active');
+                $(this).addClass('active');
+
+                let foods = $('.list-food'); 
+                foods.trigger('destroy.owl.carousel');
+                foods.html('');
+                foodList.filter(i => i.category == $(this).attr('category')).forEach(item => foods.append(`
+                    <div class="item ${item.isPromote? 'promote':''} ${item.isNew? 'new':''}">
+                        <div class="img-food"><img src="${item.image}" alt="food"></div>
+                        <div class="name-food">${item.name}</div>
+                        <div class="price-food"><i class="fa fa-star-o"></i>${item.price}<i class="fa fa-star-o"></i></div>
+                        <div class="promote-price"><i>${item.promote}</i></div>
+                    </div> 
+                `));  
+                enableListFood();
+            }) 
+
+            $('.tab-food-item')[0].click();
             loadingProcess(10);
         }
-    }; 
-    //${$(this).attr('category')}
+    };  
     xhttp.open("GET", `http://5e5a5ce16a71ea0014e61d69.mockapi.io/contact`, true); 
     xhttp.send();
 }
-$('.tab-food-item').click(function(){
-    $('.tab-food-item.active').removeClass('active');
-    $(this).addClass('active');
+loadFood();
 
-    loadFood();
-})
-$('.tab-food-item')[0].click();
 $('.footer').html(`Copyright &copy; ${new Date().getFullYear()} All rights reserved`);
 loadingProcess(10);
 

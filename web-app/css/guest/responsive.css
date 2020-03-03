@@ -50,6 +50,9 @@
         padding: 25px 0;
         width: 120px;
     }
+    .list-food.owl-carousel{  
+        max-height: 430px; 
+    } 
     .list-food .item{     
         height: 350px;
         min-width: 350px; 
