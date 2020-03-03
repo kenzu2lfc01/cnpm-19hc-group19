@@ -29,8 +29,8 @@
         <div class="sidebar-welcome">
             <img class="avatar" src="../img/img.webp" alt="avatar">
             <div class="welcome-text">
-                <span>Welcom,</span><br>
-                <h2 class="name">NhungCR</h2>
+                <span>Welcom,</span>
+                <h2 class="name">THÁI VÕ</h2>
             </div>
         </div>
         <div class="nav-menu">
@@ -103,16 +103,17 @@
         <div class="profile">
             <div class="profile-button">
                 <img class="avatar" src="../img/img.webp" alt="" class=" profile">
-                <span class="name">NhungCR</span> 
+                <span class="name">Thái Võ</span> 
                 <i class="fa fa-angle-down"></i> 
             </div>
             <div class="profile-dropdown hide">
                 <a href="#">Profile</a>
-                <a href="#">Log out</a>
+                <a class="logout">Log out</a>
             </div>
         </div>
     </div>
     <div class="main" page='./index.html'>
+        <div class="main-title">Xin chào đây là giao diện admin</div>
         <div class="main-container">
             <div></div>
             <div></div>
@@ -127,6 +128,44 @@
         </div>
     </div>
 
+    <div class="login">
+        <div class="form-login form-custom">
+            <form action="#" id="log-in">
+                <h1 class="title-form">Login System</h1>
+                <div>
+                    <input required type="text" name="username" id="username" placeholder="Username">
+                </div>
+                <div>         
+                    <input required type="text" name="password" id="password" placeholder="Password">
+                </div>
+                <div>
+                    <input type="submit" value="Login">
+                    <input class="btn-forgot" type="button" value="Forgot password?">
+                </div>
+                
+                <div class="end-form">From Thái Võ with  
+                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                </div>
+            </form>
+        </div>
+        <div class="form-forgot form-custom">
+            <form action="#" id="forgot-password">
+                <h1 class="title-form">Reset Password</h1>
+                <div>
+                    <input required type="text" name="username" id="username" placeholder="Username">
+                </div> 
+                <div>
+                    <input type="submit" value="Send password to mail">
+                    <input class="btn-forgot" type="button" value="Back to login">
+                </div>
+                
+                <div class="end-form">From Thái Võ with  
+                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="notification"> </div>
     <script src="../js/admin/event.js"></script>  
 </body>
 

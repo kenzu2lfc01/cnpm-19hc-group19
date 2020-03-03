@@ -50,14 +50,17 @@
 } 
 .sidebar-welcome .welcome-text {
     margin-left: 20px;
-    display: inline-table;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 } 
 .sidebar-welcome span {
     color: #BAB8B8;
     font-size: 13px;
 } 
 .sidebar-welcome h2 {
-    font-size: 14px;
+    font-size: 15px;
+    font-family: monospace;
     font-weight: bold;
 } 
 

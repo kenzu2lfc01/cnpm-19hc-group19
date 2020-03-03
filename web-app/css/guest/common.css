@@ -107,7 +107,8 @@ ul {
 }
 #notification::-webkit-scrollbar {
     width: 0; 
-  }
+    height: 1px;
+}
 #notification div{ 
     background: rgb(231, 85, 85);
     padding: 20px 15px;
