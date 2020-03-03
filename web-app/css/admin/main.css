@@ -1,0 +1,68 @@
+body{
+    overflow: hidden;
+}
+.main{    
+    padding: 5px 0 5px 5px;
+    height: calc(100vh - 71px);  
+    background: #F7F7F7; 
+    overflow: hidden;
+} 
+.main-container::-webkit-scrollbar {
+    width: 5px;
+} 
+.main-container::-webkit-scrollbar-track {
+    background: #ddd;
+} 
+.main-container::-webkit-scrollbar-thumb {
+    background: #2a3f54; 
+}
+
+.main-container{ 
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+    background: #fff;
+}
+
+
+.main-container div:nth-child(1){
+    height: 50vh;
+    background: green;
+}
+.main-container div:nth-child(2){
+    height: 50vh;
+    background: orange;
+}
+.main-container div:nth-child(3){
+    height: 50vh;
+    background: teal;
+}
+.main-container div:nth-child(4){
+    height: 50vh;
+    background: yellow;
+}
+.main-container div:nth-child(5){
+    height: 50vh;
+    background: red;
+}
+.main-container div:nth-child(6){
+    height: 50vh;
+    background: purple;
+}
+.main-container div:nth-child(7){
+    height: 50vh;
+    background: wheat;
+} 
+.main-container div:nth-child(8){
+    height: 50vh;
+    background: goldenrod;
+} 
+.main-container div:nth-child(9){
+    height: 50vh;
+    background: gray;
+} 
+.main-container div:nth-child(10){
+    height: 50vh;
+    background: blueviolet;
+}
+

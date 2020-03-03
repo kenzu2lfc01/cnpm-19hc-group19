@@ -192,7 +192,7 @@
     display: block;
     margin-right: 0;
 }
-.menu-parent .menu-title i:last-child{ 
+.sidebar.collapse .menu-title i:last-child{ 
     display: none;
 } 
 .sidebar.collapse .menu-body { 

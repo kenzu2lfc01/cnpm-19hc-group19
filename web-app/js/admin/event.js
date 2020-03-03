@@ -1,9 +1,11 @@
+$('.btn-toggle i').click(function(){
+    toggleSidebar();
+})
 $('.menu-parent').click(function() { 
     let current = $(this).hasClass('active');
     $('.menu-parent.active').removeClass('active'); 
     if(!current)  $(this).toggleClass('active');
 })
-
 function toggleSidebar(){
     if(window.innerWidth < 1000){
         $('.sidebar').addClass('collapse');
@@ -32,3 +34,10 @@ window.addEventListener('load', function(){
     current.parent().parent().addClass('current-module');
     adjustSidebar();
 }); 
+window.addEventListener('click', function(event){
+    let parent = $('.profile-button');
+    if(parent.get(0) == event.target || parent.has(event.target).length)
+        $('.profile-dropdown').toggleClass('hide');
+    else 
+        $('.profile-dropdown').addClass('hide');
+});
