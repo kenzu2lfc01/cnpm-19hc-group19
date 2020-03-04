@@ -17,5 +17,7 @@ namespace QLNH.Infrastructure.Data
         public virtual DbSet<Food> Foods { get; set; }
         public virtual DbSet<RestaurantInformation> RestaurantInformations { get; set; }
         public virtual DbSet<Table> Tables { get; set; }
+        public virtual DbSet<FeedBacks> FeedBacks { get; set; }
+
     }
 }

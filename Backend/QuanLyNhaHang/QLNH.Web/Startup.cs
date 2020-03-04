@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QLNH.Business.FeedBack;
+using QLNH.Business.FeedBack.Interfaces;
 using QLNH.Business.Restaurant;
 using QLNH.Business.Restaurant.Interfaces;
 using QLNH.Business.Table;
@@ -11,8 +13,12 @@ using QLNH.Business.Table.Interfaces;
 using QLNH.Infrastructure.Data;
 using QLNH.Infrastructure.Repositories;
 using QLNH.Infrastructure.Repositories.Interfaces;
-using QLNH.Service.ServiceHandle;
-using QLNH.Service.ServiceInterface;
+using QLNH.Service.FeedBack;
+using QLNH.Service.FeedBack.Interface;
+using QLNH.Service.Restaurant;
+using QLNH.Service.Restaurant.Interface;
+using QLNH.Service.Table;
+using QLNH.Service.Table.Interface;
 
 namespace QLNH.Web
 {
@@ -32,10 +38,16 @@ namespace QLNH.Web
 
             services.AddSingleton<ITableRepository, TableRepository >();
             services.AddSingleton<IRestaurantInfoRepository, RestaurantInfoRepository>();
-            services.AddSingleton<ITableBusiness, TableBusiness>();
+            services.AddSingleton<IFeedBackRepository, FeedBackRepository>();
+
+            services.AddSingleton<IFeedBackBusiness ,FeedBackBusiness > ();
             services.AddSingleton<IRestaurantInfoBusiness, RestaurantInfoBusiness>();
+            services.AddSingleton<ITableBusiness, TableBusiness>();
+
             services.AddSingleton<IRestaurantService, RestaurantService>();
             services.AddSingleton<ITableService, TableService>();
+            services.AddSingleton<IFeedBackService, FeedBackService>();
+
 
             var conectionString = Configuration.GetConnectionString("Default");
 

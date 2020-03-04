@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QLNH.Business.Models;
-using QLNH.Service.ServiceInterface;
+using QLNH.Business.Models.Dtos;
+using QLNH.Service.Restaurant.Interface;
 
 namespace QLNH.Web.Controllers
 {
@@ -20,6 +21,7 @@ namespace QLNH.Web.Controllers
             _service = service;
         }
 
+        [HttpGet]
         public async Task<ActionResult<RestaurantInfoDto>> GetRestaurantInfor()
         {
             return Ok(await _service.GetRestaurantInformation());

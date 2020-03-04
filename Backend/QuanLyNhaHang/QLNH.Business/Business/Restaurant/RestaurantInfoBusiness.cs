@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QLNH.Business.Models;
+using QLNH.Business.Models.Dtos;
 using QLNH.Business.Restaurant.Interfaces;
 using QLNH.Infrastructure.Repositories.Interfaces;
 using System;

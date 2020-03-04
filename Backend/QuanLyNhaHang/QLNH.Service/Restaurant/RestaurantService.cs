@@ -1,12 +1,9 @@
-﻿using QLNH.Business.Models;
+﻿using QLNH.Business.Models.Dtos;
 using QLNH.Business.Restaurant.Interfaces;
-using QLNH.Service.ServiceInterface;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using QLNH.Service.Restaurant.Interface;
 using System.Threading.Tasks;
 
-namespace QLNH.Service.ServiceHandle
+namespace QLNH.Service.Restaurant
 {
     public class RestaurantService : IRestaurantService
     {

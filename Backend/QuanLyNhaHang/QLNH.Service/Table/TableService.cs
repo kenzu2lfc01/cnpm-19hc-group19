@@ -1,12 +1,13 @@
 ﻿using QLNH.Business.Models;
+using QLNH.Business.Models.Dtos;
 using QLNH.Business.Table.Interfaces;
-using QLNH.Service.ServiceInterface;
+using QLNH.Service.Table.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QLNH.Service.ServiceHandle
+namespace QLNH.Service.Table
 {
     public class TableService : ITableService
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QLNH.Business.Models;
-using QLNH.Service.ServiceHandle;
+using QLNH.Business.Models.Dtos;
+using QLNH.Service.Table;
 using QLNH.Web.Models.Tables;
 using System.Collections.Generic;
 using System.Threading.Tasks;

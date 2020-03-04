@@ -1,10 +1,11 @@
 ﻿using QLNH.Business.Models;
+using QLNH.Business.Models.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace QLNH.Service.ServiceInterface
+namespace QLNH.Business.Table.Interfaces
 {
-    public interface ITableService
+    public interface ITableBusiness
     {
         Task<IList<TableDto>> GetAllTable();
 
@@ -13,5 +14,7 @@ namespace QLNH.Service.ServiceInterface
         void UpdateTable(TableDto tableDto);
 
         void DeleteTable(int tableId);
+
+        void SaveChangeAsync();
     }
 }

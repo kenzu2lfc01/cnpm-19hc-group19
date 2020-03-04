@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QLNH.Business.Models
+namespace QLNH.Business.Models.Dtos
 {
    public class RestaurantInfoDto
     {
