@@ -5,6 +5,7 @@ $('.btn-toggle i').click(toggleSidebar)
 $('.menu-parent').click(function() { toggleMenu($(this)); })
 $('.btn-forgot').click(function(){ $('.login').toggleClass('forgot'); })
 $('.logout').click(logout)
+$('#btn-filter').click(toggleFilter);
  
 let processLogin = false;
 $('#log-in').submit(function(e) { login(e, $(this).serialize()); });
@@ -28,6 +29,11 @@ function resetPassword(e, d){
         }
     });
 }
+function updateLoginInfo(){
+    let auth = JSON.parse(localStorage.auth);
+    $('.name').text(auth.name);
+    $('.avatar').attr('src', auth.avatar);
+}
 function login(e, d){
     e.preventDefault();
     if(processLogin) return;
@@ -40,7 +46,12 @@ function login(e, d){
         success: function(data)
         {  
             if(data.username) {
-                localStorage.token = "login success";
+                localStorage.auth = JSON.stringify({
+                    token: data.username,
+                    name: data.name,
+                    avatar: data.avatar
+                });
+                updateLoginInfo();
                 toggleLogin();
             }
             else {
@@ -50,12 +61,15 @@ function login(e, d){
         }
     });
 }
+function toggleFilter(){
+    $('.d-form-filter').toggleClass('active');
+}
 function toggleLogin(){
     $('.login').toggleClass('login-required');
 }
 function logout(){
     event.preventDefault();
-    localStorage.removeItem('token');
+    localStorage.removeItem('auth');
     window.location = './index.html';
 }
 function toggleSidebar(){
@@ -83,7 +97,8 @@ function adjustSidebar(){
     } 
 }
 function loadRequired(){
-    if(!localStorage.token) toggleLogin();
+    if(!localStorage.auth) toggleLogin();
+    else updateLoginInfo();
 
     let page = $('.main').attr('page');
     let current = $( `a[href*='${page}']` );

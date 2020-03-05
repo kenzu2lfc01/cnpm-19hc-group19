@@ -166,7 +166,7 @@ ul {
     height: 100vh;
     background: #000;
     z-index: 1;
-    transition: .5s; 
+    transition: .2s; 
     transition-delay: .5s; 
     overflow: hidden;
 }

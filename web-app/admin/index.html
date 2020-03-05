@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="./css/font_awesome.min.css">    -->
+    <!-- <link rel="stylesheet" href="../css/libs/font-awesome.min.css">    -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/libs/owl.carousel.min.css">
     <link rel="stylesheet" href="../css/libs/owl.theme.default.min.css">
@@ -100,9 +100,23 @@
     </div>
     <div class="header">
         <div class="btn-toggle"><i class="fa fa-bars"></i></div> 
+        <div class="search-form">
+            <form id="form-search">
+                <div class="form-wrapper">
+                    <input name="q" id="search-input" placeholder="Search" autocomplete="off"/>
+                    <button name="btn-search" id="btn-search" type="submit"><i class="fa fa-search"></i></button> 
+                    <button id="btn-filter" type="button"><i class="fa fa-angle-down"></i></button> 
+                </div>
+            </form>
+            <div class="d-form-filter">
+                <form id="form-filter">
+                     
+                </form>
+            </div>
+        </div>
         <div class="profile">
             <div class="profile-button">
-                <img class="avatar" src="../img/img.webp" alt="" class=" profile">
+                <img class="avatar" src="../img/img.webp" alt="avt" class=" profile">
                 <span class="name">Thái Võ</span> 
                 <i class="fa fa-angle-down"></i> 
             </div>
@@ -113,7 +127,12 @@
         </div>
     </div>
     <div class="main" page='./index.html'>
-        <div class="main-title">Xin chào đây là giao diện admin</div>
+        <div class="main-header"> 
+            <div class="main-title">Xin chào đây là giao diện admin</div> 
+            <div class="main-button">
+                <button class="btn-main"><i class="fa fa-plus"></i>Create</button>
+            </div>
+        </div>
         <div class="main-container">
             <div></div>
             <div></div>
@@ -133,10 +152,10 @@
             <form action="#" id="log-in">
                 <h1 class="title-form">Login System</h1>
                 <div>
-                    <input required type="text" name="username" id="username" placeholder="Username">
+                    <input autofocus required type="text" name="username" id="username" placeholder="Username" autocomplete="off" >
                 </div>
                 <div>         
-                    <input required type="text" name="password" id="password" placeholder="Password">
+                    <input required type="text" name="password" id="password" placeholder="Password" autocomplete="off" >
                 </div>
                 <div>
                     <input type="submit" value="Login">
@@ -152,7 +171,7 @@
             <form action="#" id="forgot-password">
                 <h1 class="title-form">Reset Password</h1>
                 <div>
-                    <input required type="text" name="username" id="username" placeholder="Username">
+                    <input required type="text" name="username" id="username" placeholder="Username" autocomplete="off" >
                 </div> 
                 <div>
                     <input type="submit" value="Send password to mail">

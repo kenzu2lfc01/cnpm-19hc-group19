@@ -3,12 +3,13 @@ body{
 }
 .main{    
     padding: 5px 0 5px 5px;
-    height: calc(100vh - 61px);  
+    height: calc(100vh - 81px);  
     background: #F7F7F7; 
     overflow: hidden;
 } 
 .main-container::-webkit-scrollbar {
     width: 5px;
+    height: 5px;
 } 
 .main-container::-webkit-scrollbar-track {
     background: #ddd;
@@ -16,26 +17,58 @@ body{
 .main-container::-webkit-scrollbar-thumb {
     background: #2a3f54; 
 }
-.main-title{
-    height: 25px;
-    line-height: 25px;
+.main-header{
+    display: flex;
+    height: 50px;
+    align-items: center; 
+    justify-content: flex-end;
+}
+.main-header .main-title{
+    height: 40px; 
+    line-height: 40px;
     font-size: 18px;
     padding: 0 15px;
     font-weight: bold;
     color: #2a3f54ab; 
-    font-family: monospace;
+    font-family: monospace; 
+    flex: 1;
+}   
+.main-header .main-button{ 
+    float: right;
+    text-align: right; 
+    vertical-align: middle;
+}
+.main-header.disable-button .main-button{
+    display: none;
+}
+.main-header .main-button .btn-main{
+    padding: 10px 0;
+    margin-right: 10px;
+    width: 100px;
+    background-color: #1ABB9C;
+    border: none; 
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    position: relative;
+}
+.main-header .main-button .btn-main i{
+   margin-right: 5px; 
+}
+.main-header .main-button .btn-main:hover{
+    box-shadow: 1px 1px 5px #2a3f54;
 }
 
 .main-container{ 
-    overflow-x: hidden;
-    overflow-y: scroll;
-    height: calc(100% - 25px);
+    overflow: auto;
+    height: calc(100% - 50px);
     background: #fff;
 }
 
 
 .main-container div:nth-child(1){
-    height: 50vh;
+    height: 50vh; 
     background: green;
 }
 .main-container div:nth-child(2){
@@ -73,15 +106,13 @@ body{
 }
 .login .form-login{ 
     width: 310px;
-    height: 400px;
-    padding: 5px; 
+    height: 400px; 
     overflow: hidden;
     transition: .5s;
     background: transparent;
 }
 .login .form-forgot{  
-    width: 310px;
-    padding: 5px; 
+    width: 310px; 
     height: 0;
     overflow: hidden;
     transition: .5s;
@@ -164,9 +195,11 @@ body{
 }
 .form-custom input[type='button']:hover{   
     color: #298da7;
-}
-@media(max-width: 999px){ 
-    .main-title{ 
-        font-size: 16px; 
+} 
+
+@media(max-width: 420px){  
+    .main-header:not(.disable-button) .main-title{ 
+        line-height: 20px; 
+        font-size: 16px;
     }
-}
+} 

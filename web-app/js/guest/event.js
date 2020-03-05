@@ -46,7 +46,7 @@ $('.submit-contact').click(function() {
     let xhr = new XMLHttpRequest();    
     let data = {
         name: $('#full-name-contact').val(),
-        email: $('#email-contact').val(),
+        email: $('#phone-contact').val(),
         subject: $('#subject-contact').val(),
         message: $('#message-contact').val()
     };  

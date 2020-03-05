@@ -34,7 +34,7 @@ function loadInfo(){
             $('#reservation').css('background-image', `url(${webInfo.banner.reserve})`);
             $('.phone-number').text(`Tel: ${webInfo.phone}`);
             $('.address').text(`Address: ${webInfo.address}`);
-            $('.email').text(`Email: ${webInfo.mail}`);
+            $('.email').html(`Email: <a href='mailto:${webInfo.mail}'>${webInfo.mail}</a>`);
             
             enableGallery();
             loadingProcess(10);
