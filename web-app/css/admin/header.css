@@ -136,6 +136,7 @@
     background: #fff;
     border: 1px solid #D9DEE4;
     right: 0; 
+    z-index: 1;
 }
 .header .profile-dropdown a{
     text-align: left;

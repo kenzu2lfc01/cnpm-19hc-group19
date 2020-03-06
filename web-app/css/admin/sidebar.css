@@ -204,6 +204,9 @@
     left: 100%;
     top: 0;
 } 
+.sidebar.collapse .menu-child { 
+    min-width: 100px;
+} 
 .sidebar.collapse .menu-child::before { 
     content: none;
 } 

@@ -1,18 +1,39 @@
+let processLogin = false;
+let processResetPass = false;
+
 window.addEventListener('resize', adjustSidebar);
 window.addEventListener('load', loadRequired); 
 window.addEventListener('click', triggerWindowClick);
-$('.btn-toggle i').click(toggleSidebar)
-$('.menu-parent').click(function() { toggleMenu($(this)); })
-$('.btn-forgot').click(function(){ $('.login').toggleClass('forgot'); })
-$('.logout').click(logout)
-$('#btn-filter').click(toggleFilter);
- 
-let processLogin = false;
-$('#log-in').submit(function(e) { login(e, $(this).serialize()); });
-let processResetPass = false;
-$('#forgot-password').submit(function(e) { resetPassword(e, $(this).serialize()); });
 
+function loadRequired(){
+    renderSidebar();
+    renderHeaader();
+    if(!localStorage.auth) toggleLogin();
+    else updateLoginInfo();
 
+    highlightCurrentPage();
+    adjustSidebar();
+        
+    enableEventPage();
+}
+
+function enableEventPage(){
+    $('.btn-toggle i').click(toggleSidebar)
+    $('.menu-parent').click(function() { toggleMenu($(this)); })
+    $('.btn-forgot').click(function(){ $('.login').toggleClass('forgot'); })
+    $('.logout').click(logout)
+    $('#btn-filter').click(toggleFilter);
+    
+    $('#log-in').submit(function(e) { login(e, $(this).serialize()); });
+    $('#forgot-password').submit(function(e) { resetPassword(e, $(this).serialize()); });
+}
+function highlightCurrentPage(){
+    let page = $('.main').attr('page');
+    let current = $(`a[href*='${page}']`);
+    current.addClass('current-page');
+    current.parent().parent().addClass('current-module');
+
+}
 function resetPassword(e, d){
     e.preventDefault();
     if(processResetPass) return;
@@ -96,17 +117,6 @@ function adjustSidebar(){
         $('.sidebar').addClass('hidden'); 
     } 
 }
-function loadRequired(){
-    if(!localStorage.auth) toggleLogin();
-    else updateLoginInfo();
-
-    let page = $('.main').attr('page');
-    let current = $( `a[href*='${page}']` );
-    current.addClass('current-page');
-    current.parent().parent().addClass('current-module');
-
-    adjustSidebar();
-}
 function triggerWindowClick(event){
     let parent = $('.profile-button');
     if(parent.get(0) == event.target || parent.has(event.target).length)
@@ -121,4 +131,141 @@ function pushNotify(notify){
         scrollTop: $("#notification")[0].scrollHeight
     }, 100);  
     setTimeout(() => $(`#${id}`).remove(), 6100);
+}
+function renderSidebar(){
+    $('.sidebar').html(`
+    <div class="sidebar-top">
+            <a href="#">
+                <i class="fa fa-paw"></i>
+                <p>Admin Dashboard</p>
+            </a>
+        </div>
+        <div class="sidebar-welcome">
+            <img class="avatar" src="../img/img.webp" alt="avatar">
+            <div class="welcome-text">
+                <span>Welcom,</span>
+                <h2 class="name">THÁI VÕ</h2>
+            </div>
+        </div>
+        <div class="nav-menu">
+            <div class="menu-container">
+                <div class="menu-parent">
+                    <div class="menu-title">
+                        <i class="fa fa-home"></i>
+                        Finance
+                        <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div class="menu-body">
+                        <a href="./index.html" class="menu-child">Revenue</a>
+                        <a href="#" class="menu-child">Receipts Voucher</a>
+                        <a href="#" class="menu-child">Payment Voucher</a>
+                    </div>
+                </div>
+                <div class="menu-parent">
+                    <div class="menu-title">
+                        <i class="fa fa-home"></i>
+                        Human Resource
+                        <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div class="menu-body">
+                        <a href="#" class="menu-child">Employee</a>
+                        <a href="#" class="menu-child">Timesheet</a>
+                        <a href="#" class="menu-child">Payroll</a>
+                        <a href="#" class="menu-child">Department</a>
+                    </div>
+                </div>
+                <div class="menu-parent">
+                    <div class="menu-title">
+                        <i class="fa fa-home"></i>
+                        Customers
+                        <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div class="menu-body">
+                        <a href="#" class="menu-child">Infomation</a>
+                        <a href="#" class="menu-child">History Book</a>
+                        <a href="#" class="menu-child">History Payment</a>
+                        <a href="#" class="menu-child">Feedback</a>
+                        <a href="#" class="menu-child">Customer Group</a>
+                    </div>
+                </div>
+                <div class="menu-parent">
+                    <div class="menu-title">
+                        <i class="fa fa-home"></i>
+                        Tables
+                        <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div class="menu-body">
+                        <a href="#" class="menu-child">Infomation</a>
+                        <a href="#" class="menu-child">Reservation</a>
+                        <a href="#" class="menu-child">Table Type</a>
+                    </div>
+                </div>
+                <div class="menu-parent">
+                    <div class="menu-title">
+                        <i class="fa fa-home"></i>
+                        Food 
+                        <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div class="menu-body">
+                        <a href="#" class="menu-child">Menu</a>
+                        <a href="#" class="menu-child">Food Category</a> 
+                    </div>
+                </div>
+                <div class="menu-parent">
+                    <div class="menu-title">
+                        <i class="fa fa-home"></i>
+                        Provider 
+                        <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div class="menu-body">
+                        <a href="#" class="menu-child">Infomation</a>
+                        <a href="#" class="menu-child">History Import</a>
+                        <a href="#" class="menu-child">Provider Type</a> 
+                    </div>
+                </div>
+                <div class="menu-parent">
+                    <div class="menu-title">
+                        <i class="fa fa-home"></i>
+                        Config Website
+                        <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div class="menu-body">
+                        <a href="#" class="menu-child">Image</a>
+                        <a href="#" class="menu-child">Infomation</a>
+                        <a href="#" class="menu-child">Working Time</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    `);
+}
+function renderHeaader(){
+    $('.header').html(`
+        <div class="btn-toggle"><i class="fa fa-bars"></i></div> 
+            <div class="search-form">
+                <form id="form-search">
+                    <div class="form-wrapper">
+                        <input name="q" id="search-input" placeholder="Search" autocomplete="off"/>
+                        <button name="btn-search" id="btn-search" type="submit"><i class="fa fa-search"></i></button> 
+                        <button id="btn-filter" type="button"><i class="fa fa-angle-down"></i></button> 
+                    </div>
+                </form>
+                <div class="d-form-filter">
+                    <form id="form-filter">
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="profile">
+                <div class="profile-button">
+                    <img class="avatar" src="../img/img.webp" alt="avt" class=" profile">
+                    <span class="name">Thái Võ</span> 
+                    <i class="fa fa-angle-down"></i> 
+                </div>
+                <div class="profile-dropdown hide">
+                    <a href="#">Profile</a>
+                    <a class="logout">Log out</a>
+                </div>
+            </div>
+    `);
 }
