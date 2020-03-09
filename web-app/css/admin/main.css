@@ -82,8 +82,36 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
 }
+
+.drawer{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 100%;
+    transition: .5s; 
+    position: fixed;
+    background: rgba(247, 247, 247, 1); 
+    overflow-y: scroll;
+}
+.drawer.active{ 
+    top: 0;
+    left: 0; 
+}
+.drawer .btn-close-drawer{
+    position: absolute;
+    top: 0;
+    left: 0; 
+    padding: 10px 20px;
+    font-size: 30px;
+    color: #2a3f54;
+    cursor: pointer;
+}
+.drawer .btn-close-drawer:hover{
+    opacity: .5;
+}
+
 .login.login-required{
     top: 0;
 }

@@ -26,6 +26,9 @@ function enableEventPage(){
     $('.logout').click(logout)
     $('#btn-filter').click(toggleFilter);
     
+    $('.btn-main').click(toggleDrawer);
+    $('.btn-close-drawer').click(toggleDrawer);
+
     $('#log-in').submit(function(e) { login(e, $(this).serialize()); });
     $('#forgot-password').submit(function(e) { resetPassword(e, $(this).serialize()); });
 }
@@ -89,6 +92,9 @@ function toggleFilter(){
 }
 function toggleLogin(){
     $('.login').toggleClass('login-required');
+}
+function toggleDrawer(){
+    $('.drawer').toggleClass('active');
 }
 function logout(){
     event.preventDefault();

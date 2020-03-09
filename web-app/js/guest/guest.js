@@ -15,7 +15,7 @@ function loadInfo(){
     loadingProcess(10);
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) { 
+        if (this.readyState == 4) { 
             loadingProcess(10);
             let webInfo = JSON.parse(this.responseText); 
             
@@ -50,7 +50,7 @@ function loadEvent(){
     loadingProcess(10);
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) { 
+        if (this.readyState == 4 ) { 
             loadingProcess(10);
             let data = JSON.parse(this.responseText);
             
@@ -80,7 +80,7 @@ function loadFood(){
     let foodList;
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { 
-        if (this.readyState == 4 && this.status == 200) { 
+        if (this.readyState == 4 ) { 
             loadingProcess(10);
             
             foodList = JSON.parse(this.responseText); 

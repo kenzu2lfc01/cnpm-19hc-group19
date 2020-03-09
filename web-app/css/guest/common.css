@@ -6,7 +6,16 @@
     -webkit-tap-highlight-color: transparent;
     user-select: none;
 }
-
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+} 
+*::-webkit-scrollbar-track {
+    background: #ddd;
+} 
+*::-webkit-scrollbar-thumb {
+    background: #2a3f54; 
+}
 html {
     scroll-behavior: smooth; 
 }
@@ -102,8 +111,8 @@ ul {
     width: 320px; 
     top: 69px;   
     right: 0;
-    max-height: 90vh;   
-    overflow: scroll;
+    max-height: calc(100% - 140px);   
+    overflow: hidden;
 }
 #notification::-webkit-scrollbar {
     width: 0; 

@@ -51,7 +51,7 @@ $('.submit-contact').click(function() {
         message: $('#message-contact').val()
     };  
     xhr.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 201) {  
+        if (this.readyState == 4) {  
             let response = JSON.parse(this.responseText);
 
             pushNotify(response.message);
@@ -81,7 +81,7 @@ $('.btn-book-now').click(function() {
         time: $('#time-reservation').val()
     };  
     xhr.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 201) {  
+        if (this.readyState == 4) {  
             let response = JSON.parse(this.responseText);
 
             pushNotify(response.message);
