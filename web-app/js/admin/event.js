@@ -8,6 +8,8 @@ window.addEventListener('click', triggerWindowClick);
 function loadRequired(){
     renderSidebar();
     renderHeaader();
+    renderLogin();
+    
     if(!localStorage.auth) toggleLogin();
     else updateLoginInfo();
 
@@ -156,9 +158,9 @@ function renderSidebar(){
                         <i class="fa fa-angle-down"></i>
                     </div>
                     <div class="menu-body">
-                        <a href="./index.html" class="menu-child">Revenue</a>
-                        <a href="#" class="menu-child">Receipts Voucher</a>
-                        <a href="#" class="menu-child">Payment Voucher</a>
+                        <a href="./finance-revanue.html" class="menu-child">Revenue</a>
+                        <a href="./finance-receipts.html" class="menu-child">Receipts Voucher</a>
+                        <a href="./finance-payment.html" class="menu-child">Payment Voucher</a>
                     </div>
                 </div>
                 <div class="menu-parent">
@@ -168,10 +170,10 @@ function renderSidebar(){
                         <i class="fa fa-angle-down"></i>
                     </div>
                     <div class="menu-body">
-                        <a href="#" class="menu-child">Employee</a>
-                        <a href="#" class="menu-child">Timesheet</a>
-                        <a href="#" class="menu-child">Payroll</a>
-                        <a href="#" class="menu-child">Department</a>
+                        <a href="./employee.html" class="menu-child">Employee</a>
+                        <a href="./employee-timesheet.html" class="menu-child">Timesheet</a>
+                        <a href="./employee-payroll.html" class="menu-child">Payroll</a>
+                        <a href="./employee-department.html" class="menu-child">Department</a>
                     </div>
                 </div>
                 <div class="menu-parent">
@@ -181,11 +183,11 @@ function renderSidebar(){
                         <i class="fa fa-angle-down"></i>
                     </div>
                     <div class="menu-body">
-                        <a href="#" class="menu-child">Infomation</a>
-                        <a href="#" class="menu-child">History Book</a>
-                        <a href="#" class="menu-child">History Payment</a>
-                        <a href="#" class="menu-child">Feedback</a>
-                        <a href="#" class="menu-child">Customer Group</a>
+                        <a href="./customer.html" class="menu-child">Infomation</a>
+                        <a href="./history-book.html" class="menu-child">History Book</a>
+                        <a href="./history-payment.html" class="menu-child">History Payment</a>
+                        <a href="./feedback.html" class="menu-child">Feedback</a>
+                        <a href="./customer-group.html" class="menu-child">Customer Group</a>
                     </div>
                 </div>
                 <div class="menu-parent">
@@ -195,9 +197,9 @@ function renderSidebar(){
                         <i class="fa fa-angle-down"></i>
                     </div>
                     <div class="menu-body">
-                        <a href="#" class="menu-child">Infomation</a>
-                        <a href="#" class="menu-child">Reservation</a>
-                        <a href="#" class="menu-child">Table Type</a>
+                        <a href="./table.html" class="menu-child">Infomation</a>
+                        <a href="./reservation.html" class="menu-child">Reservation</a>
+                        <a href="./table-type.html" class="menu-child">Table Type</a>
                     </div>
                 </div>
                 <div class="menu-parent">
@@ -207,8 +209,8 @@ function renderSidebar(){
                         <i class="fa fa-angle-down"></i>
                     </div>
                     <div class="menu-body">
-                        <a href="#" class="menu-child">Menu</a>
-                        <a href="#" class="menu-child">Food Category</a> 
+                        <a href="./list-foog.html" class="menu-child">Menu</a>
+                        <a href="./food-category.html" class="menu-child">Food Category</a> 
                     </div>
                 </div>
                 <div class="menu-parent">
@@ -218,9 +220,9 @@ function renderSidebar(){
                         <i class="fa fa-angle-down"></i>
                     </div>
                     <div class="menu-body">
-                        <a href="#" class="menu-child">Infomation</a>
-                        <a href="#" class="menu-child">History Import</a>
-                        <a href="#" class="menu-child">Provider Type</a> 
+                        <a href="./provider.html" class="menu-child">Infomation</a>
+                        <a href="./history-import.html" class="menu-child">History Import</a>
+                        <a href="./provider-type.html" class="menu-child">Provider Type</a> 
                     </div>
                 </div>
                 <div class="menu-parent">
@@ -230,9 +232,9 @@ function renderSidebar(){
                         <i class="fa fa-angle-down"></i>
                     </div>
                     <div class="menu-body">
-                        <a href="#" class="menu-child">Image</a>
-                        <a href="#" class="menu-child">Infomation</a>
-                        <a href="#" class="menu-child">Working Time</a> 
+                        <a href="./website-image.html" class="menu-child">Image</a>
+                        <a href="./website-info.html" class="menu-child">Infomation</a>
+                        <a href="./working-time.html" class="menu-child">Working Time</a> 
                     </div>
                 </div>
             </div>
@@ -267,5 +269,44 @@ function renderHeaader(){
                     <a class="logout">Log out</a>
                 </div>
             </div>
+    `);
+}
+function renderLogin(){
+    $('.login').html(`
+    <div class="form-login form-custom">
+            <form action="#" id="log-in">
+                <h1 class="title-form">Login System</h1>
+                <div>
+                    <input autofocus required type="text" name="username" id="username" placeholder="Username" autocomplete="off" >
+                </div>
+                <div>         
+                    <input required type="text" name="password" id="password" placeholder="Password" autocomplete="off" >
+                </div>
+                <div>
+                    <input type="submit" value="Login">
+                    <input class="btn-forgot" type="button" value="Forgot password?">
+                </div>
+                
+                <div class="end-form">From Thái Võ with  
+                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                </div>
+            </form>
+        </div>
+        <div class="form-forgot form-custom">
+            <form action="#" id="forgot-password">
+                <h1 class="title-form">Reset Password</h1>
+                <div>
+                    <input required type="text" name="username" id="username" placeholder="Username" autocomplete="off" >
+                </div> 
+                <div>
+                    <input type="submit" value="Send password to mail">
+                    <input class="btn-forgot" type="button" value="Back to login">
+                </div>
+                
+                <div class="end-form">From Thái Võ with  
+                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                </div>
+            </form>
+        </div>
     `);
 }

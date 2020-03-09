@@ -67,23 +67,6 @@ body{
 }
 
 
-.main-container div:nth-child(1){
-    height: 50vh; 
-    background: green;
-}
-.main-container div:nth-child(2){
-    height: 50vh;
-    background: orange;
-}
-.main-container div:nth-child(3){
-    height: 50vh;
-    background: teal;
-}
-.main-container div:nth-child(4){
-    height: 50vh;
-    background: yellow;
-}
-
 
 #notification{ 
     top: 51px;     
