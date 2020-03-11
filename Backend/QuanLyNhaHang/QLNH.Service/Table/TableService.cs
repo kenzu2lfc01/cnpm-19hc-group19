@@ -18,27 +18,14 @@ namespace QLNH.Service.Table
             _tableBusiness = tableBusiness;
         }
 
-        public async Task<IList<TableDto>> GetAllTable()
+        public async Task BookingTable(BookTableModel model)
         {
-            return await _tableBusiness.GetAllTable();
+            await _tableBusiness.BookingTable(model);
         }
 
-        public void AddTable(PostTableModel tableDto)
+        public async Task<List<BookTableDto>> GetAllBookingTable()
         {
-            _tableBusiness.AddTable(tableDto);
-            _tableBusiness.SaveChangeAsync();
-        }
-
-        public void UpdateTable(TableDto tableDto)
-        {
-            _tableBusiness.UpdateTable(tableDto);
-            _tableBusiness.SaveChangeAsync();
-        }
-
-        public void DeleteTable(int tableId)
-        {
-            _tableBusiness.DeleteTable(tableId);
-            _tableBusiness.SaveChangeAsync();
+            return await _tableBusiness.GetAllBookingTable();
         }
     }
 }

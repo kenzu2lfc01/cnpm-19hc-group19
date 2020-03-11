@@ -1,8 +1,4 @@
-﻿using QLNH.Infrastructure.Entities.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System;
 
 namespace QLNH.Infrastructure.Entities
 {
@@ -10,10 +6,10 @@ namespace QLNH.Infrastructure.Entities
     {
         public int Amount { get; set; }
 
-        public DateTime TimeBooking { get; set; }
+        public DateTime DateBooking { get; set; }
 
-        public int CustomerBookingId { get; set; }
+        public int CustomerId{ get; set; }
 
-        public TypeBooking TypeBooking { get; set; }
+        public int EmployeeId { get; set; }
     }
 }

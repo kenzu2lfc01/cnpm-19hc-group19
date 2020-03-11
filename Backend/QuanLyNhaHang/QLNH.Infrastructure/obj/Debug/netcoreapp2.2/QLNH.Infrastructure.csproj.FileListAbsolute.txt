@@ -17,3 +17,4 @@ C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infras
 C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.AssemblyInfo.cs
 C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.dll
 C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.pdb
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Debug\netcoreapp2.2\QLNH.Infrastructure.csprojAssemblyReference.cache

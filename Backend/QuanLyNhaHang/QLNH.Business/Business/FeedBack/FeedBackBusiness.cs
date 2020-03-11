@@ -2,8 +2,8 @@
 using QLNH.Business.FeedBack.Interfaces;
 using QLNH.Business.Models;
 using QLNH.Business.Models.Dtos;
+using QLNH.Infrastructure.Data;
 using QLNH.Infrastructure.Entities;
-using QLNH.Infrastructure.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +14,16 @@ namespace QLNH.Business.FeedBack
 {
     public class FeedBackBusiness : IFeedBackBusiness
     {
-        private IFeedBackRepository _feedBackRepository;
+        private QLNHDbContext _context;
 
-        public FeedBackBusiness(IFeedBackRepository feedBackRepository)
+        public FeedBackBusiness(QLNHDbContext context)
         {
-            _feedBackRepository = feedBackRepository;
+            _context = context;
         }
 
         public async Task<List<FeedBackDto>> GetFeedBackSync()
         {
-            return await _feedBackRepository.FindAll().Select(x => new FeedBackDto()
+            return await _context.FeedBacks.Select(x => new FeedBackDto()
             {
                 Email = x.Email,
                 Message = x.Message,
@@ -34,7 +34,7 @@ namespace QLNH.Business.FeedBack
 
         public void AddFeedBack(FeedBackModel model)
         {
-            _feedBackRepository.Add(new FeedBacks()
+            _context.FeedBacks.Add(new FeedBacks()
             {
                 Email = model.Email,
                 Message = model.Message,
@@ -42,7 +42,7 @@ namespace QLNH.Business.FeedBack
                 Subject = model.Subject
             });
 
-            _feedBackRepository.SaveChangeAsync();
+            _context.SaveChangesAsync();
         }
     }
 }

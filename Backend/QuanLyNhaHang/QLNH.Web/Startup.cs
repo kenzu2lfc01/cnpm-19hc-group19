@@ -11,8 +11,6 @@ using QLNH.Business.Restaurant.Interfaces;
 using QLNH.Business.Table;
 using QLNH.Business.Table.Interfaces;
 using QLNH.Infrastructure.Data;
-using QLNH.Infrastructure.Repositories;
-using QLNH.Infrastructure.Repositories.Interfaces;
 using QLNH.Service.FeedBack;
 using QLNH.Service.FeedBack.Interface;
 using QLNH.Service.Restaurant;
@@ -35,10 +33,6 @@ namespace QLNH.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-            services.AddSingleton<ITableRepository, TableRepository >();
-            services.AddSingleton<IRestaurantInfoRepository, RestaurantInfoRepository>();
-            services.AddSingleton<IFeedBackRepository, FeedBackRepository>();
 
             services.AddSingleton<IFeedBackBusiness ,FeedBackBusiness > ();
             services.AddSingleton<IRestaurantInfoBusiness, RestaurantInfoBusiness>();

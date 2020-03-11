@@ -2,7 +2,7 @@
 using QLNH.Business.Models;
 using QLNH.Business.Models.Dtos;
 using QLNH.Business.Restaurant.Interfaces;
-using QLNH.Infrastructure.Repositories.Interfaces;
+using QLNH.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +13,30 @@ namespace QLNH.Business.Restaurant
 {
     public class RestaurantInfoBusiness : IRestaurantInfoBusiness
     {
-        private IRestaurantInfoRepository _restaurantInfoRepository;
+        private QLNHDbContext _context;
 
-        public RestaurantInfoBusiness(IRestaurantInfoRepository restaurantInfoRepository)
+        public RestaurantInfoBusiness(QLNHDbContext context)
         {
-            _restaurantInfoRepository = restaurantInfoRepository;
+            _context = context;
         }
 
         public async Task<RestaurantInfoDto> GetRestaurantInformation()
         {
-            return await _restaurantInfoRepository.FindAll().Select(x => new RestaurantInfoDto()
+            return await _context.RestaurantInformations.Select(x => new RestaurantInfoDto()
             {
-                TimeToStartWorking = x.TimeToStartWorking,
+                OpenTime = x.OpenTime,
                 Adresss = x.Adresss,
                 LogoURL = x.LogoURL,
                 Name = x.Name,
-                PhoneNumber = x.PhoneNumber
+                PhoneNumber = x.PhoneNumber,
+                Email = x.Email,
+                FaceBookURL = x.FaceBookURL,
+                HomeURL = x.HomeURL,
+                InstagramURL = x.InstagramURL,
+                Location_src = x.Location_src,
+                MenuURL = x.MenuURL,
+                ReserveURL = x.ReserveURL,
+                TwitterURL  = x.TwitterURL
             }).FirstOrDefaultAsync();
         }
     }

@@ -21,45 +21,27 @@ namespace QLNH.Web.Controllers
 
         // GET: api/Tables
         [HttpGet]
-        public async Task<IList<TableDto>> GetTable()
+        [Route("BookTable")]
+        public async Task<IList<BookTableDto>> GetTable()
         {
-            return await _service.GetAllTable();
+            return await _service.GetAllBookingTable();
         }
 
         // POST: api/Tables
         [HttpPost]
-        public ActionResult PostTable(TablePostModel model)
+        [Route("BookTable")]
+        public async Task<ActionResult> PostTable(POST_BookTableModel model)
         {
-            _service.AddTable(new PostTableModel()
+            await _service.BookingTable(new BookTableModel()
             {
-                Amount = model.Amount,
-                EmployeeId = model.EmployeeId,
-                TableStatus = model.TableStatus
+                DateBooking = model.DateBooking,
+                Email = model.Email,
+                FullName = model.FullName,
+                NumberOfGuest = model.NumberOfGuest,
+                PhoneNumber = model.PhoneNumber
             });
 
-            return Ok();
-        }
-
-        [HttpPut]
-        public ActionResult UpdateTable(TablePutModel model)
-        {
-            _service.UpdateTable(new TableDto()
-            {
-                ID = model.ID,
-                Amount = model.Amount,
-                EmployeeId = model.EmployeeId,
-                TableStatus = model.TableStatus
-            });
-            
-            return Ok();
-        }
-
-        // DELETE: api/Tables/5
-        [HttpDelete]
-        public ActionResult DeleteTable(int tableId)
-        {
-            _service.DeleteTable(tableId);
-            return Ok();
+            return Ok("Book success.");
         }
     }
 }
