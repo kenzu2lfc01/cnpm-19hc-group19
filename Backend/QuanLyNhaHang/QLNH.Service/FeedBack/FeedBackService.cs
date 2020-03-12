@@ -23,9 +23,9 @@ namespace QLNH.Service.FeedBack
             return await _feedBackBusiness.GetFeedBackSync();
         }
 
-        public void AddFeedBack(FeedBackModel model)
+        public async Task AddFeedBack(FeedBackModel model)
         {
-            _feedBackBusiness.AddFeedBack(model);
+            await  _feedBackBusiness.AddFeedBack(model);
         }
     }
 }

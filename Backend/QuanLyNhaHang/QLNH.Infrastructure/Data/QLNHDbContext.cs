@@ -19,6 +19,6 @@ namespace QLNH.Infrastructure.Data
         public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<FeedBacks> FeedBacks { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-
+        public virtual DbSet<Event> Events { get; set; }
     }
 }

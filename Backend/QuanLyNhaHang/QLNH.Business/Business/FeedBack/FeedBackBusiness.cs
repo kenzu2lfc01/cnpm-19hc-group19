@@ -32,9 +32,9 @@ namespace QLNH.Business.FeedBack
             }).ToListAsync();
         }
 
-        public void AddFeedBack(FeedBackModel model)
+        public async Task AddFeedBack(FeedBackModel model)
         {
-            _context.FeedBacks.Add(new FeedBacks()
+             _context.FeedBacks.Add(new FeedBacks()
             {
                 Email = model.Email,
                 Message = model.Message,
@@ -42,7 +42,7 @@ namespace QLNH.Business.FeedBack
                 Subject = model.Subject
             });
 
-            _context.SaveChangesAsync();
+           await _context.SaveChangesAsync();
         }
     }
 }

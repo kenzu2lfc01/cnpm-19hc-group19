@@ -10,6 +10,6 @@ namespace QLNH.Service.FeedBack.Interface
     public interface IFeedBackService
     {
         Task<List<FeedBackDto>> GetFeedBackSync();
-        void AddFeedBack(FeedBackModel model);
+        Task AddFeedBack(FeedBackModel model);
     }
 }

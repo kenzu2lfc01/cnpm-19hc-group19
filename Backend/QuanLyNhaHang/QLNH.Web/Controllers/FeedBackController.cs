@@ -22,15 +22,16 @@ namespace QLNH.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<List<FeedBackDto>> GetFeedBackSync()
+        public async Task<ActionResult<List<FeedBackDto>>> GetFeedBackSync()
         {
-            return await _feedBackService.GetFeedBackSync();
+             return Ok(await _feedBackService.GetFeedBackSync());
         }
 
         [HttpPost]
-        public void AddFeedBack(FeedBackModel model)
+        public async Task<ActionResult> AddFeedBack(FeedBackModel model)
         {
-            _feedBackService.AddFeedBack(model);
+            await _feedBackService.AddFeedBack(model);
+            return Ok();
         }
     }
 }
