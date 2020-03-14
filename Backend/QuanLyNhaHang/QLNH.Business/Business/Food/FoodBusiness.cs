@@ -29,7 +29,7 @@ namespace QLNH.Business.Business.Food
             {
                 Category = model.Category,
                 ImageURL = model.ImageURL,
-                IsNew = model.IsNew,
+                IsNew = model.IsNew,    
                 IsPromote = model.IsPromote,
                 Name = model.Name,
                 Price = model.Price,

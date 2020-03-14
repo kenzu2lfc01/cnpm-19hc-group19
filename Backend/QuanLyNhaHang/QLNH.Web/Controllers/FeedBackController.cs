@@ -12,7 +12,7 @@ namespace QLNH.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FeedBackController : ControllerBase
+    public class FeedBackController : Controller
     {
         private IFeedBackService _feedBackService;
 
@@ -28,10 +28,10 @@ namespace QLNH.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddFeedBack(FeedBackModel model)
+        public async Task<ActionResult> AddFeedBack([FromQuery] FeedBackModel model)
         {
             await _feedBackService.AddFeedBack(model);
-            return Ok();
+            return Ok("Add success.");
         }
     }
 }

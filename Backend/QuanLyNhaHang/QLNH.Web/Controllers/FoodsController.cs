@@ -25,12 +25,11 @@ namespace QLNH.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<List<FoodDto>>> GetFoodAsync()
         {
-
             return Ok(await _foodService.GetAllFood());
         }
 
         [HttpPost] 
-        public async Task<ActionResult> AddFoodAsync(POST_FoodModel model)
+        public async Task<ActionResult> AddFoodAsync([FromQuery] POST_FoodModel model)
         {
             await _foodService.AddFoodAsync(new Business.Models.FoodModel()
             {
@@ -44,11 +43,11 @@ namespace QLNH.Web.Controllers
                 IsNew = model.IsNew
             });
 
-            return Ok();
+            return Ok("Add success.");
         }
 
         [HttpPatch]
-        public async Task<ActionResult> UpdateFoodAsync(PATCH_FoodModel model)
+        public async Task<ActionResult> UpdateFoodAsync([FromQuery] PATCH_FoodModel model)
         {
             await _foodService.UpdateFoodAsync(new Business.Models.FoodModel()
             {
@@ -62,15 +61,15 @@ namespace QLNH.Web.Controllers
                 IsNew = model.IsNew
             });
 
-            return Ok();
+            return Ok("Update success.");
         }
 
         [HttpDelete]
-        [Route("/{id}")]
+        [Route("{id}")]
         public async Task<ActionResult> DeleteFoodAsync(int id)
         {
             await _foodService.DeleteFood(id);
-            return Ok();
+            return Ok("Delete success.");
         }
     }
 }

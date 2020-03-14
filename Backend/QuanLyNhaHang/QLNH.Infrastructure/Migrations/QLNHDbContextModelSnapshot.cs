@@ -15,38 +15,55 @@ namespace QLNH.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("QLNH.Infrastructure.Entities.BookTable", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Amount");
 
-                    b.Property<int>("CustomerBookingId");
+                    b.Property<int>("CustomerId");
 
-                    b.Property<DateTime>("TimeBooking");
+                    b.Property<DateTime>("DateBooking");
 
-                    b.Property<int>("TypeBooking");
+                    b.Property<int>("EmployeeId");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("BookTables");
                 });
 
+            modelBuilder.Entity("QLNH.Infrastructure.Entities.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FullName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
             modelBuilder.Entity("QLNH.Infrastructure.Entities.Employee", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AvartarURL");
 
-                    b.Property<int?>("EmployeeId");
+                    b.Property<int>("EmployeeId");
 
                     b.Property<int>("EmployeeType");
 
@@ -56,11 +73,51 @@ namespace QLNH.Infrastructure.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("QLNH.Infrastructure.Entities.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime>("DateStart");
+
+                    b.Property<string>("EventURL");
+
+                    b.Property<string>("ImgURL");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("QLNH.Infrastructure.Entities.FeedBacks", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Message");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Subject");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FeedBacks");
                 });
 
             modelBuilder.Entity("QLNH.Infrastructure.Entities.Food", b =>
@@ -69,11 +126,19 @@ namespace QLNH.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Country");
+                    b.Property<string>("Category");
+
+                    b.Property<string>("ImageURL");
+
+                    b.Property<bool>("IsNew");
+
+                    b.Property<bool>("IsPromote");
 
                     b.Property<string>("Name");
 
                     b.Property<decimal>("Price");
+
+                    b.Property<decimal>("Promote");
 
                     b.HasKey("Id");
 
@@ -82,36 +147,52 @@ namespace QLNH.Infrastructure.Migrations
 
             modelBuilder.Entity("QLNH.Infrastructure.Entities.RestaurantInformation", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Adresss");
 
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FaceBookURL");
+
+                    b.Property<string>("HomeURL");
+
+                    b.Property<string>("InstagramURL");
+
+                    b.Property<string>("Location_src");
+
                     b.Property<string>("LogoURL");
+
+                    b.Property<string>("MenuURL");
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("OpenTime");
+
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<string>("TimeToStartWorking");
+                    b.Property<string>("ReserveURL");
 
-                    b.HasKey("ID");
+                    b.Property<string>("TwitterURL");
+
+                    b.HasKey("Id");
 
                     b.ToTable("RestaurantInformations");
                 });
 
             modelBuilder.Entity("QLNH.Infrastructure.Entities.Table", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("EmployeeId");
 
-                    b.Property<int>("TableStatus");
+                    b.Property<int>("TableStatusId");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Tables");
                 });
@@ -120,7 +201,8 @@ namespace QLNH.Infrastructure.Migrations
                 {
                     b.HasOne("QLNH.Infrastructure.Entities.Table", "Table")
                         .WithMany()
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

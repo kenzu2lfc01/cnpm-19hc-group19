@@ -10,7 +10,7 @@ namespace QLNH.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TablesController : ControllerBase
+    public class TablesController : Controller
     {
         private readonly TableService _service;
 
@@ -22,15 +22,15 @@ namespace QLNH.Web.Controllers
         // GET: api/Tables
         [HttpGet]
         [Route("BookTable")]
-        public async Task<IList<BookTableDto>> GetTable()
+        public async Task<ActionResult<IList<BookTableDto>>> GetTable()
         {
-            return await _service.GetAllBookingTable();
+            return Ok(await _service.GetAllBookingTable());
         }
 
         // POST: api/Tables
         [HttpPost]
         [Route("BookTable")]
-        public async Task<ActionResult> PostTable(POST_BookTableModel model)
+        public async Task<ActionResult> PostTable([FromQuery] POST_BookTableModel model)
         {
             await _service.BookingTable(new BookTableModel()
             {
