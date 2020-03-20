@@ -28,7 +28,7 @@ namespace QLNH.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddFeedBack([FromQuery] FeedBackModel model)
+        public async Task<ActionResult> AddFeedBack([FromBody] FeedBackModel model)
         {
             await _feedBackService.AddFeedBack(model);
             return Ok("Add success.");

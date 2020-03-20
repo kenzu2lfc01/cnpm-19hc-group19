@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QLNH.Infrastructure.Data;
 
@@ -16,14 +15,12 @@ namespace QLNH.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("QLNH.Infrastructure.Entities.BookTable", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Amount");
 
@@ -35,14 +32,18 @@ namespace QLNH.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
+
                     b.ToTable("BookTables");
                 });
 
             modelBuilder.Entity("QLNH.Infrastructure.Entities.Customer", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email");
 
@@ -58,12 +59,9 @@ namespace QLNH.Infrastructure.Migrations
             modelBuilder.Entity("QLNH.Infrastructure.Entities.Employee", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AvartarURL");
-
-                    b.Property<int>("EmployeeId");
 
                     b.Property<int>("EmployeeType");
 
@@ -75,26 +73,27 @@ namespace QLNH.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
-
                     b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("QLNH.Infrastructure.Entities.Event", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Content");
+                    b.Property<string>("Content")
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime>("DateStart");
 
-                    b.Property<string>("EventURL");
+                    b.Property<string>("EventURL")
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<string>("ImgURL");
+                    b.Property<string>("ImgURL")
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -104,8 +103,7 @@ namespace QLNH.Infrastructure.Migrations
             modelBuilder.Entity("QLNH.Infrastructure.Entities.FeedBacks", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email");
 
@@ -123,8 +121,7 @@ namespace QLNH.Infrastructure.Migrations
             modelBuilder.Entity("QLNH.Infrastructure.Entities.Food", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Category");
 
@@ -148,8 +145,7 @@ namespace QLNH.Infrastructure.Migrations
             modelBuilder.Entity("QLNH.Infrastructure.Entities.RestaurantInformation", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Adresss");
 
@@ -185,8 +181,7 @@ namespace QLNH.Infrastructure.Migrations
             modelBuilder.Entity("QLNH.Infrastructure.Entities.Table", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("EmployeeId");
 
@@ -197,11 +192,16 @@ namespace QLNH.Infrastructure.Migrations
                     b.ToTable("Tables");
                 });
 
-            modelBuilder.Entity("QLNH.Infrastructure.Entities.Employee", b =>
+            modelBuilder.Entity("QLNH.Infrastructure.Entities.BookTable", b =>
                 {
-                    b.HasOne("QLNH.Infrastructure.Entities.Table", "Table")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
+                    b.HasOne("QLNH.Infrastructure.Entities.Customer", "Customer")
+                        .WithMany("BookTables")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("QLNH.Infrastructure.Entities.Employee", "Employee")
+                        .WithOne("BookTable")
+                        .HasForeignKey("QLNH.Infrastructure.Entities.BookTable", "EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

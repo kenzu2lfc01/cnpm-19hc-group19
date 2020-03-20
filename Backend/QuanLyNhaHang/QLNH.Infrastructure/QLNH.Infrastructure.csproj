@@ -5,12 +5,47 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200315130305_First migation.cs" />
+    <Compile Remove="Migrations\20200315130305_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200315130328_First migation.cs" />
+    <Compile Remove="Migrations\20200315130328_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200315130741_First migation.cs" />
+    <Compile Remove="Migrations\20200315130741_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200315131016_First migation.cs" />
+    <Compile Remove="Migrations\20200315131016_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200315135917_First migation.cs" />
+    <Compile Remove="Migrations\20200315135917_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200315140634_First migation.cs" />
+    <Compile Remove="Migrations\20200315140634_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200315142140_First migation.cs" />
+    <Compile Remove="Migrations\20200315142140_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200315142530_First migation.cs" />
+    <Compile Remove="Migrations\20200315142530_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200315144056_First migation.cs" />
+    <Compile Remove="Migrations\20200315144056_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200315144919_First migation.cs" />
+    <Compile Remove="Migrations\20200315144919_First migation.Designer.cs" />
+    <Compile Remove="Migrations\20200316153538_update-column-type.cs" />
+    <Compile Remove="Migrations\20200316153538_update-column-type.Designer.cs" />
+    <Compile Remove="Migrations\20200316153749_first commit.cs" />
+    <Compile Remove="Migrations\20200316153749_first commit.Designer.cs" />
+    <Compile Remove="Migrations\20200316153955_first commit.cs" />
+    <Compile Remove="Migrations\20200316153955_first commit.Designer.cs" />
+    <Compile Remove="Migrations\20200316154748_second commit.cs" />
+    <Compile Remove="Migrations\20200316154748_second commit.Designer.cs" />
+    <Compile Remove="Migrations\20200316161158_third-commit.cs" />
+    <Compile Remove="Migrations\20200316161158_third-commit.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="6.10.8" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

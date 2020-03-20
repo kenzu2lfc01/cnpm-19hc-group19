@@ -28,6 +28,7 @@ namespace QLNH.Business.Business.Event
                 .Take(10)
                 .Select(x => new EventDto()
                 {
+                    Id = x.Id,
                     Content = x.Content,
                     ImgURL = x.ImgURL,
                     Title = x.Title,
@@ -38,16 +39,23 @@ namespace QLNH.Business.Business.Event
 
         public async Task AddEventAsync(EventModel model)
         {
-            _context.Events.Add(new Infrastructure.Entities.Event()
+            try
             {
-                Content = model.Content,
-                ImgURL = model.ImgURL,
-                Title = model.Title,
-                EventURL = model.EventURL,
-                DateStart = model.DateStart,
-            });
+                _context.Events.Add(new Infrastructure.Entities.Event()
+                {
+                    Content = model.Content,
+                    ImgURL = model.ImgURL,
+                    Title = model.Title,
+                    EventURL = model.EventURL,
+                    DateStart = model.DateStart,
+                });
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task UpdateEventAsync(EventModel model)

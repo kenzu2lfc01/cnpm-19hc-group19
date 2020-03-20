@@ -20,6 +20,65 @@ namespace QLNH.Business.Restaurant
             _context = context;
         }
 
+        public async Task AddRestaurantInformation(RestaurantInformationModel model)
+        {
+            try
+            {
+                _context.RestaurantInformations.Add(new Infrastructure.Entities.RestaurantInformation()
+                {
+                    Adresss = model.Adresss,
+                    Email = model.Email,
+                    FaceBookURL = model.FaceBookURL,
+                    HomeURL = model.HomeURL,
+                    InstagramURL = model.InstagramURL,
+                    Location_src = model.Location_src,
+                    LogoURL = model.LogoURL,
+                    MenuURL = model.MenuURL,
+                    Name = model.Name,
+                    OpenTime = model.OpenTime,
+                    PhoneNumber = model.PhoneNumber,
+                    ReserveURL = model.ReserveURL,
+                    TwitterURL = model.TwitterURL
+                });
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task UpdateRestaurantInformation(RestaurantInformationModel model)
+        {
+            try
+            {
+                _context.RestaurantInformations.Update(new Infrastructure.Entities.RestaurantInformation()
+                {
+                    Id = Convert.ToInt32(model.Id),
+                    Adresss = model.Adresss,
+                    Email = model.Email,
+                    FaceBookURL = model.FaceBookURL,
+                    HomeURL = model.HomeURL,
+                    InstagramURL = model.InstagramURL,
+                    Location_src = model.Location_src,
+                    LogoURL = model.Location_src,
+                    MenuURL = model.MenuURL,
+                    Name = model.Name,
+                    OpenTime = model.OpenTime,
+                    PhoneNumber = model.PhoneNumber,
+                    ReserveURL = model.ReserveURL,
+                    TwitterURL = model.TwitterURL
+                });
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task<RestaurantInfoDto> GetRestaurantInformation()
         {
             return await _context.RestaurantInformations.Select(x => new RestaurantInfoDto()
@@ -36,8 +95,9 @@ namespace QLNH.Business.Restaurant
                 Location_src = x.Location_src,
                 MenuURL = x.MenuURL,
                 ReserveURL = x.ReserveURL,
-                TwitterURL  = x.TwitterURL
-            }).FirstOrDefaultAsync();
+                TwitterURL = x.TwitterURL,
+                Id = x.Id
+            }).LastOrDefaultAsync();
         }
     }
 }

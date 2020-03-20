@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QLNH.Business.Models.Dtos;
-using QLNH.Service.Food;
 using QLNH.Service.Food.Interfaces;
 using QLNH.Web.Models.Foods;
 
@@ -29,12 +25,11 @@ namespace QLNH.Web.Controllers
         }
 
         [HttpPost] 
-        public async Task<ActionResult> AddFoodAsync([FromQuery] POST_FoodModel model)
+        public async Task<ActionResult> AddFoodAsync([FromBody] POST_FoodModel model)
         {
             await _foodService.AddFoodAsync(new Business.Models.FoodModel()
             {
                 Category = model.Category,
-                ID = model.ID,
                 Name = model.Name,
                 ImageURL = model.ImageURL,
                 Price = model.Price,
@@ -47,7 +42,7 @@ namespace QLNH.Web.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult> UpdateFoodAsync([FromQuery] PATCH_FoodModel model)
+        public async Task<ActionResult> UpdateFoodAsync([FromBody] PATCH_FoodModel model)
         {
             await _foodService.UpdateFoodAsync(new Business.Models.FoodModel()
             {

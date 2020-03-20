@@ -1,4 +1,5 @@
 ﻿using QLNH.Infrastructure.Entities.Enums;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,7 +17,7 @@ namespace QLNH.Infrastructure.Entities
 
         public string AvartarURL { get; set; }
 
-        [ForeignKey("EmployeeId")]
-        public Table Table { get; set; }
+        public virtual BookTable BookTable { get; set; }
+
     }
 }

@@ -6,6 +6,8 @@ namespace QLNH.Business.Models.Dtos
 {
    public class RestaurantInfoDto
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Adresss { get; set; }

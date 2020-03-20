@@ -6,6 +6,7 @@ namespace QLNH.Business.Models.Dtos
 {
     public class EventDto
     {
+        public int Id { get; set; }
         public string EventURL { get; set; }
         public DateTime DateStart { get; set; }
         public string Title { get; set; }

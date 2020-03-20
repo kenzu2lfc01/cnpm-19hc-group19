@@ -30,7 +30,7 @@ namespace QLNH.Web.Controllers
         // POST: api/Tables
         [HttpPost]
         [Route("BookTable")]
-        public async Task<ActionResult> PostTable([FromQuery] POST_BookTableModel model)
+        public async Task<ActionResult> PostTable([FromBody] POST_BookTableModel model)
         {
             await _service.BookingTable(new BookTableModel()
             {

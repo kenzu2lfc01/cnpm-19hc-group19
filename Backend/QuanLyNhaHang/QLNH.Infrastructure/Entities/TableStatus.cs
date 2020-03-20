@@ -8,8 +8,5 @@ namespace QLNH.Infrastructure.Entities
         public bool IsBook{ get; set; }
 
         public DateTime DateBook { get; set; }
-
-        [ForeignKey("TableId")]
-        public Table Table { get; set; }
     }
 }

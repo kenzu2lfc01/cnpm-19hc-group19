@@ -1,0 +1,10 @@
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Release\netcoreapp2.2\QLNH.Infrastructure.deps.json
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Release\netcoreapp2.2\QLNH.Infrastructure.runtimeconfig.json
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Release\netcoreapp2.2\QLNH.Infrastructure.runtimeconfig.dev.json
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Release\netcoreapp2.2\QLNH.Infrastructure.dll
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\bin\Release\netcoreapp2.2\QLNH.Infrastructure.pdb
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Release\netcoreapp2.2\QLNH.Infrastructure.csprojAssemblyReference.cache
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Release\netcoreapp2.2\QLNH.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Release\netcoreapp2.2\QLNH.Infrastructure.AssemblyInfo.cs
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Release\netcoreapp2.2\QLNH.Infrastructure.dll
+C:\Users\ThangNguyen\Desktop\cnpm-19hc-group19\Backend\QuanLyNhaHang\QLNH.Infrastructure\obj\Release\netcoreapp2.2\QLNH.Infrastructure.pdb

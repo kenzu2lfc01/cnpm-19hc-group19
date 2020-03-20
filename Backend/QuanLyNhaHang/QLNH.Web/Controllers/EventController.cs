@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QLNH.Business.Models.Dtos;
 using QLNH.Service.Event.Interface;
+using QLNH.Web.Models.Events;
 
 namespace QLNH.Web.Controllers
 {
@@ -24,6 +25,46 @@ namespace QLNH.Web.Controllers
         public async Task<ActionResult<List<EventDto>>> GetEventAsync()
         {
             return await _eventService.GetEventAsync();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddEventAsync([FromBody] POST_EventModel model)
+        {
+            await _eventService.AddEventAsync(new Business.Models.EventModel()
+            {
+                Content = model.Content,
+                EventURL = model.EventURL,
+                DateStart = model.DateStart,
+                ImgURL = model.ImgURL,
+                Title = model.Title
+            });
+
+            return Ok("Add succesfull.");
+        }
+
+        [HttpPatch]
+        public async Task<ActionResult> UpdateEventAsync([FromBody] PATCH_EventModel model)
+        {
+            await _eventService.UpdateEventAsync(new Business.Models.EventModel()
+            {
+                Content = model.Content,
+                EventURL = model.EventURL,
+                DateStart = model.DateStart,
+                ImgURL = model.ImgURL,
+                Title = model.Title,
+                Id = model.Id
+            });
+
+            return Ok("Update sucessful");
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> DeleteEvent(int id)
+        {
+            await _eventService.DeleteEvent(id);
+
+            return Ok("Delete sucessful");
         }
     }
 }

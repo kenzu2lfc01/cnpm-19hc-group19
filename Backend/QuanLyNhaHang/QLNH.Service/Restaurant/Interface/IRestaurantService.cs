@@ -10,5 +10,7 @@ namespace QLNH.Service.Restaurant.Interface
     public interface IRestaurantService
     {
          Task<RestaurantInfoDto> GetRestaurantInformation();
+        Task AddRestaurantInformation(RestaurantInformationModel model);
+        Task UpdateRestaurantInformation(RestaurantInformationModel model);
     }
 }

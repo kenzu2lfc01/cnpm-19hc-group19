@@ -7,8 +7,6 @@ namespace QLNH.Web.Models.Foods
 {
     public class POST_FoodModel
     {
-        public int? ID { get; set; }
-
         public string Name { get; set; }
 
         public string ImageURL { get; set; }
