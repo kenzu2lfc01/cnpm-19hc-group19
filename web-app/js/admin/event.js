@@ -50,7 +50,7 @@ function resetPassword(e, d){
         data: d,
         success: function(data)
         { 
-            pushNotify('Check your mail to get password');
+            pushNotify('Check your mail to get password', true);
             processResetPass = false;
         }
     });
@@ -81,7 +81,7 @@ function login(e, d){
                 toggleLogin();
             }
             else {
-                pushNotify(data.name);
+                pushNotify(data.name, true);
             }
             processLogin = false;
         }
@@ -132,9 +132,9 @@ function triggerWindowClick(event){
     else 
         $('.profile-dropdown').addClass('hide');
 }
-function pushNotify(notify){
+function pushNotify(notify, isSuccess){
     let id = Math.random().toString(36).replace('.', '');
-    $('#notification').append(` <div id=${id}>${notify}</div> `); 
+    $('#notification').append(` <div id=${id} class='${isSuccess? "success" : ""}'>${notify}</div> `); 
     $("#notification").animate({
         scrollTop: $("#notification")[0].scrollHeight
     }, 100);  

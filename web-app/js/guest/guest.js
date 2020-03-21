@@ -18,29 +18,28 @@ function loadInfo(){
         if (this.readyState == 4) { 
             loadingProcess(10);
             let webInfo = JSON.parse(this.responseText); 
-            
-            $('.logo-img').attr('src', webInfo.logo);
-            $('.facebook').attr('href', webInfo.facebook);
-            $('.twitter').attr('href', webInfo.twitter);
-            $('.instagram').attr('href', webInfo.instagram);
-            $('#home').css('background-image', `url(${webInfo.banner.home})`);
-            let gallery = $('#gallery .owl-carousel');
-            webInfo.gallery_food.forEach(i => gallery.append(`<img src="${i}" alt="foood"/> `));  
-            let opentime = $('.working-time ul');
-            Object.entries(webInfo.open_time).forEach(([key, val]) => 
-                opentime.append(`<li><span>${key}</span><span>${val}</span></li>`)); 
+            console.log(webInfo);
+            $('.logo-img').attr('src', webInfo.logoURL);
+            $('.facebook').attr('href', webInfo.faceBookURL);
+            $('.twitter').attr('href', webInfo.twitterURL);
+            $('.instagram').attr('href', webInfo.instagramURL);
+            $('#home').css('background-image', `url(${webInfo.homeURL})`);
+            // let gallery = $('#gallery .owl-carousel');
+            // webInfo.gallery_food.forEach(i => gallery.append(`<img src="${i}" alt="foood"/> `));  
+            $('.open-time').text(webInfo.openTime);
             $('.map-iframe').attr('src', webInfo.location_src);
-            $('#menu').css('background-image', `url(${webInfo.banner.menu})`);
-            $('#reservation').css('background-image', `url(${webInfo.banner.reserve})`);
-            $('.phone-number').text(`Tel: ${webInfo.phone}`);
-            $('.address').text(`Address: ${webInfo.address}`);
-            $('.email').html(`Email: <a href='mailto:${webInfo.mail}'>${webInfo.mail}</a>`);
+            $('#menu').css('background-image', `url(${webInfo.menuURL})`);
+            $('#reservation').css('background-image', `url(${webInfo.reserveURL})`);
+            $('.phone-number').text(`Tel: ${webInfo.phoneNumber}`);
+            $('.address').text(`Address: ${webInfo.adresss}`);
+            $('.email').html(`Email: <a href='mailto:${webInfo.email}'>${webInfo.email}</a>`);
             
             enableGallery();
             loadingProcess(10);
+            console.log("[Render Web Info]");
         }
     };
-    xhttp.open("GET", "http://5e5a5ce16a71ea0014e61d69.mockapi.io/infoWeb", true); 
+    xhttp.open("GET", "https://risotto.azurewebsites.net/api/Restaurants", true); 
     xhttp.send();
 }
 loadInfo();
@@ -56,20 +55,21 @@ function loadEvent(){
             
             let events = $('.events-list');
             data.forEach(i => events.append(`
-            <div class="event-item" style="background-image: url('${i.image}')">
+            <div class="event-item" style="background-image: url('${i.imgURL}')">
                 <div class="event-detail">
-                    <div class="event-date">${i.date}</div>
+                    <div class="event-date">${i.dateStart}</div>
                     <div class="event-title">${i.title}</div>
                     <div class="event-content">${i.content}</div>
-                    <div class="read-more"><a href="${i.url}">Read More -></a></div>
+                    <div class="read-more"><a href="${i.eventURL}">Read More -></a></div>
                 </div>
             </div> `));
             
             enableEventList();
             loadingProcess(10);
+            console.log("[Render Event]");
         }
     };
-    xhttp.open("GET", "http://5e5a5ce16a71ea0014e61d69.mockapi.io/events", true); 
+    xhttp.open("GET", "https://risotto.azurewebsites.net/api/event", true); 
     xhttp.send();
 }
 loadEvent();
@@ -94,7 +94,7 @@ function loadFood(){
                 foods.html('');
                 foodList.filter(i => i.category == $(this).attr('category')).forEach(item => foods.append(`
                     <div class="item ${item.isPromote? 'promote':''} ${item.isNew? 'new':''}">
-                        <div class="img-food"><img src="${item.image}" alt="food"></div>
+                        <div class="img-food"><img src="${item.imageURL}" alt="food"></div>
                         <div class="name-food">${item.name}</div>
                         <div class="price-food"><i class="fa fa-star-o"></i>${item.price}<i class="fa fa-star-o"></i></div>
                         <div class="promote-price"><i>${item.promote}</i></div>
@@ -105,9 +105,10 @@ function loadFood(){
 
             $('.tab-food-item')[0].click();
             loadingProcess(10);
+            console.log("[Render Menu Food]");
         }
     };  
-    xhttp.open("GET", `http://5e5a5ce16a71ea0014e61d69.mockapi.io/contact`, true); 
+    xhttp.open("GET", `https://risotto.azurewebsites.net/api/foods`, true); 
     xhttp.send();
 }
 loadFood();

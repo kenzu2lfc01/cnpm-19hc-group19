@@ -129,10 +129,7 @@ ul {
     transition-timing-function: ease-in-out;
     animation: notiPushAnim 6s ease-in-out;
 }
-#notification div:nth-child(odd){ 
-    background: rgb(231, 85, 85); 
-}
-#notification div:nth-child(even){ 
+#notification div.success{ 
     background: rgb(2, 150, 150); 
 }
 #notification div::after{
