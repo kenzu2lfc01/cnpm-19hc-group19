@@ -18,7 +18,7 @@ function loadInfo(){
         if (this.readyState == 4) { 
             loadingProcess(10);
             let webInfo = JSON.parse(this.responseText); 
-            console.log(webInfo);
+            
             $('.logo-img').attr('src', webInfo.logoURL);
             $('.facebook').attr('href', webInfo.faceBookURL);
             $('.twitter').attr('href', webInfo.twitterURL);
@@ -99,7 +99,7 @@ function loadFood(){
                         <div class="price-food"><i class="fa fa-star-o"></i>${item.price}<i class="fa fa-star-o"></i></div>
                         <div class="promote-price"><i>${item.promote}</i></div>
                     </div> 
-                `));  
+                `));   
                 enableListFood();
             }) 
 
@@ -145,7 +145,7 @@ function enableListFood(){
         loop: false, 
         center: false,
         dots: false,
-        autoWidth: true,
+        autoWidth: true, 
         callbacks: true,
         margin: -130,
         autoplay: false,
