@@ -1,22 +1,11 @@
-let loading = 0; 
-function loadingProcess(step){
-    loading += step;
-    $('#loading .process-bar .process').width( loading + '%' )
-}
-
-let loadingFunc = setInterval(function(){ 
-    if(loading < 100) return; 
-    $('#loading').addClass('loaded'); 
-    clearInterval(loadingFunc);
-}, 1);
-
-// Web info 
+enableGallery(); 
+ 
+ // Web info 
 function loadInfo(){
-    loadingProcess(10);
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4) { 
-            loadingProcess(10);
+            if(this.status != 200) return;
             let webInfo = JSON.parse(this.responseText); 
             
             $('.logo-img').attr('src', webInfo.logoURL);
@@ -33,9 +22,7 @@ function loadInfo(){
             $('.phone-number').text(`Tel: ${webInfo.phoneNumber}`);
             $('.address').text(`Address: ${webInfo.adresss}`);
             $('.email').html(`Email: <a href='mailto:${webInfo.email}'>${webInfo.email}</a>`);
-            
-            enableGallery();
-            loadingProcess(10);
+             
             console.log("[Render Web Info]");
         }
     };
@@ -46,11 +33,10 @@ loadInfo();
 
 // Load listEvent
 function loadEvent(){
-    loadingProcess(10);
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 ) { 
-            loadingProcess(10);
+            if(this.status != 200) return;
             let data = JSON.parse(this.responseText);
             
             let events = $('.events-list');
@@ -65,7 +51,6 @@ function loadEvent(){
             </div> `));
             
             enableEventList();
-            loadingProcess(10);
             console.log("[Render Event]");
         }
     };
@@ -76,13 +61,11 @@ loadEvent();
  
 // Food list
 function loadFood(){
-    loadingProcess(10);
     let foodList;
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { 
-        if (this.readyState == 4 ) { 
-            loadingProcess(10);
-            
+        if (this.readyState == 4 ) {  
+            if(this.status != 200) return;
             foodList = JSON.parse(this.responseText); 
          
             $('.tab-food-item').click(function(){
@@ -104,7 +87,6 @@ function loadFood(){
             }) 
 
             $('.tab-food-item')[0].click();
-            loadingProcess(10);
             console.log("[Render Menu Food]");
         }
     };  
@@ -114,7 +96,7 @@ function loadFood(){
 loadFood();
 
 $('.footer').html(`Copyright &copy; ${new Date().getFullYear()} All rights reserved`);
-loadingProcess(10);
+
 
 // Carousel
 function enableGallery(){

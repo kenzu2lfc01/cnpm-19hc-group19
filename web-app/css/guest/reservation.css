@@ -1,6 +1,5 @@
-
-.reservation{
-    /* background-image: url('../img/background03.jpg'); */
+#reservation{
+    background-image: url(../../img/background02.jpg);
     background-clip: content-box;
     background-attachment: fixed;
 }
