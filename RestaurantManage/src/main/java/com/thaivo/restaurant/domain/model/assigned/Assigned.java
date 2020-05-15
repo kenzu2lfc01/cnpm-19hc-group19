@@ -30,7 +30,7 @@ public class Assigned {
 
     //////////////////////////////
     @ManyToOne
-    @JoinColumn(columnDefinition = "staff_id", nullable = false)
+    @JoinColumn(columnDefinition = "staff_id", nullable = false, updatable = false)
     private Staff staff;
     //////////////////////////////
 

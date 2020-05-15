@@ -30,11 +30,11 @@ public class ImportBill {
 
     //////////////////////////
     @ManyToOne
-    @JoinColumn(columnDefinition = "food_id", nullable = false)
+    @JoinColumn(columnDefinition = "food_id", nullable = false, updatable = false)
     private Food food;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "created_by", nullable = false)
+    @JoinColumn(columnDefinition = "created_by", nullable = false, updatable = false)
     private Staff staff;
     //////////////////////////
 }

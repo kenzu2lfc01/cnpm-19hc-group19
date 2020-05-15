@@ -27,7 +27,7 @@ public class Account {
 
     ////////////////////////////
     @OneToOne
-    @JoinColumn(columnDefinition = "staff_id", nullable = false, unique = true)
+    @JoinColumn(columnDefinition = "staff_id", nullable = false, unique = true, updatable = false)
     private Staff staff;
     ////////////////////////////
 }

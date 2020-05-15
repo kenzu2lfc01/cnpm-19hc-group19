@@ -28,11 +28,11 @@ public class Receipt {
 
     /////////////////////////////////
     @OneToOne
-    @JoinColumn(columnDefinition = "order_id", nullable = false, unique = true)
+    @JoinColumn(columnDefinition = "order_id", nullable = false, unique = true, updatable = false)
     private Order order;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "created_by", nullable = false)
+    @JoinColumn(columnDefinition = "created_by", nullable = false, updatable = false)
     private Staff staff;
     /////////////////////////////////
 }

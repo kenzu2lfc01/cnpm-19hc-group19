@@ -29,11 +29,11 @@ public class Order {
 
     //////////////////////////
     @ManyToOne
-    @JoinColumn(columnDefinition = "created_by", nullable = false)
+    @JoinColumn(columnDefinition = "created_by", nullable = false, updatable = false)
     private Staff staff;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "table_id", nullable = false)
+    @JoinColumn(columnDefinition = "table_id", nullable = false, updatable = false)
     private RTable table;
 
     @OneToMany(mappedBy = "order")

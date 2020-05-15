@@ -35,11 +35,11 @@ public class OrderDetail {
 
     ////////////////////////////////////////////
     @ManyToOne
-    @JoinColumn(columnDefinition = "order_id", nullable = false)
+    @JoinColumn(columnDefinition = "order_id", nullable = false, updatable = false)
     private Order order;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "food_id", nullable = false)
+    @JoinColumn(columnDefinition = "food_id", nullable = false, updatable = false)
     private Food food;
     ////////////////////////////////////////////
 

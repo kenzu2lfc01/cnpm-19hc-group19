@@ -35,6 +35,8 @@ public class Staff {
     private Double salary;
     @Column(nullable = false)
     private Double allowance;
+    @Column(nullable = false)
+    private Boolean is_deleted;
 
 
     /////////////////////////////
