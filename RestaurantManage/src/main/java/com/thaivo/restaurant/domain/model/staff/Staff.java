@@ -37,6 +37,8 @@ public class Staff {
     private Double allowance;
     @Column(nullable = false)
     private Boolean is_deleted;
+    @Enumerated(EnumType.STRING)
+    private Position position;
 
 
     /////////////////////////////
@@ -58,4 +60,6 @@ public class Staff {
     @OneToMany(mappedBy = "staff")
     private Set<Receipt> receipts;
     //////////////////////////////
+
+    public enum Position { SERVICE, CHEF, CASHIER, MANAGER }
 }

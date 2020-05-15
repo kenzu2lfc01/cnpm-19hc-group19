@@ -3,6 +3,8 @@ package com.thaivo.restaurant.domain.model.staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StaffService {
     private StaffRepository repository;
@@ -17,10 +19,14 @@ public class StaffService {
     }
 
     public void update(Staff staff){
-        repository.update(staff.getId(), staff.getName(), staff.getPhone(), staff.getSalary(), staff.getAllowance());
+        repository.update(staff.getId(), staff.getName(), staff.getPhone(), staff.getSalary(), staff.getAllowance(), staff.getPosition());
     }
 
     public void delete(String id){
         repository.delete(id);
+    }
+
+    public List<Staff> getAll(){
+        return repository.findAll();
     }
 }

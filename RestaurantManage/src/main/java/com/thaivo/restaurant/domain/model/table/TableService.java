@@ -3,6 +3,8 @@ package com.thaivo.restaurant.domain.model.table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TableService {
     private TableRepository repository;
@@ -30,5 +32,13 @@ public class TableService {
 
     public void delete(String id){
         repository.delete(id);
+    }
+
+    public List<RTable> getAll(){
+        return repository.findAll();
+    }
+
+    public List<RTable> getByStatus(RTable.Status status){
+        return repository.findByStatus(status);
     }
 }

@@ -23,6 +23,7 @@ public class RestaurantApplication {
                                     .name("Thai Vo").phone("0989421615")
                                     .join_date(System.currentTimeMillis())
                                     .salary(1000d).allowance(100d)
+                                    .is_deleted(false)
                                     .build());
         Account account = accountRepository.saveAndFlush(Account.builder()
                 .username("thai-vo512")

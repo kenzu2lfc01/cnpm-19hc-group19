@@ -3,6 +3,8 @@ package com.thaivo.restaurant.domain.model.food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FoodService {
     private FoodRepository repository;
@@ -22,5 +24,9 @@ public class FoodService {
 
     public void delete(String id){
         repository.deleteById(id);
+    }
+
+    public List<Food> getAll(){
+        return repository.findAll();
     }
 }

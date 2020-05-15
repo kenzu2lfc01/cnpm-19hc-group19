@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 @Data
 @Entity(name = "tbl_assigned")
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"staff_id", "day_of_week", "session"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"staff_id", "dow", "session"}))
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +22,7 @@ public class Assigned {
     private String id;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private DayOfWeek day_of_week;
+    private DayOfWeek dow;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Session session;

@@ -1,8 +1,11 @@
 package com.thaivo.restaurant.domain.model.table;
 
+import com.thaivo.restaurant.domain.model.staff.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface TableRepository extends JpaRepository<RTable, String> {
 
@@ -26,4 +29,5 @@ public interface TableRepository extends JpaRepository<RTable, String> {
     @Query(value = "UPDATE tbl_table SET last_order_id = ?2 WHERE id = ?1", nativeQuery = true)
     void updateLastOrder(String id, String last_order_id);
 
+    List<RTable> findByStatus(RTable.Status status);
 }
