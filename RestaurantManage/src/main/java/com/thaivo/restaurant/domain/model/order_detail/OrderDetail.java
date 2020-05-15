@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -16,24 +17,29 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class OrderDetail {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    @Column(nullable = false)
     private Double price;
+    @Column(nullable = false)
     private Integer amount;
+    @Column(nullable = false)
     private Long order_at;
     private Long done_at;
     private String note;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
 
 
     ////////////////////////////////////////////
     @ManyToOne
-    @JoinColumn(columnDefinition = "order_id")
+    @JoinColumn(columnDefinition = "order_id", nullable = false)
     private Order order;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "food_id")
+    @JoinColumn(columnDefinition = "food_id", nullable = false)
     private Food food;
     ////////////////////////////////////////////
 

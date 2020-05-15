@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,18 +20,20 @@ import java.util.Set;
 @AllArgsConstructor
 public class Order {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    @Column(nullable = false)
     private Long created_at;
 
 
     //////////////////////////
     @ManyToOne
-    @JoinColumn(columnDefinition = "created_by")
+    @JoinColumn(columnDefinition = "created_by", nullable = false)
     private Staff staff;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "table_id")
+    @JoinColumn(columnDefinition = "table_id", nullable = false)
     private RTable table;
 
     @OneToMany(mappedBy = "order")

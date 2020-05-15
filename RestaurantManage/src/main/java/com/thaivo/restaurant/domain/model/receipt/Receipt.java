@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -16,19 +17,22 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Receipt {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    @Column(nullable = false)
     private String total_cost;
+    @Column(nullable = false)
     private Long created_at;
 
 
     /////////////////////////////////
     @OneToOne
-    @JoinColumn(columnDefinition = "order_id")
+    @JoinColumn(columnDefinition = "order_id", nullable = false, unique = true)
     private Order order;
 
     @ManyToOne
-    @JoinColumn(columnDefinition = "created_by")
+    @JoinColumn(columnDefinition = "created_by", nullable = false)
     private Staff staff;
     /////////////////////////////////
 }

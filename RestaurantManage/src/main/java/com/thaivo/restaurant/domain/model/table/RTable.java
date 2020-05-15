@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,12 +17,17 @@ import java.util.Set;
 @AllArgsConstructor
 public class RTable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
+    @Column(nullable = false)
     private Integer capacity;
+    @Column(nullable = false)
     private Boolean is_deleted;
 
 
@@ -30,7 +36,7 @@ public class RTable {
     private Set<Order> orders;
 
     @OneToOne
-    @JoinColumn(columnDefinition = "last_order")
+    @JoinColumn(columnDefinition = "last_order", unique = true)
     private Order lastOrder;
     //////////////////////////////////
 

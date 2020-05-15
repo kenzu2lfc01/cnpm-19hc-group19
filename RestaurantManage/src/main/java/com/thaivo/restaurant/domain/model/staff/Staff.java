@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -21,12 +22,18 @@ import java.util.Set;
 @AllArgsConstructor
 public class Staff {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String phone;
+    @Column(nullable = false)
     private Long join_date;
+    @Column(nullable = false)
     private Double salary;
+    @Column(nullable = false)
     private Double allowance;
 
 
