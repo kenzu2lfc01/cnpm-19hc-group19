@@ -20,7 +20,7 @@ public class FoodService {
     }
 
     public void update(Food food){
-        repository.update(food.getId(), food.getName(), food.getPrice(), food.getImage(), food.getType());
+        repository.update(food.getId(), food.getName(), food.getPrice(), food.getImage(), food.getType().toString());
     }
 
     public void delete(String id){
