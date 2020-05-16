@@ -42,4 +42,27 @@ public class RTable {
 
 
     public enum Status { READY, BUSY }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private String name;
+        private Status status;
+        private Integer capacity;
+        private Order.View lastOrder;
+
+        public static View from(RTable table){
+            return View.builder()
+                    .id(table.getId())
+                    .name(table.getName())
+                    .status(table.getStatus())
+                    .capacity(table.getCapacity())
+                    .lastOrder(table.getLastOrder() == null? null :
+                            Order.View.from(table.getLastOrder()))
+                    .build();
+        }
+    }
 }

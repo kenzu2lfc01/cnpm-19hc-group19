@@ -1,5 +1,6 @@
 package com.thaivo.restaurant.domain.model.account;
 
+import com.thaivo.restaurant.domain.model.ReferenceData;
 import com.thaivo.restaurant.domain.model.staff.Staff;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,4 +31,27 @@ public class Account {
     @JoinColumn(columnDefinition = "staff_id", nullable = false, unique = true, updatable = false)
     private Staff staff;
     ////////////////////////////
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private String username;
+        private String password;
+        private ReferenceData staff;
+
+        public static View from(Account account){
+            return View.builder()
+                    .id(account.getId())
+                    .username(account.getUsername())
+                    .password(account.getPassword())
+                    .staff(ReferenceData.builder()
+                            .id(account.getStaff().getId())
+                            .name(account.getStaff().getName())
+                            .build())
+                    .build();
+        }
+    }
 }

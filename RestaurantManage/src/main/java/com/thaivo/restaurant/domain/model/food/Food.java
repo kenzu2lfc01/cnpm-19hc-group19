@@ -43,4 +43,26 @@ public class Food {
     /////////////////////////////////
 
     public enum Type { FOOD, DRINK }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private String name;
+        private Double price;
+        private String image;
+        private Type type;
+
+        public static View from(Food food){
+            return View.builder()
+                    .id(food.getId())
+                    .name(food.getName())
+                    .price(food.getPrice())
+                    .image(food.getImage())
+                    .type(food.getType())
+                    .build();
+        }
+    }
 }

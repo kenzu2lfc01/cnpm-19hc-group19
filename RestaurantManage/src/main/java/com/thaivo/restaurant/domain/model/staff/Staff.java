@@ -63,4 +63,30 @@ public class Staff {
     //////////////////////////////
 
     public enum Position { SERVE, CHEF, CASHIER, MANAGER }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private String name;
+        private String phone;
+        private Long joinDate;
+        private Double salary;
+        private Double allowance;
+        private Position position;
+
+        public static View from(Staff staff){
+            return View.builder()
+                    .id(staff.getId())
+                    .name(staff.getName())
+                    .phone(staff.getPhone())
+                    .joinDate(staff.getJoinDate())
+                    .salary(staff.getSalary())
+                    .allowance(staff.getAllowance())
+                    .position(staff.getPosition())
+                    .build();
+        }
+    }
 }
