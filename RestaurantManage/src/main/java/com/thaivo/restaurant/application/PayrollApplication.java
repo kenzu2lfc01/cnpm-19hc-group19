@@ -7,6 +7,7 @@ import com.thaivo.restaurant.domain.model.staff.Staff;
 import com.thaivo.restaurant.domain.model.staff.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +48,7 @@ public class PayrollApplication {
     }
 
     public Page<Payroll> getByTime(PayrollCommand.GetByTime command){
-        return payrollService.getByTime(command.getFrom(), command.getTo(), command.getPage(), command.getSize());
+        return payrollService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()));
     }
 
     public Double getTotalSalaryByTime(PayrollCommand.GetByTime command){

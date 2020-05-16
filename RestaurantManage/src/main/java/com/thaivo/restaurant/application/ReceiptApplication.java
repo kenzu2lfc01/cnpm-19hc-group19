@@ -9,6 +9,7 @@ import com.thaivo.restaurant.domain.model.table.RTable;
 import com.thaivo.restaurant.domain.model.table.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +48,7 @@ public class ReceiptApplication {
     }
 
     public Page<Receipt> getByTime(ReceiptCommand.GetByTime command) {
-        return receiptService.getByTime(command.getFrom(), command.getTo(), command.getPage(), command.getSize());
+        return receiptService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()));
     }
 
     public Double getTotalCostByTime(ReceiptCommand.GetByTime command) {

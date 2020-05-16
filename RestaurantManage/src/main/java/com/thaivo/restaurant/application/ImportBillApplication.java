@@ -7,6 +7,7 @@ import com.thaivo.restaurant.domain.model.import_bill.ImportBillService;
 import com.thaivo.restaurant.domain.model.staff.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +37,7 @@ public class ImportBillApplication {
     }
 
     public Page<ImportBill> getByTime(ImportBillCommand.GetByTime command){
-        return importBillService.getByTime(command.getFrom(), command.getTo(), command.getPage(), command.getSize());
+        return importBillService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()));
     }
 
     public Double getTotalCostByTime(ImportBillCommand.GetByTime command){

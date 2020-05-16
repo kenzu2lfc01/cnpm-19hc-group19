@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,8 +37,8 @@ public class PayrollService {
         return repository.findByMonthAndYear(month, year);
     }
 
-    public Page<Payroll> getByTime(Long from, Long to, Integer page, Integer size){
-        return repository.findByTimestampBetweenOrderByTimestampDesc(from, to, PageRequest.of(page-1, size));
+    public Page<Payroll> getByTime(Long from, Long to, Pageable pageable){
+        return repository.findByTimestampBetweenOrderByTimestampDesc(from, to, pageable);
     }
 
     public Double getTotalSalaryByTime(Long from, Long to){

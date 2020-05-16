@@ -23,8 +23,8 @@ public class Order {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    @Column(nullable = false)
-    private Long created_at;
+    @Column(name = "created_at", nullable = false)
+    private Long createdAt;
 
 
     //////////////////////////
