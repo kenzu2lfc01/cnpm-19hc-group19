@@ -1,5 +1,6 @@
 package com.thaivo.restaurant.domain.model.staff;
 
+import com.thaivo.restaurant.domain.model.ReferenceData;
 import com.thaivo.restaurant.domain.model.account.Account;
 import com.thaivo.restaurant.domain.model.assigned.Assigned;
 import com.thaivo.restaurant.domain.model.import_bill.ImportBill;
@@ -76,6 +77,7 @@ public class Staff {
         private Double salary;
         private Double allowance;
         private Position position;
+        private Account.View account;
 
         public static View from(Staff staff){
             return View.builder()
@@ -86,6 +88,7 @@ public class Staff {
                     .salary(staff.getSalary())
                     .allowance(staff.getAllowance())
                     .position(staff.getPosition())
+                    .account(Account.View.from(staff.getAccount()))
                     .build();
         }
     }

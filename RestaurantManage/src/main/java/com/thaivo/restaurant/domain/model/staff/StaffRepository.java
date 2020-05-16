@@ -16,5 +16,5 @@ public interface StaffRepository extends JpaRepository<Staff, String> {
 
     @Modifying
     @Query(value = "UPDATE tbl_staff SET name = ?2, phone = ?3, salary = ?4, allowance = ?5, position = ?6 WHERE id = ?1", nativeQuery = true)
-    void update(String id, String name, String phone, Double salary, Double allowance, Staff.Position position);
+    void update(String id, String name, String phone, Double salary, Double allowance, String position);
 }

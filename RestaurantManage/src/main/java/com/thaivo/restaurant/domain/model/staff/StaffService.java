@@ -20,7 +20,7 @@ public class StaffService {
     }
 
     public void update(Staff staff){
-        repository.update(staff.getId(), staff.getName(), staff.getPhone(), staff.getSalary(), staff.getAllowance(), staff.getPosition());
+        repository.update(staff.getId(), staff.getName(), staff.getPhone(), staff.getSalary(), staff.getAllowance(), staff.getPosition().toString());
     }
 
     public void delete(String id){

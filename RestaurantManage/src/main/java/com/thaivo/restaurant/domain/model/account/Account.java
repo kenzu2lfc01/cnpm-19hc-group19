@@ -27,7 +27,7 @@ public class Account {
 
 
     ////////////////////////////
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "staff_id", nullable = false, unique = true, updatable = false)
     private Staff staff;
     ////////////////////////////
@@ -40,17 +40,12 @@ public class Account {
         private String id;
         private String username;
         private String password;
-        private ReferenceData staff;
 
         public static View from(Account account){
             return View.builder()
                     .id(account.getId())
                     .username(account.getUsername())
                     .password(account.getPassword())
-                    .staff(ReferenceData.builder()
-                            .id(account.getStaff().getId())
-                            .name(account.getStaff().getName())
-                            .build())
                     .build();
         }
     }
