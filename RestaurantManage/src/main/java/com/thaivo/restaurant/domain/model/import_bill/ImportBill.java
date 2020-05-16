@@ -20,10 +20,10 @@ public class ImportBill {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    @Column(nullable = false)
-    private Long created_at;
-    @Column(nullable = false)
-    private Double total_cost;
+    @Column(name = "created_at", nullable = false)
+    private Long createdAt;
+    @Column(name = "total_cost", nullable = false)
+    private Double totalCost;
     @Column(nullable = false)
     private String description;
 

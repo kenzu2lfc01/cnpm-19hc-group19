@@ -30,6 +30,8 @@ public class Food {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Type type;
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
 
 
     /////////////////////////////////

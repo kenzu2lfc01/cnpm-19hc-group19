@@ -18,19 +18,23 @@ public class OrderDetailService {
         return repository.save(orderDetail);
     }
 
-    public void updateAmount(OrderDetail orderDetail){
-        Optional<OrderDetail> byId = repository.findById(orderDetail.getId());
+    public void updateAmount(String id, Integer amount){
+        Optional<OrderDetail> byId = repository.findById(id);
         if (!byId.isPresent()) return;
         if(byId.get().getStatus() == OrderDetail.Status.FINISH)
             throw new RuntimeException("Order completed!");
-        repository.updateAmount(orderDetail.getId(), orderDetail.getAmount());
+        repository.updateAmount(id, amount);
     }
 
-    public void updateStatus(OrderDetail orderDetail){
-        repository.updateStatus(orderDetail.getId(), orderDetail.getStatus());
+    public void updateStatus(String id, OrderDetail.Status status){
+        repository.updateStatus(id, status, System.currentTimeMillis());
     }
 
     public void delete(String id){
         repository.deleteById(id);
+    }
+
+    public Double getTotalPrice(String orderId){
+        return repository.getTotalPrice(orderId);
     }
 }

@@ -24,9 +24,10 @@ public class OrderDetail {
     private Double price;
     @Column(nullable = false)
     private Integer amount;
-    @Column(nullable = false)
-    private Long order_at;
-    private Long done_at;
+    @Column(name = "order_at", nullable = false)
+    private Long orderAt;
+    @Column(name = "done_at")
+    private Long doneAt;
     private String note;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

@@ -20,9 +20,9 @@ public class Assigned {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    @Column(nullable = false)
+    @Column(name = "day_of_week", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DayOfWeek day_of_week;
+    private DayOfWeek dayOfWeek;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Session session;

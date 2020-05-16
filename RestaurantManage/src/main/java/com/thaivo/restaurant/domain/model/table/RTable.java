@@ -27,8 +27,8 @@ public class RTable {
     private Status status;
     @Column(nullable = false)
     private Integer capacity;
-    @Column(nullable = false)
-    private Boolean is_deleted;
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
 
 
     ///////////////////////////////////
