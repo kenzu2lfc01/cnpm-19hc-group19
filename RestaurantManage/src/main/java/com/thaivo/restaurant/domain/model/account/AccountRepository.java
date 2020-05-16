@@ -10,4 +10,6 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     @Modifying
     @Query(value = "UPDATE tbl_account SET username = ?2, password = ?3 WHERE id = ?1", nativeQuery = true)
     void update(String id, String username, String password);
+
+    Account findByUsername(String username);
 }

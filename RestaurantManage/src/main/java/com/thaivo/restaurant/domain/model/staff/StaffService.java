@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StaffService {
@@ -27,6 +28,12 @@ public class StaffService {
     }
 
     public List<Staff> getAll(){
-        return repository.findAll();
+        return repository.findByIsDeletedFalse();
+    }
+
+    public Staff getById(String id){
+        Optional<Staff> byId = repository.findById(id);
+        if(byId.isPresent()) return byId.get();
+        throw new RuntimeException("Staff not found");
     }
 }

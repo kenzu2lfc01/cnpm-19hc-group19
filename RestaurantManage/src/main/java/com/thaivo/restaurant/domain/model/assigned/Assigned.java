@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 @Data
 @Entity(name = "tbl_assigned")
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"staff_id", "dow", "session"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"staff_id", "day_of_week", "session"}))
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,9 +20,9 @@ public class Assigned {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    @Column(nullable = false)
+    @Column(name = "day_of_week", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DayOfWeek dow;
+    private DayOfWeek dayOfWeek;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Session session;

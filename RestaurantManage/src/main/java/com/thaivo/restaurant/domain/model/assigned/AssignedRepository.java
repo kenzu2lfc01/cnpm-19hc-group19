@@ -8,14 +8,12 @@ import java.util.List;
 
 public interface AssignedRepository extends JpaRepository<Assigned, String> {
 
-    @Query(value = "SELECT * from tbl_assigned WHERE staff_id = ?1 AND dow = ?2 AND session = ?3", nativeQuery = true)
-    Assigned findDuplicate(String staff_id, Assigned.DayOfWeek dayOfWeek, Assigned.Session session);
-
     @Modifying
-    @Query(value = "UPDATE tbl_assigned SET dow = ?2, session = ?3 WHERE id = ?1", nativeQuery = true)
+    @Query(value = "UPDATE tbl_assigned SET day_of_week = ?2, session = ?3 WHERE id = ?1", nativeQuery = true)
     void update(String id, Assigned.DayOfWeek dayOfWeek, Assigned.Session session);
 
 
-     List<Assigned> findByDow(Assigned.DayOfWeek dayOfWeek);
+    Boolean existsByStaffIdAndDayOfWeekAndSession(String staffId, Assigned.DayOfWeek dayOfWeek, Assigned.Session session);
+     List<Assigned> findByDayOfWeek(Assigned.DayOfWeek dayOfWeek);
      List<Assigned> findByStaffId(String staff);
 }

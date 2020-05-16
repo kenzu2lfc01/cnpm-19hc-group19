@@ -21,9 +21,11 @@ public class Receipt {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     @Column(nullable = false)
-    private String total_cost;
-    @Column(nullable = false)
-    private Long created_at;
+    private Double surcharge;
+    @Column(name = "total_cost", nullable = false)
+    private Double totalCost;
+    @Column(name = "created_at", nullable = false)
+    private Long createdAt;
 
 
     /////////////////////////////////

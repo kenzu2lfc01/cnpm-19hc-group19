@@ -29,14 +29,15 @@ public class Staff {
     private String name;
     @Column(nullable = false)
     private String phone;
-    @Column(nullable = false)
-    private Long join_date;
+    @Column(name = "join_date", nullable = false)
+    private Long joinDate;
     @Column(nullable = false)
     private Double salary;
     @Column(nullable = false)
     private Double allowance;
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
     @Column(nullable = false)
-    private Boolean is_deleted;
     @Enumerated(EnumType.STRING)
     private Position position;
 
@@ -61,5 +62,5 @@ public class Staff {
     private Set<Receipt> receipts;
     //////////////////////////////
 
-    public enum Position { SERVICE, CHEF, CASHIER, MANAGER }
+    public enum Position { SERVE, CHEF, CASHIER, MANAGER }
 }

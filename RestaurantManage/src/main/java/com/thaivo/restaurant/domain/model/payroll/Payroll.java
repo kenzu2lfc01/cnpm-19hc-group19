@@ -30,6 +30,7 @@ public class Payroll {
     private Integer month;
     @Column(nullable = false)
     private Integer year;
+    private Long timestamp;
 
 
     ///////////////////////

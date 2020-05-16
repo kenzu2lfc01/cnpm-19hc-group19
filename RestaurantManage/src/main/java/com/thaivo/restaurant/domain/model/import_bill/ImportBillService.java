@@ -2,11 +2,8 @@ package com.thaivo.restaurant.domain.model.import_bill;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ImportBillService {
@@ -22,9 +19,10 @@ public class ImportBillService {
     }
 
     public Page<ImportBill> getByTime(Long from, Long to, Integer page, Integer size){
-        Integer total = repository.countByTime(from, to);
-        List<ImportBill> list = repository.findByTime(from, to, (page-1) * size, size);
+       return repository.findByCreatedAtBetweenOrderByCreatedAtDesc(from, to, PageRequest.of(page-1, size));
+    }
 
-        return new PageImpl<>(list, PageRequest.of(page, size), total);
+    public Double getTotalCostByTime(Long from, Long to){
+        return repository.getTotalCostByTime(from, to);
     }
 }
