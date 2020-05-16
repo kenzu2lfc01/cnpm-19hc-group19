@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Transactional
@@ -22,12 +23,14 @@ public class AssignedApplication {
         this.staffService = staffService;
     }
 
-    public Assigned add(AssignedCommand.Create command){
-        return assignedService.add(Assigned.builder()
+    public Assigned.View add(AssignedCommand.Create command){
+        Assigned assigned = assignedService.add(Assigned.builder()
                 .staff(staffService.getById(command.getStaffId()))
                 .dayOfWeek(command.getDayOfWeek())
                 .session(command.getSession())
                 .build());
+
+        return Assigned.View.from(assigned);
     }
 
     public void delete(String id){
@@ -45,15 +48,13 @@ public class AssignedApplication {
                 .build());
     }
 
-    public List<Assigned> getAll(){
-        return assignedService.getAll();
+    public List<Assigned.View> getByStaff(String staffId){
+        return assignedService.getByStaffId(staffId).stream()
+            .map(Assigned.View::from).collect(Collectors.toList());
     }
 
-    public List<Assigned> getByStaff(String staffId){
-        return assignedService.getByStaffId(staffId);
-    }
-
-    public List<Assigned> getByDayOfWeek(Assigned.DayOfWeek dayOfWeek){
-        return assignedService.getByDayOfWeek(dayOfWeek);
+    public List<Assigned.View> getByDayOfWeek(Assigned.DayOfWeek dayOfWeek){
+        return assignedService.getByDayOfWeek(dayOfWeek).stream()
+            .map(Assigned.View::from).collect(Collectors.toList());
     }
 }
