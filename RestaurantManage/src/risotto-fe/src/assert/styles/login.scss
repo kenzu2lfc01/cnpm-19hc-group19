@@ -1,0 +1,23 @@
+.form-login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    background-color: rgba($color: white, $alpha: 0.95);
+}
+
+.form-group {
+    width: 90%;
+    margin-left: 10px;
+}
+
+.form-button-login {
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 5%;
+}
+
+h1 {
+    text-align: center;
+}
