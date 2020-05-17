@@ -21,8 +21,9 @@ public class PayrollResource {
         this.payrollApplication = payrollApplication;
     }
 
+    // Require Manage
     @PostMapping("/add")
-    public ResponseEntity<Object> add(@RequestBody PayrollCommand.Create command){
+    public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody PayrollCommand.Create command){
         try {
             Payroll.View payroll = payrollApplication.add(command);
 
@@ -30,12 +31,13 @@ public class PayrollResource {
         }
         catch (Throwable throwable){
             throwable.printStackTrace();
-            return new ResponseEntity<>(throwable.getMessage(), HttpStatus.OK);
+            return new ResponseEntity<>(throwable.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
+    // Require Manage
     @GetMapping("/getByStaff/{staffId}")
-    public ResponseEntity<Object> getByStaff(@PathVariable String staffId){
+    public ResponseEntity<Object> getByStaff(@RequestHeader(name="Authorization") String token, @PathVariable String staffId){
         try {
             List<Payroll.View> list = payrollApplication.getByStaff(staffId);
 
@@ -43,12 +45,13 @@ public class PayrollResource {
         }
         catch (Throwable throwable){
             throwable.printStackTrace();
-            return new ResponseEntity<>(throwable.getMessage(), HttpStatus.OK);
+            return new ResponseEntity<>(throwable.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
+    // Require Manage
     @GetMapping("/getByTime")
-    public ResponseEntity<Object> getByTime(@ModelAttribute PayrollCommand.GetByTime command){
+    public ResponseEntity<Object> getByTime(@RequestHeader(name="Authorization") String token, @ModelAttribute PayrollCommand.GetByTime command){
         try {
             Page<Payroll.View> page = payrollApplication.getByTime(command);
 
@@ -56,7 +59,7 @@ public class PayrollResource {
         }
         catch (Throwable throwable){
             throwable.printStackTrace();
-            return new ResponseEntity<>(throwable.getMessage(), HttpStatus.OK);
+            return new ResponseEntity<>(throwable.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

@@ -21,7 +21,7 @@ public interface TableRepository extends JpaRepository<RTable, String> {
 
     @Modifying
     @Query(value = "UPDATE tbl_table SET status = ?2 WHERE id = ?1", nativeQuery = true)
-    void updateStatus(String id, RTable.Status status);
+    void updateStatus(String id, String status);
 
 
     @Modifying

@@ -20,8 +20,9 @@ public class AssignedResource {
         this.assignedApplication = assignedApplication;
     }
 
+    // Require Manage
     @PostMapping("/add")
-    public ResponseEntity<Object> add(@RequestBody AssignedCommand.Create command){
+    public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody AssignedCommand.Create command){
         try {
             Assigned.View assigned = assignedApplication.add(command);
 
@@ -33,8 +34,9 @@ public class AssignedResource {
         }
     }
 
+    // Require Manage
     @PostMapping("/update")
-    public ResponseEntity<Object> update(@RequestBody AssignedCommand.Update command){
+    public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody AssignedCommand.Update command){
         try {
             assignedApplication.update(command);
 
@@ -46,8 +48,9 @@ public class AssignedResource {
         }
     }
 
+    // Require Manage
     @GetMapping("/delete/{id}")
-    public ResponseEntity<Object> update(@PathVariable String id){
+    public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
             assignedApplication.delete(id);
 
@@ -59,8 +62,9 @@ public class AssignedResource {
         }
     }
 
+    // Require Manage
     @GetMapping("/get/staff/{staffId}")
-    public ResponseEntity<Object> get(@PathVariable String staffId){
+    public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @PathVariable String staffId){
         try {
             List<Assigned.View> list = assignedApplication.getByStaff(staffId);
 
@@ -72,8 +76,9 @@ public class AssignedResource {
         }
     }
 
+    // Require Manage
     @GetMapping("/get/dow/{dayOfWeek}")
-    public ResponseEntity<Object> get(@PathVariable Assigned.DayOfWeek dayOfWeek){
+    public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @PathVariable Assigned.DayOfWeek dayOfWeek){
         try {
             List<Assigned.View> list = assignedApplication.getByDayOfWeek(dayOfWeek);
 

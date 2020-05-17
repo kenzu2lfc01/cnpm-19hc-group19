@@ -27,7 +27,7 @@ public class OrderApplication {
     }
 
 
-    public Order add(OrderCommand.Create command){
+    public Order.View add(OrderCommand.Create command){
         RTable table = tableService.getById(command.getTableId());
         if(table.getStatus() == RTable.Status.BUSY)
             throw new RuntimeException("Table not available");
@@ -42,14 +42,16 @@ public class OrderApplication {
 
         tableService.updateLastOrder(table.getId(), order.getId());
 
-        return order;
+        return Order.View.from(order);
     }
 
-    public Page<Order> getByTime(OrderCommand.Get command){
-        return orderService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()));
+    public Page<Order.View> getByTime(OrderCommand.Get command){
+        return orderService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()))
+                .map(Order.View::from);
     }
 
-    public Page<Order> getByTimeInTable(OrderCommand.Get command){
-        return orderService.getByTimeInTable(command.getTableId(), command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()));
+    public Page<Order.View> getByTimeInTable(OrderCommand.Get command){
+        return orderService.getByTimeInTable(command.getTableId(), command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()))
+                .map(Order.View::from);
     }
 }

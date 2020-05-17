@@ -21,8 +21,10 @@ public class TableResource {
         this.tableApplication = tableApplication;
     }
 
+
+    // Require Manage
     @PostMapping("/add")
-    ResponseEntity<Object> add(@RequestBody TableCommand.Create command){
+    ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody TableCommand.Create command){
         try {
             RTable.View table = tableApplication.add(command);
             return new ResponseEntity<>(table, HttpStatus.OK);
@@ -33,9 +35,9 @@ public class TableResource {
         }
     }
 
-
+    // Require Manage
     @PostMapping("/update")
-    ResponseEntity<Object> update(@RequestBody TableCommand.Update command){
+    ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody TableCommand.Update command){
         try {
             RTable.View table = tableApplication.update(command);
             return new ResponseEntity<>(table, HttpStatus.OK);
@@ -46,9 +48,9 @@ public class TableResource {
         }
     }
 
-
+    // Require Manage
     @GetMapping("/delete/{id}")
-    ResponseEntity<Object> delete(@PathVariable String id){
+    ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
             tableApplication.deleted(id);
             return new ResponseEntity<>("Deleted", HttpStatus.OK);
@@ -59,9 +61,9 @@ public class TableResource {
         }
     }
 
-
+    // Require Manage
     @GetMapping("/get")
-    ResponseEntity<Object> get(@RequestParam(required = false) RTable.Status status){
+    ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @RequestParam(required = false) RTable.Status status){
         try {
             List<RTable.View> list;
             if(status == null) list = tableApplication.getAll();
@@ -75,8 +77,9 @@ public class TableResource {
         }
     }
 
+    // Require Manage
     @GetMapping("/get/{id}")
-    ResponseEntity<Object> get(@PathVariable String id){
+    ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
             RTable.View table = tableApplication.getById(id);
 

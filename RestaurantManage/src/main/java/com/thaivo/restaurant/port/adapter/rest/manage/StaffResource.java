@@ -21,8 +21,9 @@ public class StaffResource {
         this.staffApplication = staffApplication;
     }
 
+    // Require Manage
     @PostMapping("/add")
-    public ResponseEntity<Object> add(@RequestBody StaffCommand.Create command){
+    public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody StaffCommand.Create command){
         try {
             Staff.View staff = staffApplication.add(command);
 
@@ -34,8 +35,9 @@ public class StaffResource {
         }
     }
 
+    // Require Manage
     @PostMapping("/update")
-    public ResponseEntity<Object> update(@RequestBody StaffCommand.Update command){
+    public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody StaffCommand.Update command){
         try {
             Staff.View staff = staffApplication.update(command);
 
@@ -47,8 +49,9 @@ public class StaffResource {
         }
     }
 
+    // Require Manage
     @GetMapping("/delete/{id}")
-    public ResponseEntity<Object> delete(@PathVariable String id){
+    public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
             staffApplication.delete(id);
 
@@ -60,9 +63,9 @@ public class StaffResource {
         }
     }
 
-
+    // Require Manage
     @GetMapping("/get")
-    public ResponseEntity<Object> get(){
+    public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token){
         try {
             List<Staff.View> list = staffApplication.getAll();
 
@@ -74,8 +77,9 @@ public class StaffResource {
         }
     }
 
+    // Require Manage
     @GetMapping("/get/{id}")
-    public ResponseEntity<Object> getById(@PathVariable String id){
+    public ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
             Staff.View staff = staffApplication.getById(id);
 

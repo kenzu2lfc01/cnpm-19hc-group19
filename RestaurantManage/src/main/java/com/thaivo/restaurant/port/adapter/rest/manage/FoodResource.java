@@ -21,8 +21,9 @@ public class FoodResource {
         this.foodApplication = foodApplication;
     }
 
+    // Require Manage
     @PostMapping("/add")
-    public ResponseEntity<Object> add(@RequestBody FoodCommand.Create command){
+    public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody FoodCommand.Create command){
         try {
             Food.View food = foodApplication.add(command);
 
@@ -34,9 +35,9 @@ public class FoodResource {
         }
     }
 
-
+    // Require Manage
     @PostMapping("/update")
-    public ResponseEntity<Object> update(@RequestBody FoodCommand.Update command){
+    public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody FoodCommand.Update command){
         try {
             Food.View food = foodApplication.update(command);
 
@@ -48,9 +49,9 @@ public class FoodResource {
         }
     }
 
-
+    // Require Manage
     @GetMapping("/delete/{id}")
-    public ResponseEntity<Object> delete(@PathVariable String id){
+    public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
             foodApplication.delete(id);
 
@@ -62,9 +63,9 @@ public class FoodResource {
         }
     }
 
-
+    // Require Manage
     @GetMapping("/get")
-    public ResponseEntity<Object> get(){
+    public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token){
         try {
             List<Food.View> list = foodApplication.getAll();
 

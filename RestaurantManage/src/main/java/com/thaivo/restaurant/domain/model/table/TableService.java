@@ -24,7 +24,7 @@ public class TableService {
     }
 
     public void updateStatus(String id, RTable.Status status){
-        repository.updateStatus(id, status);
+        repository.updateStatus(id, status.toString());
     }
 
     public void updateLastOrder(String id, String orderId){
