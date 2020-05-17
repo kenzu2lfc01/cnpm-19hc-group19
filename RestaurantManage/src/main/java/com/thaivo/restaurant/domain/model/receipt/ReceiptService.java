@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ReceiptService {
     private ReceiptRepository repository;
@@ -16,6 +18,12 @@ public class ReceiptService {
 
     public Receipt add(Receipt receipt){
         return repository.save(receipt);
+    }
+
+    public Receipt getById(String id){
+        Optional<Receipt> byId = repository.findById(id);
+        if(byId.isPresent()) return byId.get();
+        throw new RuntimeException("Receipt not found");
     }
 
     public Page<Receipt> getByTime(Long from, Long to, Pageable pageable){

@@ -19,6 +19,8 @@ public class ReceiptCommand {
 
     @Data
     @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class GetByTime {
         private Long from;
         private Long to;

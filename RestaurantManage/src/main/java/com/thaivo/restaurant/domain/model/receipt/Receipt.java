@@ -49,7 +49,7 @@ public class Receipt {
         private Double surcharge;
         private Double totalCost;
         private Long createdAt;
-        private String orderId;
+        private Order.View order;
         private ReferenceData staff;
 
         public static View from(Receipt receipt){
@@ -58,7 +58,19 @@ public class Receipt {
                     .surcharge(receipt.getSurcharge())
                     .totalCost(receipt.getTotalCost())
                     .createdAt(receipt.getCreatedAt())
-                    .orderId(receipt.getOrder().getId())
+                    .order(Order.View.from(receipt.getOrder()))
+                    .staff(ReferenceData.builder()
+                            .id(receipt.getStaff().getId())
+                            .name(receipt.getStaff().getName())
+                            .build())
+                    .build();
+        }
+        public static View quick(Receipt receipt){
+            return View.builder()
+                    .id(receipt.getId())
+                    .surcharge(receipt.getSurcharge())
+                    .totalCost(receipt.getTotalCost())
+                    .createdAt(receipt.getCreatedAt())
                     .staff(ReferenceData.builder()
                             .id(receipt.getStaff().getId())
                             .name(receipt.getStaff().getName())
