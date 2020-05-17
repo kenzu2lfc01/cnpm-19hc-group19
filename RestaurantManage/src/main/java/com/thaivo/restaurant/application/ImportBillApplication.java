@@ -11,6 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @Transactional
 public class ImportBillApplication {
@@ -45,5 +48,10 @@ public class ImportBillApplication {
 
     public Double getTotalCostByTime(ImportBillCommand.GetByTime command){
         return importBillService.getTotalCostByTime(command.getFrom(), command.getTo());
+    }
+
+    public List<ImportBill.View> getByStaff(String staffId) {
+        return importBillService.getByStaff(staffId).stream()
+                .map(ImportBill.View::from).collect(Collectors.toList());
     }
 }

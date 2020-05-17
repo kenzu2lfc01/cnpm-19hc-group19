@@ -1,6 +1,5 @@
 package com.thaivo.restaurant.domain.model.account;
 
-import com.thaivo.restaurant.application.command.AccountCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,18 +22,24 @@ public class AccountService {
         return repository.save(account);
     }
 
-    public void update(AccountCommand.Update command) {
-        Account account = repository.findByUsername(command.getUsername());
-        if(account != null && !account.getId().equals(command.getId()))
+    public void update(Account account) {
+        Account exists = repository.findByUsername(account.getUsername());
+        if(exists != null && !account.getId().equals(exists.getId()))
             throw new RuntimeException("Username duplicate");
-        String password = this.encrypt(command.getPassword(), command.getUsername());
-        repository.update(command.getId(), command.getUsername(), password);
+        String password = this.encrypt(account.getPassword(), account.getUsername());
+        repository.update(account.getId(), account.getUsername(), password);
     }
 
     public void delete(String id){
         repository.deleteById(id);
     }
 
+    public Account login(String username, String password) {
+        password = this.encrypt(password, username);
+        Account account = repository.findByUsernameAndPassword(username, password);
+        if (account != null) return account;
+        throw new RuntimeException("Username or password wrong");
+    }
 
     private String encrypt(String password, String salt){
         String generatedPassword = null;

@@ -11,6 +11,16 @@ public class AccountCommand {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class Login {
+        private String username;
+        private String password;
+    }
+
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Update {
         private String id;
         private String username;

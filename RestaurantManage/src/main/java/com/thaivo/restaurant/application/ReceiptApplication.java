@@ -44,6 +44,7 @@ public class ReceiptApplication {
                 .build());
 
         tableService.updateStatus(table.getId(), RTable.Status.READY);
+        tableService.updateLastOrder(table.getId(), null);
 
         return Receipt.View.from(receipt);
     }

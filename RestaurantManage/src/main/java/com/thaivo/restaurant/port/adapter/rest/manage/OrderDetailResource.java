@@ -3,6 +3,8 @@ package com.thaivo.restaurant.port.adapter.rest.manage;
 import com.thaivo.restaurant.application.OrderDetailApplication;
 import com.thaivo.restaurant.application.command.OrderDetailCommand;
 import com.thaivo.restaurant.domain.model.order_detail.OrderDetail;
+import com.thaivo.restaurant.domain.model.staff.Staff;
+import com.thaivo.restaurant.port.adapter.auth.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ public class OrderDetailResource {
         this.orderDetailApplication = orderDetailApplication;
     }
 
-    // Require serve staff
+    @Authentication(positions = { Staff.Position.SERVE })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody OrderDetailCommand.Create command) {
         try {
@@ -33,7 +35,7 @@ public class OrderDetailResource {
     }
 
 
-    // Require serve staff
+    @Authentication(positions = { Staff.Position.SERVE })
     @PostMapping("/update/amount")
     public ResponseEntity<Object> updateAmount(@RequestHeader(name="Authorization") String token, @RequestBody OrderDetailCommand.UpdateAmount command) {
         try {
@@ -48,7 +50,7 @@ public class OrderDetailResource {
     }
 
 
-    // Require chef staff
+    @Authentication(positions = { Staff.Position.CHEF })
     @PostMapping("/update/status")
     public ResponseEntity<Object> updateStatus(@RequestHeader(name="Authorization") String token, @RequestBody OrderDetailCommand.UpdateStatus command) {
         try {
@@ -63,7 +65,7 @@ public class OrderDetailResource {
     }
 
 
-    // Require serve staff
+    @Authentication(positions = { Staff.Position.SERVE })
     @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id) {
         try {

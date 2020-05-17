@@ -6,6 +6,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ImportBillService {
     private ImportBillRepository repository;
@@ -25,5 +27,9 @@ public class ImportBillService {
 
     public Double getTotalCostByTime(Long from, Long to){
         return repository.getTotalCostByTime(from, to);
+    }
+
+    public List<ImportBill> getByStaff(String staffId) {
+        return repository.findByStaffIdOrderByCreatedAtDesc(staffId);
     }
 }
