@@ -45,13 +45,19 @@ public class OrderApplication {
         return Order.View.from(order);
     }
 
+    public Order.View getById(String id){
+        Order order = orderService.getById(id);
+
+        return Order.View.from(order);
+    }
+
     public Page<Order.View> getByTime(OrderCommand.Get command){
         return orderService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()))
-                .map(Order.View::from);
+                .map(Order.View::quick);
     }
 
     public Page<Order.View> getByTimeInTable(OrderCommand.Get command){
-        return orderService.getByTimeInTable(command.getTableId(), command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()))
-                .map(Order.View::from);
+        Page<Order> page = orderService.getByTimeInTable(command.getTableId(), command.getFrom(), command.getTo(), PageRequest.of(command.getPage() - 1, command.getSize()));
+        return page.map(Order.View::quick);
     }
 }

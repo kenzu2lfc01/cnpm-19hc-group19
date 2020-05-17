@@ -30,7 +30,7 @@ public class Assigned {
 
 
     //////////////////////////////
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "staff_id", nullable = false, updatable = false)
     private Staff staff;
     //////////////////////////////

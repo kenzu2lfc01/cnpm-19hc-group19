@@ -37,11 +37,11 @@ public class OrderDetail {
 
 
     ////////////////////////////////////////////
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "order_id", nullable = false, updatable = false)
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "food_id", nullable = false, updatable = false)
     private Food food;
     ////////////////////////////////////////////

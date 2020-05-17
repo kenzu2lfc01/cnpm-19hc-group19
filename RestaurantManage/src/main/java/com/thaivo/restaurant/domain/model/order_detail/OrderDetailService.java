@@ -23,7 +23,7 @@ public class OrderDetailService {
     }
 
     public void updateStatus(String id, OrderDetail.Status status){
-        repository.updateStatus(id, status, System.currentTimeMillis());
+        repository.updateStatus(id, status.toString(), System.currentTimeMillis());
     }
 
     public void delete(String id){

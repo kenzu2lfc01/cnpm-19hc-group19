@@ -31,11 +31,11 @@ public class ImportBill {
 
 
     //////////////////////////
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "food_id", nullable = false, updatable = false)
     private Food food;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "created_by", nullable = false, updatable = false)
     private Staff staff;
     //////////////////////////

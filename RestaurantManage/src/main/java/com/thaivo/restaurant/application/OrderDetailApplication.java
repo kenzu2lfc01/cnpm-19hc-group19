@@ -3,9 +3,10 @@ package com.thaivo.restaurant.application;
 import com.thaivo.restaurant.application.command.OrderDetailCommand;
 import com.thaivo.restaurant.domain.model.food.Food;
 import com.thaivo.restaurant.domain.model.food.FoodService;
-import com.thaivo.restaurant.domain.model.order.OrderService;
 import com.thaivo.restaurant.domain.model.order_detail.OrderDetail;
 import com.thaivo.restaurant.domain.model.order_detail.OrderDetailService;
+import com.thaivo.restaurant.domain.model.table.RTable;
+import com.thaivo.restaurant.domain.model.table.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,27 +16,32 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderDetailApplication {
     private OrderDetailService orderDetailService;
     private FoodService foodService;
-    private OrderService orderService;
+    private TableService tableService;
 
     @Autowired
-    public OrderDetailApplication(OrderDetailService orderDetailService, FoodService foodService, OrderService orderService) {
+    public OrderDetailApplication(OrderDetailService orderDetailService, FoodService foodService, TableService tableService) {
         this.orderDetailService = orderDetailService;
         this.foodService = foodService;
-        this.orderService = orderService;
+        this.tableService = tableService;
     }
 
-    public OrderDetail add(OrderDetailCommand.Create command){
+    public OrderDetail.View add(OrderDetailCommand.Create command){
         Food food = foodService.getById(command.getFoodId());
+        RTable table = tableService.getById(command.getTableId());
 
-        return orderDetailService.add(OrderDetail.builder()
+        if(table.getStatus() == RTable.Status.READY) throw new RuntimeException("No order at table");
+
+        OrderDetail orderDetail = orderDetailService.add(OrderDetail.builder()
                 .food(food)
-                .order(orderService.getById(command.getFoodId()))
+                .order(table.getLastOrder())
                 .note(command.getNote())
                 .amount(command.getAmount())
                 .orderAt(System.currentTimeMillis())
                 .status(OrderDetail.Status.PENDING)
                 .price(food.getPrice())
                 .build());
+
+        return OrderDetail.View.from(orderDetail);
     }
 
     public void updateAmount(OrderDetailCommand.UpdateAmount command){

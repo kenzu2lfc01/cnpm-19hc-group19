@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -44,23 +45,23 @@ public class Staff {
 
 
     /////////////////////////////
-    @OneToOne(mappedBy = "staff")
+    @OneToOne(mappedBy = "staff", fetch = FetchType.LAZY)
     private Account account;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Assigned> assignedSet;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<Assigned> assignedSet;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<ImportBill> importBills;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<ImportBill> importBills;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Order> orders;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<Order> orders;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Payroll> payrolls;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<Payroll> payrolls;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Receipt> receipts;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<Receipt> receipts;
     //////////////////////////////
 
     public enum Position { SERVE, CHEF, CASHIER, MANAGER }

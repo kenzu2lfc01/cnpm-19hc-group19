@@ -52,14 +52,12 @@ public class TableApplication {
     }
     public List<RTable.View> getAll(){
         return tableService.getAll().stream()
-                .peek(i -> i.setLastOrder(null))
-                .map(RTable.View::from)
+                .map(RTable.View::quick)
                 .collect(Collectors.toList());
     }
     public List<RTable.View> getByStatus(RTable.Status status){
         return tableService.getByStatus(status).stream()
-                .peek(i -> i.setLastOrder(null))
-                .map(RTable.View::from)
+                .map(RTable.View::quick)
                 .collect(Collectors.toList());
     }
 }

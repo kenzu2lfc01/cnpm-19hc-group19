@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity(name = "tbl_food")
@@ -35,11 +35,11 @@ public class Food {
 
 
     /////////////////////////////////
-    @OneToMany(mappedBy = "food")
-    private Set<ImportBill> importBills;
+    @OneToMany(mappedBy = "food", fetch = FetchType.LAZY)
+    private List<ImportBill> importBills;
 
-    @OneToMany(mappedBy = "food")
-    private Set<OrderDetail> orderDetails;
+    @OneToMany(mappedBy = "food", fetch = FetchType.LAZY)
+    private List<OrderDetail> orderDetails;
     /////////////////////////////////
 
     public enum Type { FOOD, DRINK }

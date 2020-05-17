@@ -12,7 +12,7 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, String
 
     @Modifying
     @Query(value = "UPDATE tbl_order_detail SET status = ?2, done_at = ?3 WHERE id = ?1", nativeQuery = true)
-    void updateStatus(String id, OrderDetail.Status status, Long time);
+    void updateStatus(String id, String status, Long time);
 
 
     @Query(value = "SELECT SUM(price*amount) FROM tbl_order_detail WHERE order_id = ?1", nativeQuery = true)

@@ -31,11 +31,11 @@ public class Receipt {
 
 
     /////////////////////////////////
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "order_id", nullable = false, unique = true, updatable = false)
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "created_by", nullable = false, updatable = false)
     private Staff staff;
     /////////////////////////////////

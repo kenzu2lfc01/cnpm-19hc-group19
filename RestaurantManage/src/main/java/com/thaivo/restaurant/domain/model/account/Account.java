@@ -1,6 +1,5 @@
 package com.thaivo.restaurant.domain.model.account;
 
-import com.thaivo.restaurant.domain.model.ReferenceData;
 import com.thaivo.restaurant.domain.model.staff.Staff;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

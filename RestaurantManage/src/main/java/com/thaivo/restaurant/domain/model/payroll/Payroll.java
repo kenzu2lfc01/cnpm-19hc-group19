@@ -36,7 +36,7 @@ public class Payroll {
 
 
     ///////////////////////
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "staff_id", nullable = false, updatable = false)
     private Staff staff;
     ///////////////////////

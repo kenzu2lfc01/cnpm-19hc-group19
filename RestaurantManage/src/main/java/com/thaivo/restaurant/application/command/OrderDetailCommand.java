@@ -13,7 +13,7 @@ public class OrderDetailCommand {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Create {
-        private String orderId;
+        private String tableId;
         private String foodId;
         private Integer amount;
         private String note;
