@@ -26,18 +26,21 @@ public class ImportBillApplication {
         this.foodService = foodService;
     }
 
-    public ImportBill add(ImportBillCommand.Create command){
-        return importBillService.add(ImportBill.builder()
+    public ImportBill.View add(ImportBillCommand.Create command){
+        ImportBill importBill = importBillService.add(ImportBill.builder()
                 .staff(staffService.getById(command.getStaffId()))
                 .food(foodService.getById(command.getFoodId()))
                 .totalCost(command.getTotalCost())
                 .description(command.getDescription())
                 .createdAt(System.currentTimeMillis())
                 .build());
+
+        return ImportBill.View.from(importBill);
     }
 
-    public Page<ImportBill> getByTime(ImportBillCommand.GetByTime command){
-        return importBillService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()));
+    public Page<ImportBill.View> getByTime(ImportBillCommand.GetByTime command){
+        return importBillService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()))
+                .map(ImportBill.View::from);
     }
 
     public Double getTotalCostByTime(ImportBillCommand.GetByTime command){
