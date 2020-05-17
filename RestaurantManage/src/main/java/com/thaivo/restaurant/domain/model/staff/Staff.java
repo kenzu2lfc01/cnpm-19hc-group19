@@ -1,5 +1,6 @@
 package com.thaivo.restaurant.domain.model.staff;
 
+import com.thaivo.restaurant.domain.model.ReferenceData;
 import com.thaivo.restaurant.domain.model.account.Account;
 import com.thaivo.restaurant.domain.model.assigned.Assigned;
 import com.thaivo.restaurant.domain.model.import_bill.ImportBill;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -43,24 +45,52 @@ public class Staff {
 
 
     /////////////////////////////
-    @OneToOne(mappedBy = "staff")
+    @OneToOne(mappedBy = "staff", fetch = FetchType.LAZY)
     private Account account;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Assigned> assignedSet;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<Assigned> assignedSet;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<ImportBill> importBills;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<ImportBill> importBills;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Order> orders;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<Order> orders;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Payroll> payrolls;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<Payroll> payrolls;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Receipt> receipts;
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<Receipt> receipts;
     //////////////////////////////
 
     public enum Position { SERVE, CHEF, CASHIER, MANAGER }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private String name;
+        private String phone;
+        private Long joinDate;
+        private Double salary;
+        private Double allowance;
+        private Position position;
+        private Account.View account;
+
+        public static View from(Staff staff){
+            return View.builder()
+                    .id(staff.getId())
+                    .name(staff.getName())
+                    .phone(staff.getPhone())
+                    .joinDate(staff.getJoinDate())
+                    .salary(staff.getSalary())
+                    .allowance(staff.getAllowance())
+                    .position(staff.getPosition())
+                    .account(Account.View.from(staff.getAccount()))
+                    .build();
+        }
+    }
 }

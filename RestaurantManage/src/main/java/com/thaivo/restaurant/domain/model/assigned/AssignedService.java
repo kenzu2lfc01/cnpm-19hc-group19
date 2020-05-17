@@ -24,7 +24,7 @@ public class AssignedService {
     public void update(Assigned assigned){
         boolean exists = repository.existsByStaffIdAndDayOfWeekAndSession(assigned.getStaff().getId(), assigned.getDayOfWeek(), assigned.getSession());
         if(exists) throw new RuntimeException("Duplicate");
-        repository.update(assigned.getId(), assigned.getDayOfWeek(), assigned.getSession());
+        repository.update(assigned.getId(), assigned.getDayOfWeek().toString(), assigned.getSession().toString());
     }
 
     public void delete(String id){

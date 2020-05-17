@@ -9,6 +9,7 @@ import com.thaivo.restaurant.domain.model.table.RTable;
 import com.thaivo.restaurant.domain.model.table.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +29,9 @@ public class ReceiptApplication {
         this.orderDetailService = orderDetailService;
     }
 
-    public Receipt add(ReceiptCommand.Create command){
+    public Receipt.View add(ReceiptCommand.Create command){
         RTable table = tableService.getById(command.getTableId());
+        if(table.getStatus() == RTable.Status.READY) throw new RuntimeException("No order at table");
 
         Double price = orderDetailService.getTotalPrice(table.getLastOrder().getId());
 
@@ -43,11 +45,17 @@ public class ReceiptApplication {
 
         tableService.updateStatus(table.getId(), RTable.Status.READY);
 
-        return receipt;
+        return Receipt.View.from(receipt);
     }
 
-    public Page<Receipt> getByTime(ReceiptCommand.GetByTime command) {
-        return receiptService.getByTime(command.getFrom(), command.getTo(), command.getPage(), command.getSize());
+    public Receipt.View getById(String id){
+        Receipt receipt = receiptService.getById(id);
+        return Receipt.View.from(receipt);
+    }
+
+    public Page<Receipt.View> getByTime(ReceiptCommand.GetByTime command) {
+        return receiptService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()))
+                .map(Receipt.View::quick);
     }
 
     public Double getTotalCostByTime(ReceiptCommand.GetByTime command) {

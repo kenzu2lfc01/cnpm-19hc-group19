@@ -10,7 +10,7 @@ public interface AssignedRepository extends JpaRepository<Assigned, String> {
 
     @Modifying
     @Query(value = "UPDATE tbl_assigned SET day_of_week = ?2, session = ?3 WHERE id = ?1", nativeQuery = true)
-    void update(String id, Assigned.DayOfWeek dayOfWeek, Assigned.Session session);
+    void update(String id, String dayOfWeek, String session);
 
 
     Boolean existsByStaffIdAndDayOfWeekAndSession(String staffId, Assigned.DayOfWeek dayOfWeek, Assigned.Session session);

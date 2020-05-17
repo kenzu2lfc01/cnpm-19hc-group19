@@ -7,6 +7,8 @@ import com.thaivo.restaurant.domain.model.staff.StaffService;
 import com.thaivo.restaurant.domain.model.table.RTable;
 import com.thaivo.restaurant.domain.model.table.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +27,7 @@ public class OrderApplication {
     }
 
 
-    public Order add(OrderCommand.Create command){
+    public Order.View add(OrderCommand.Create command){
         RTable table = tableService.getById(command.getTableId());
         if(table.getStatus() == RTable.Status.BUSY)
             throw new RuntimeException("Table not available");
@@ -35,11 +37,27 @@ public class OrderApplication {
         Order order = orderService.add(Order.builder()
                 .staff(staffService.getById(command.getStaffId()))
                 .table(table)
-                .created_at(System.currentTimeMillis())
+                .createdAt(System.currentTimeMillis())
                 .build());
 
         tableService.updateLastOrder(table.getId(), order.getId());
 
-        return order;
+        return Order.View.from(order);
+    }
+
+    public Order.View getById(String id){
+        Order order = orderService.getById(id);
+
+        return Order.View.from(order);
+    }
+
+    public Page<Order.View> getByTime(OrderCommand.Get command){
+        return orderService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()))
+                .map(Order.View::quick);
+    }
+
+    public Page<Order.View> getByTimeInTable(OrderCommand.Get command){
+        Page<Order> page = orderService.getByTimeInTable(command.getTableId(), command.getFrom(), command.getTo(), PageRequest.of(command.getPage() - 1, command.getSize()));
+        return page.map(Order.View::quick);
     }
 }

@@ -1,5 +1,7 @@
 package com.thaivo.restaurant.domain.model.order_detail;
 
+import com.thaivo.restaurant.domain.model.ReferenceData;
+import com.thaivo.restaurant.domain.model.account.Account;
 import com.thaivo.restaurant.domain.model.food.Food;
 import com.thaivo.restaurant.domain.model.order.Order;
 import lombok.AllArgsConstructor;
@@ -35,15 +37,46 @@ public class OrderDetail {
 
 
     ////////////////////////////////////////////
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "order_id", nullable = false, updatable = false)
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "food_id", nullable = false, updatable = false)
     private Food food;
     ////////////////////////////////////////////
 
 
     public enum Status { PENDING, PROGRESS, FINISH }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private Double price;
+        private Integer amount;
+        private Long orderAt;
+        private Long doneAt;
+        private String note;
+        private Status status;
+        private ReferenceData food;
+
+        public static View from(OrderDetail orderDetail){
+            return View.builder()
+                    .id(orderDetail.getId())
+                    .price(orderDetail.getPrice())
+                    .amount(orderDetail.getAmount())
+                    .orderAt(orderDetail.getOrderAt())
+                    .doneAt(orderDetail.getDoneAt())
+                    .note(orderDetail.getNote())
+                    .status(orderDetail.getStatus())
+                    .food(ReferenceData.builder()
+                            .id( orderDetail.getFood().getId())
+                            .name(orderDetail.getFood().getName())
+                            .build())
+                    .build();
+        }
+    }
 }

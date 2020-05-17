@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity(name = "tbl_food")
@@ -35,12 +35,34 @@ public class Food {
 
 
     /////////////////////////////////
-    @OneToMany(mappedBy = "food")
-    private Set<ImportBill> importBills;
+    @OneToMany(mappedBy = "food", fetch = FetchType.LAZY)
+    private List<ImportBill> importBills;
 
-    @OneToMany(mappedBy = "food")
-    private Set<OrderDetail> orderDetails;
+    @OneToMany(mappedBy = "food", fetch = FetchType.LAZY)
+    private List<OrderDetail> orderDetails;
     /////////////////////////////////
 
     public enum Type { FOOD, DRINK }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private String name;
+        private Double price;
+        private String image;
+        private Type type;
+
+        public static View from(Food food){
+            return View.builder()
+                    .id(food.getId())
+                    .name(food.getName())
+                    .price(food.getPrice())
+                    .image(food.getImage())
+                    .type(food.getType())
+                    .build();
+        }
+    }
 }

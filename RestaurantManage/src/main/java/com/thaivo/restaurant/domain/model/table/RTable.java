@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity(name = "tbl_table")
@@ -32,14 +32,45 @@ public class RTable {
 
 
     ///////////////////////////////////
-    @OneToMany(mappedBy = "table")
-    private Set<Order> orders;
+    @OneToMany(mappedBy = "table", fetch = FetchType.LAZY)
+    private List<Order> orders;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "last_order", unique = true)
     private Order lastOrder;
     //////////////////////////////////
 
 
     public enum Status { READY, BUSY }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private String name;
+        private Status status;
+        private Integer capacity;
+        private Order.View lastOrder;
+
+        public static View from(RTable table){
+            return View.builder()
+                    .id(table.getId())
+                    .name(table.getName())
+                    .status(table.getStatus())
+                    .capacity(table.getCapacity())
+                    .lastOrder(table.getLastOrder() == null? null :
+                            Order.View.from(table.getLastOrder()))
+                    .build();
+        }
+        public static View quick(RTable table){
+            return View.builder()
+                    .id(table.getId())
+                    .name(table.getName())
+                    .status(table.getStatus())
+                    .capacity(table.getCapacity())
+                    .build();
+        }
+    }
 }

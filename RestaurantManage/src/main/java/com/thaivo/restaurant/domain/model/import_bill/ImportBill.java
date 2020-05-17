@@ -1,5 +1,7 @@
 package com.thaivo.restaurant.domain.model.import_bill;
 
+import com.thaivo.restaurant.domain.model.ReferenceData;
+import com.thaivo.restaurant.domain.model.account.Account;
 import com.thaivo.restaurant.domain.model.food.Food;
 import com.thaivo.restaurant.domain.model.staff.Staff;
 import lombok.AllArgsConstructor;
@@ -29,12 +31,42 @@ public class ImportBill {
 
 
     //////////////////////////
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "food_id", nullable = false, updatable = false)
     private Food food;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "created_by", nullable = false, updatable = false)
     private Staff staff;
     //////////////////////////
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private Long createdAt;
+        private Double totalCost;
+        private String description;
+        private ReferenceData food;
+        private ReferenceData staff;
+
+        public static View from(ImportBill importBill){
+            return View.builder()
+                    .id(importBill.getId())
+                    .createdAt(importBill.getCreatedAt())
+                    .totalCost(importBill.getTotalCost())
+                    .description(importBill.getDescription())
+                    .food(ReferenceData.builder()
+                            .id(importBill.getFood().getId())
+                            .name(importBill.getFood().getName())
+                            .build())
+                    .staff(ReferenceData.builder()
+                            .id(importBill.getStaff().getId())
+                            .name(importBill.getStaff().getName())
+                            .build())
+                    .build();
+        }
+    }
 }

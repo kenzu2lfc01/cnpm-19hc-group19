@@ -1,5 +1,7 @@
 package com.thaivo.restaurant.domain.model.receipt;
 
+import com.thaivo.restaurant.domain.model.ReferenceData;
+import com.thaivo.restaurant.domain.model.account.Account;
 import com.thaivo.restaurant.domain.model.order.Order;
 import com.thaivo.restaurant.domain.model.staff.Staff;
 import lombok.AllArgsConstructor;
@@ -29,12 +31,51 @@ public class Receipt {
 
 
     /////////////////////////////////
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "order_id", nullable = false, unique = true, updatable = false)
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "created_by", nullable = false, updatable = false)
     private Staff staff;
     /////////////////////////////////
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private Double surcharge;
+        private Double totalCost;
+        private Long createdAt;
+        private Order.View order;
+        private ReferenceData staff;
+
+        public static View from(Receipt receipt){
+            return View.builder()
+                    .id(receipt.getId())
+                    .surcharge(receipt.getSurcharge())
+                    .totalCost(receipt.getTotalCost())
+                    .createdAt(receipt.getCreatedAt())
+                    .order(Order.View.from(receipt.getOrder()))
+                    .staff(ReferenceData.builder()
+                            .id(receipt.getStaff().getId())
+                            .name(receipt.getStaff().getName())
+                            .build())
+                    .build();
+        }
+        public static View quick(Receipt receipt){
+            return View.builder()
+                    .id(receipt.getId())
+                    .surcharge(receipt.getSurcharge())
+                    .totalCost(receipt.getTotalCost())
+                    .createdAt(receipt.getCreatedAt())
+                    .staff(ReferenceData.builder()
+                            .id(receipt.getStaff().getId())
+                            .name(receipt.getStaff().getName())
+                            .build())
+                    .build();
+        }
+    }
 }

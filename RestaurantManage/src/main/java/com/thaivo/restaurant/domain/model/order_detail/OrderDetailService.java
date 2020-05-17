@@ -19,15 +19,11 @@ public class OrderDetailService {
     }
 
     public void updateAmount(String id, Integer amount){
-        Optional<OrderDetail> byId = repository.findById(id);
-        if (!byId.isPresent()) return;
-        if(byId.get().getStatus() == OrderDetail.Status.FINISH)
-            throw new RuntimeException("Order completed!");
         repository.updateAmount(id, amount);
     }
 
     public void updateStatus(String id, OrderDetail.Status status){
-        repository.updateStatus(id, status, System.currentTimeMillis());
+        repository.updateStatus(id, status.toString(), System.currentTimeMillis());
     }
 
     public void delete(String id){

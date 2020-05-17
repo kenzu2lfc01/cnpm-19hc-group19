@@ -26,8 +26,26 @@ public class Account {
 
 
     ////////////////////////////
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "staff_id", nullable = false, unique = true, updatable = false)
     private Staff staff;
     ////////////////////////////
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class View {
+        private String id;
+        private String username;
+        private String password;
+
+        public static View from(Account account){
+            return View.builder()
+                    .id(account.getId())
+                    .username(account.getUsername())
+                    .password(account.getPassword())
+                    .build();
+        }
+    }
 }

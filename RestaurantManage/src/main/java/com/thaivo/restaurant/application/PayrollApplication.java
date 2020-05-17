@@ -7,10 +7,12 @@ import com.thaivo.restaurant.domain.model.staff.Staff;
 import com.thaivo.restaurant.domain.model.staff.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Transactional
@@ -25,10 +27,10 @@ public class PayrollApplication {
     }
 
 
-    public Payroll add(PayrollCommand.Create command){
+    public Payroll.View add(PayrollCommand.Create command){
         Staff staff = staffService.getById(command.getStaffId());
 
-        return payrollService.add(Payroll.builder()
+        Payroll payroll = payrollService.add(Payroll.builder()
                 .staff(staff)
                 .month(command.getMonth())
                 .year(command.getYear())
@@ -36,18 +38,23 @@ public class PayrollApplication {
                 .allowance(staff.getAllowance())
                 .total(staff.getSalary() + staff.getAllowance())
                 .build());
+
+        return Payroll.View.from(payroll);
     }
 
-    public List<Payroll> getByStaff(String staffId){
-        return payrollService.getByStaffId(staffId);
+    public List<Payroll.View> getByStaff(String staffId){
+        return payrollService.getByStaffId(staffId).stream()
+            .map(Payroll.View::from).collect(Collectors.toList());
     }
 
-    public List<Payroll> getByMonthYear(Integer month, Integer year){
-        return payrollService.getByMonthAndYear(month, year);
+    public List<Payroll.View> getByMonthYear(Integer month, Integer year){
+        return payrollService.getByMonthAndYear(month, year).stream()
+                .map(Payroll.View::from).collect(Collectors.toList());
     }
 
-    public Page<Payroll> getByTime(PayrollCommand.GetByTime command){
-        return payrollService.getByTime(command.getFrom(), command.getTo(), command.getPage(), command.getSize());
+    public Page<Payroll.View> getByTime(PayrollCommand.GetByTime command){
+        return payrollService.getByTime(command.getFrom(), command.getTo(), PageRequest.of(command.getPage()-1, command.getSize()))
+                .map(Payroll.View::from);
     }
 
     public Double getTotalSalaryByTime(PayrollCommand.GetByTime command){

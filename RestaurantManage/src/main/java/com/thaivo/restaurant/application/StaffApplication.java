@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 @Transactional
@@ -23,7 +24,7 @@ public class StaffApplication {
     }
 
 
-    public Staff add(StaffCommand.Create command) {
+    public Staff.View add(StaffCommand.Create command) {
 
         Staff staff = staffService.add(Staff.builder()
                 .name(command.getName())
@@ -35,16 +36,17 @@ public class StaffApplication {
                 .position(command.getPosition())
                 .build());
 
-        accountService.add(Account.builder()
+        Account account = accountService.add(Account.builder()
                 .staff(staff)
                 .username(staff.getPhone() + "-" + UUID.randomUUID().toString())
                 .password(staff.getPhone())
                 .build());
 
-        return staff;
+        staff.setAccount(account);
+        return Staff.View.from(staff);
     }
 
-    public void update(StaffCommand.Update command){
+    public Staff.View update(StaffCommand.Update command){
         staffService.update(Staff.builder()
                 .id(command.getId())
                 .name(command.getName())
@@ -53,15 +55,24 @@ public class StaffApplication {
                 .allowance(command.getAllowance())
                 .position(command.getPosition())
                 .build());
+
+        Staff staff = staffService.getById(command.getId());
+        return Staff.View.from(staff);
     }
 
     public void delete(String id) {
         Staff staff = staffService.getById(id);
-        accountService.delete(staff.getAccount().getId());
         staffService.delete(id);
     }
 
-    public List<Staff> getAll(){
-        return staffService.getAll();
+    public List<Staff.View> getAll(){
+        return staffService.getAll().stream()
+                .map(Staff.View::from)
+                .collect(Collectors.toList());
+    }
+
+    public Staff.View getById(String id){
+        Staff staff = staffService.getById(id);
+        return Staff.View.from(staff);
     }
 }
