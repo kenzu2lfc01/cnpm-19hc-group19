@@ -4,6 +4,8 @@ package com.thaivo.restaurant.port.adapter.rest.manage;
 import com.thaivo.restaurant.application.FoodApplication;
 import com.thaivo.restaurant.application.command.FoodCommand;
 import com.thaivo.restaurant.domain.model.food.Food;
+import com.thaivo.restaurant.domain.model.staff.Staff;
+import com.thaivo.restaurant.port.adapter.auth.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ public class FoodResource {
         this.foodApplication = foodApplication;
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody FoodCommand.Create command){
         try {
@@ -35,7 +37,7 @@ public class FoodResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @PostMapping("/update")
     public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody FoodCommand.Update command){
         try {
@@ -49,7 +51,7 @@ public class FoodResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
@@ -63,7 +65,7 @@ public class FoodResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER, Staff.Position.SERVE, Staff.Position.CHEF })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token){
         try {

@@ -2,7 +2,9 @@ package com.thaivo.restaurant.port.adapter.rest.manage;
 
 import com.thaivo.restaurant.application.TableApplication;
 import com.thaivo.restaurant.application.command.TableCommand;
+import com.thaivo.restaurant.domain.model.staff.Staff;
 import com.thaivo.restaurant.domain.model.table.RTable;
+import com.thaivo.restaurant.port.adapter.auth.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ public class TableResource {
     }
 
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @PostMapping("/add")
     ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody TableCommand.Create command){
         try {
@@ -35,7 +37,7 @@ public class TableResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @PostMapping("/update")
     ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody TableCommand.Update command){
         try {
@@ -48,7 +50,7 @@ public class TableResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/delete/{id}")
     ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
@@ -61,7 +63,7 @@ public class TableResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/get")
     ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @RequestParam(required = false) RTable.Status status){
         try {
@@ -77,9 +79,9 @@ public class TableResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/get/{id}")
-    ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @PathVariable String id){
+    ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
             RTable.View table = tableApplication.getById(id);
 

@@ -1,4 +1,4 @@
-package com.thaivo.restaurant.port.adapter.conf;
+package com.thaivo.restaurant.port.adapter.auth;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
@@ -7,6 +7,7 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import com.thaivo.restaurant.domain.model.staff.Staff;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class JwtAuthentication {
             JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                     .claim("id", payload.getId())
                     .claim("name", payload.getName())
-                    .claim("position", payload.getPosition())
+                    .claim("position", payload.getPosition().toString())
                     .expirationTime(new Date(System.currentTimeMillis() + EXPIRE_TIME)).build();
 
             SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), claimsSet);
@@ -39,24 +40,32 @@ public class JwtAuthentication {
     }
 
     public Payload authentication(String token) {
+        JWTClaimsSet claims;
         try {
             SignedJWT signedJWT = SignedJWT.parse(token);
             JWSVerifier verifier = new MACVerifier(SECRET_KEY.getBytes());
 
             if(!signedJWT.verify(verifier)) throw new RuntimeException("Verify fail");
-            JWTClaimsSet claims = signedJWT.getJWTClaimsSet();
+            claims = signedJWT.getJWTClaimsSet();
+        }
+        catch (Throwable throwable){
+            throwable.printStackTrace();
+            throw new RuntimeException("Access token parse fail!");
+        }
 
-            if (claims.getExpirationTime().before(new Date()))
-                throw new RuntimeException("Access token expired!");
+        if (claims.getExpirationTime().before(new Date()))
+            throw new RuntimeException("Access token expired!");
 
+        try {
             return Payload.builder()
                     .id(claims.getStringClaim("id"))
                     .name(claims.getStringClaim("name"))
-                    .position(claims.getStringClaim("position"))
+                    .position(Staff.Position.valueOf(claims.getStringClaim("position")))
                     .build();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             e.printStackTrace();
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException("Access token parse fail!");
         }
     }
 
@@ -68,6 +77,6 @@ public class JwtAuthentication {
     public static class Payload {
         private String id;
         private String name;
-        private String position;
+        private Staff.Position position;
     }
 }

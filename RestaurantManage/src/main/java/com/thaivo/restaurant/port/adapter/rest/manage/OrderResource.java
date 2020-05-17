@@ -3,6 +3,8 @@ package com.thaivo.restaurant.port.adapter.rest.manage;
 import com.thaivo.restaurant.application.OrderApplication;
 import com.thaivo.restaurant.application.command.OrderCommand;
 import com.thaivo.restaurant.domain.model.order.Order;
+import com.thaivo.restaurant.domain.model.staff.Staff;
+import com.thaivo.restaurant.port.adapter.auth.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -20,7 +22,7 @@ public class OrderResource {
         this.orderApplication = orderApplication;
     }
 
-    // Require SERVE staff
+    @Authentication(positions = { Staff.Position.SERVE })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody OrderCommand.Create command) {
         try {
@@ -38,7 +40,7 @@ public class OrderResource {
     }
 
 
-    // Require MANAGE
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @ModelAttribute OrderCommand.Get command) {
         try {
@@ -54,7 +56,7 @@ public class OrderResource {
         }
     }
 
-    // Require MANAGE
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/get/{id}")
     public ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id) {
         try {

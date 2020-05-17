@@ -3,6 +3,8 @@ package com.thaivo.restaurant.port.adapter.rest.manage;
 import com.thaivo.restaurant.application.AssignedApplication;
 import com.thaivo.restaurant.application.command.AssignedCommand;
 import com.thaivo.restaurant.domain.model.assigned.Assigned;
+import com.thaivo.restaurant.domain.model.staff.Staff;
+import com.thaivo.restaurant.port.adapter.auth.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ public class AssignedResource {
         this.assignedApplication = assignedApplication;
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody AssignedCommand.Create command){
         try {
@@ -34,7 +36,7 @@ public class AssignedResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @PostMapping("/update")
     public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody AssignedCommand.Update command){
         try {
@@ -48,7 +50,7 @@ public class AssignedResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
@@ -62,7 +64,7 @@ public class AssignedResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/get/staff/{staffId}")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @PathVariable String staffId){
         try {
@@ -76,7 +78,7 @@ public class AssignedResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/get/dow/{dayOfWeek}")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @PathVariable Assigned.DayOfWeek dayOfWeek){
         try {

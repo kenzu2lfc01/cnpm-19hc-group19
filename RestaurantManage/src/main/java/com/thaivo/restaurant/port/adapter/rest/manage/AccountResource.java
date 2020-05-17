@@ -2,6 +2,8 @@ package com.thaivo.restaurant.port.adapter.rest.manage;
 
 import com.thaivo.restaurant.application.AccountApplication;
 import com.thaivo.restaurant.application.command.AccountCommand;
+import com.thaivo.restaurant.domain.model.staff.Staff;
+import com.thaivo.restaurant.port.adapter.auth.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,14 +16,13 @@ public class AccountResource {
 
     private AccountApplication accountApplication;
 
-    // Require Manage
     @Autowired
     public AccountResource(AccountApplication accountApplication) {
         this.accountApplication = accountApplication;
     }
 
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @PostMapping("/update")
     public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody AccountCommand.Update command){
         try {

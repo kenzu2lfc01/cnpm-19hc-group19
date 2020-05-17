@@ -3,6 +3,8 @@ package com.thaivo.restaurant.port.adapter.rest.manage;
 import com.thaivo.restaurant.application.ReceiptApplication;
 import com.thaivo.restaurant.application.command.ReceiptCommand;
 import com.thaivo.restaurant.domain.model.receipt.Receipt;
+import com.thaivo.restaurant.domain.model.staff.Staff;
+import com.thaivo.restaurant.port.adapter.auth.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -19,7 +21,7 @@ public class ReceiptResource {
         this.receiptApplication = receiptApplication;
     }
 
-    // Require Cashier staff
+    @Authentication(positions = { Staff.Position.CASHIER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody ReceiptCommand.Create command){
         try {
@@ -35,7 +37,7 @@ public class ReceiptResource {
         }
     }
 
-    // Require manage
+    @Authentication(positions = { Staff.Position.MANAGER, Staff.Position.CASHIER })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @ModelAttribute ReceiptCommand.GetByTime command){
         try {
@@ -49,7 +51,7 @@ public class ReceiptResource {
         }
     }
 
-    // Require manage
+    @Authentication(positions = { Staff.Position.MANAGER, Staff.Position.CASHIER })
     @GetMapping("/get/{id}")
     public ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {

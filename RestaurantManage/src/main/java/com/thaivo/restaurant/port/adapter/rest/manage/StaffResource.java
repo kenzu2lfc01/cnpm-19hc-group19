@@ -3,6 +3,7 @@ package com.thaivo.restaurant.port.adapter.rest.manage;
 import com.thaivo.restaurant.application.StaffApplication;
 import com.thaivo.restaurant.application.command.StaffCommand;
 import com.thaivo.restaurant.domain.model.staff.Staff;
+import com.thaivo.restaurant.port.adapter.auth.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class StaffResource {
         this.staffApplication = staffApplication;
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody StaffCommand.Create command){
         try {
@@ -35,7 +36,7 @@ public class StaffResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @PostMapping("/update")
     public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody StaffCommand.Update command){
         try {
@@ -49,7 +50,7 @@ public class StaffResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
@@ -63,7 +64,7 @@ public class StaffResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token){
         try {
@@ -77,7 +78,7 @@ public class StaffResource {
         }
     }
 
-    // Require Manage
+    @Authentication(positions = { Staff.Position.MANAGER })
     @GetMapping("/get/{id}")
     public ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
