@@ -1,6 +1,6 @@
 import React, { Component, useDebugValue } from 'react';
 import '../../../assert/styles/staff.scss'
-import { Row, Col, Navbar, NavbarBrand, Form, FormGroup, Label, FormFeedback, FormText, Input } from 'reactstrap';
+import { Row, Col, Navbar, NavbarBrand } from 'reactstrap';
 import RisottoCard from '../../Properties/RisottoCard';
 import TableDetail from './TableDetail';
 
