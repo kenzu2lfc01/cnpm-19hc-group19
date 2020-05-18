@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Row, Col, Input } from 'reactstrap';
+import { Form, FormGroup, Label, Row, Input } from 'reactstrap';
 
 class CreateBill extends Component {
     constructor(props) {

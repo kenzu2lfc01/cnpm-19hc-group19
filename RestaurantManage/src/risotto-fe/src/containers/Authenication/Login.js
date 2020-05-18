@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import '../../assert/styles/login.scss'
+import '../../assert/styles/login.scss';
 import { Button, Form } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import { requestApiLogin } from './redux/actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
+            username: '',
             password: ''
         };
     }
-    login = () => {
-        if (this.state.email == 'admin@gmail.com' && this.state.password == '1234qwe') {
-            localStorage.setItem('isLogin', true);
-            return <Redirect to="/" />
+    onLogin = () => {
+        if (this.state.username != null && this.state.password != null) {
+            this.props.requestApiLogin({ username: this.state.username, password: this.state.password });
         }
     }
 
@@ -23,9 +26,9 @@ class Login extends Component {
             <div className="risotto-container">
                 <Form className="form-login">
                     <h1>Login</h1>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" onChange={e => this.setState({ email: e.target.value })} />
+                    <Form.Group>
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Username" onChange={e => this.setState({ username: e.target.value })} />
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
@@ -34,7 +37,7 @@ class Login extends Component {
                     <Form.Group controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Check me out" />
                     </Form.Group>
-                    <Button onClick={e => this.login()} className="form-button-login" variant="primary" type="submit">
+                    <Button onClick={this.onLogin()} className="form-button-login" variant="primary" type="button">
                         Submit
                 </Button>
                 </Form>
@@ -43,4 +46,9 @@ class Login extends Component {
     }
 }
 
-export default Login
+const mapStateToProps = state => ({ data: state.data ? state.data : {} });
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators({ requestApiLogin }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
