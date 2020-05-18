@@ -40,11 +40,12 @@ public class AccountResource {
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody AccountCommand.Login command){
         try {
+            Staff.View staff = accountApplication.getStaffInfo(command);
             String accessToken = accountApplication.getAccessToken(command);
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("access_token", accessToken);
-            return new ResponseEntity<>(headers, HttpStatus.OK);
+            return new ResponseEntity<>(staff, headers, HttpStatus.OK);
         }
         catch (Throwable throwable){
             throwable.printStackTrace();
