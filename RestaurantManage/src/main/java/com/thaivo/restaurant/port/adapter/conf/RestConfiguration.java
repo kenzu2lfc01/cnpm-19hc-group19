@@ -9,6 +9,9 @@ public class RestConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedMethods("*");
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .exposedHeaders("access_token")
+                .allowedOrigins("*");
     }
 }
