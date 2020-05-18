@@ -3,6 +3,7 @@ package com.thaivo.restaurant.application;
 import com.thaivo.restaurant.application.command.AccountCommand;
 import com.thaivo.restaurant.domain.model.account.Account;
 import com.thaivo.restaurant.domain.model.account.AccountService;
+import com.thaivo.restaurant.domain.model.staff.Staff;
 import com.thaivo.restaurant.port.adapter.auth.JwtAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,5 +37,11 @@ public class AccountApplication {
                 .name(account.getStaff().getName())
                 .position(account.getStaff().getPosition())
                 .build());
+    }
+
+    public Staff.View getStaffInfo(AccountCommand.Login command){
+        Account account = accountService.login(command.getUsername(), command.getPassword());
+
+        return Staff.View.from(account.getStaff());
     }
 }

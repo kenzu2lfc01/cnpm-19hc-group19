@@ -38,13 +38,11 @@ public class Account {
     public static class View {
         private String id;
         private String username;
-        private String password;
 
         public static View from(Account account){
             return View.builder()
                     .id(account.getId())
                     .username(account.getUsername())
-                    .password(account.getPassword())
                     .build();
         }
     }
