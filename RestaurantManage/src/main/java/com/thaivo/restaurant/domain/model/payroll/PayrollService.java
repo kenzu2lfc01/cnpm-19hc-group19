@@ -41,7 +41,8 @@ public class PayrollService {
         return repository.findByTimestampBetweenOrderByTimestampDesc(from, to, pageable);
     }
 
-    public Double getTotalSalaryByTime(Long from, Long to){
-        return repository.getTotalSalaryByTime(from, to);
+    public double getTotalSalaryByTime(Long from, Long to){
+        Double salary = repository.getTotalSalaryByTime(from, to);
+        return salary == null ? 0 : salary;
     }
 }

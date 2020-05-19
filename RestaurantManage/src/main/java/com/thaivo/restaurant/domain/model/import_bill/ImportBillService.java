@@ -25,8 +25,9 @@ public class ImportBillService {
        return repository.findByCreatedAtBetweenOrderByCreatedAtDesc(from, to, pageable);
     }
 
-    public Double getTotalCostByTime(Long from, Long to){
-        return repository.getTotalCostByTime(from, to);
+    public double getTotalCostByTime(Long from, Long to){
+        Double cost = repository.getTotalCostByTime(from, to);
+        return cost == null ? 0 : cost;
     }
 
     public List<ImportBill> getByStaff(String staffId) {
