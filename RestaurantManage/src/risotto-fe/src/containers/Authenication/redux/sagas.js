@@ -1,22 +1,16 @@
-import { call, put, takeLatest, all } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { REQUEST_API_LOGIN, receivetApiLogin } from './actions';
 import { loginApi } from './api';
 
 function* postLogin(action) {
     try {
-        debugger
         const data = yield call(loginApi, action.payload);
-        //yield put(receivetApiLogin(data));
+        yield put(receivetApiLogin(data));
     } catch (e) {
         console.log(e);
     }
 }
-function* loginSaga() {
-    yield takeLatest(REQUEST_API_LOGIN, postLogin)
-  }
 
-export default function* rootSaga() {
-    yield all([
-        loginSaga(),
-    ])
-  }
+export default function* loginSaga() {
+    yield takeLatest(REQUEST_API_LOGIN, postLogin)
+}

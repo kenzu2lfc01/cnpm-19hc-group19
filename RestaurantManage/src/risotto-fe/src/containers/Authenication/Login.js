@@ -3,7 +3,6 @@ import '../../assert/styles/login.scss';
 import { Button, Form } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { requestApiLogin } from './redux/actions';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 
@@ -29,8 +28,12 @@ class Login extends Component {
         this.setState({ password: event.target.value })
     }
 
+    componentWillUpdate(nextProps, prevState) {
+        sessionStorage.setItem("token", nextProps.data.Access_Token);
+        return <Redirect to='/login' />
+    }
+
     render() {
-        console.log(this.props)
         return (
             <div className="risotto-container">
                 <Form className="form-login">
@@ -55,14 +58,13 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = state => ({ data: state.data  });
 
 const mapDispatchToProps = dispatch => {
     return {
-      // dispatching plain actions
-      requestApiLogin: (payload) => dispatch(requestApiLogin(payload)),
-     
+        requestApiLogin: (payload) => dispatch(requestApiLogin(payload)),
     }
-  }
+}
+
+const mapStateToProps = state => ({ data: state.loginReduder });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

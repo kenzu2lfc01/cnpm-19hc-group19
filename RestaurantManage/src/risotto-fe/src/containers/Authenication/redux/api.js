@@ -1,5 +1,4 @@
 export const loginApi = async (params) => {
-
     const requestOptions = {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
@@ -7,14 +6,12 @@ export const loginApi = async (params) => {
     };
     try {
         const response = await fetch('https://cnpm19group.herokuapp.com/manage/account/login', requestOptions);
-        // fetch('https://cnpm19group.herokuapp.com/manage/account/login', requestOptions).then(function(res){
-        //     res.json().then(function(abc){
-        //         console.log(abc); <= lam zay thi no ra ma asyn await no ko ra  :( )
-        //     })
-        // })
-         const data = await response.json();
-        debugger
-        return data;
+        const userInfor = await response.json();
+        var result = {
+            userInfor: userInfor,
+            Access_Token: response.headers.get("token")
+        }
+        return result;
     } catch (e) {
         console.log(e);
     }

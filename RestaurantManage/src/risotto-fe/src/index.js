@@ -5,19 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { logger } from 'redux-logger';
-import loginReduder from './containers/Authenication/redux/reducers';
-import rootSaga from './containers/Authenication/redux/sagas';
-import createSagaMiddleware from 'redux-saga';
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(
-  combineReducers({loginReduder}),
-  applyMiddleware(sagaMiddleware, logger),
-);
-
-sagaMiddleware.run(rootSaga);
+import store from './redux-core/store';
 
 ReactDOM.render(
   <Provider store={store}>

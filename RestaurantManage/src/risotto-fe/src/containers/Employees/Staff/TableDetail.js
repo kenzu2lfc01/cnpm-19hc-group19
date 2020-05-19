@@ -19,10 +19,6 @@ class CreateBill extends Component {
                         <Label>Tình trạng:</Label>
                         <Input readOnly value="Busy"></Input>
                     </FormGroup>
-                    <FormGroup style={{ width: "25%" }}>
-                        <Label>Tình trạng:</Label>
-                        <Input readOnly value="Busy"></Input>
-                    </FormGroup>
                 </Row>
             </Form>
         );
