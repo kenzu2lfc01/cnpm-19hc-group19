@@ -1,3 +1,4 @@
+import { API_URL } from '../../../../env-risotto'
 export const getAllTable = async () => {
     const requestOption = {
         header: {
@@ -7,7 +8,7 @@ export const getAllTable = async () => {
         method: 'GET',
     }
     try {
-        const response = await fetch(process.env.API_URL + "manage/table/get", requestOption);
+        const response = await fetch(API_URL + "manage/table/get", requestOption);
         const data = await response.json();
     } catch (ex) {
         console.log(ex);

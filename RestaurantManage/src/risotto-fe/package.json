@@ -28,8 +28,8 @@
     "redux-saga": "^1.1.3"
   },
   "scripts": {
-    "start": "env-cmd .env.risotto react-scripts start",
-    "build": "env-cmd .env.risotto react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
