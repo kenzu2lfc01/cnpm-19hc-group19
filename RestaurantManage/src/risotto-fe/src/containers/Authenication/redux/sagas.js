@@ -4,20 +4,19 @@ import { loginApi } from './api';
 
 function* postLogin(action) {
     try {
+        debugger
         const data = yield call(loginApi, action.payload);
-        yield put(receivetApiLogin(data));
+        //yield put(receivetApiLogin(data));
     } catch (e) {
         console.log(e);
     }
 }
-
-function* actionWatcher() {
+function* loginSaga() {
     yield takeLatest(REQUEST_API_LOGIN, postLogin)
-}
-
+  }
 
 export default function* rootSaga() {
     yield all([
-        actionWatcher(),
-    ]);
-}
+        loginSaga(),
+    ])
+  }
