@@ -1,4 +1,4 @@
-import { API_URL } from '../../../../env-risotto'
+import { API_URL } from '../../../models/risotto-enviroment';
 
 export const loginApi = async (params) => {
     const requestOptions = {

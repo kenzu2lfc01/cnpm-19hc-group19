@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { REQUEST_API_TABLE_DATA, receivetApiTableData } from './actions';
 import { getAllTable } from './api';
 
-function* getchAllTable(action) {
+function* fetchAllTable(action) {
     try {
         const data = yield call(getAllTable());
         yield put(receivetApiTableData(data));
@@ -11,6 +11,6 @@ function* getchAllTable(action) {
     }
 }
 
-export default function* getchAllTable() {
+export default function* fetchAllTableSaga() {
     yield takeLatest(REQUEST_API_TABLE_DATA, fetchAllTable)
 }
