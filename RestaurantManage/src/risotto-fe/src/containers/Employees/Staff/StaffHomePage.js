@@ -4,7 +4,7 @@ import TableDetail from './TableDetail';
 import RisottoCard from '../../../components/RisottoCard';
 import { requestApiTableData } from './redux/actions';
 import { connect } from 'react-redux';
-
+import { TABLE_STATUS } from './constants';
 import '../../../assert/styles/staff.scss';
 
 class StaffHomePage extends Component {
@@ -16,29 +16,35 @@ class StaffHomePage extends Component {
         this.props.requestApiTableData();
     }
 
-    imagesRender = () => {
+    imagesRender = (tables) => {
         var indents = [];
-        for (var i = 0; i < 20; i++) {
-            if (i % 2 == 0) {
+        for (var i = 0; i < tables.length; i++) {
+            if (tables[i].status == TABLE_STATUS.ready) {
                 indents.push(
-                    <RisottoCard srcImg="https://i0.wp.com/s1.uphinh.org/2020/05/17/15896858521709058.png"
+                    <RisottoCard
+                        onClick={() => this.onShowTableDetail()}
+                        srcImg="https://i0.wp.com/s1.uphinh.org/2020/05/17/15896858521709058.png"
                         bodyCard={"Bàn " + (i + 1)}
-                        status="busy" />
+                        status={TABLE_STATUS.ready} />
                 );
             }
             else {
                 indents.push(
                     <RisottoCard srcImg="https://i0.wp.com/s1.uphinh.org/2020/05/17/15896858521709058.png"
                         bodyCard={"Bàn " + (i + 1)}
-                        status="free" />
+                        status={TABLE_STATUS.busy} />
                 );
             }
         }
         return indents;
     }
 
+    onShowTableDetail = () => {
+        console.log("blablalb")
+    }
+
     render() {
-        console.log(this.props.data);
+        var tables = this.props.data;
         return (
             <div className="risotto-container">
                 <div className="form-create-bill">
@@ -48,7 +54,7 @@ class StaffHomePage extends Component {
                     <Row>
                         <Col xs="7">
                             <div style={{ textAlign: "center" }}>
-                                {this.imagesRender()}
+                                {this.imagesRender(tables)}
                             </div>
                         </Col>
                         <Col xs="5">

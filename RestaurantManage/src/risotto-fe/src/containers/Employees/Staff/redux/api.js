@@ -2,11 +2,12 @@ import { API_URL } from '../../../../models/risotto-enviroment';
 
 export const getAllTable = async () => {
     const requestOption = {
-        header: {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
         },
-        method: 'GET',
+        redirect: 'follow'
     }
     try {
         const response = await fetch(API_URL + "manage/table/get", requestOption);

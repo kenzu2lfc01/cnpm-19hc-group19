@@ -4,7 +4,7 @@ import { getAllTable } from './api';
 
 function* fetchAllTable(action) {
     try {
-        const data = yield call(getAllTable());
+        const data = yield call(getAllTable);
         yield put(receivetApiTableData(data));
     } catch (e) {
         console.log(e);

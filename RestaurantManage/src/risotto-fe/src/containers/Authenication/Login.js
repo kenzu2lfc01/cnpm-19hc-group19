@@ -29,13 +29,19 @@ class Login extends Component {
     }
 
     componentWillUpdate(nextProps, prevState) {
-        sessionStorage.setItem("token", nextProps.data.Access_Token);
-        return <Redirect to='/login' />
+        if (nextProps.data.Access_Token) {
+            sessionStorage.setItem("token", nextProps.data.Access_Token);
+        }
     }
 
     render() {
+        if (this.props.data.Access_Token) {
+            return <Redirect to='/staff' />
+        }
+
         return (
-            <div className="risotto-container">
+            < div className="risotto-container" >
+
                 <Form className="form-login">
                     <h1>Login</h1>
                     <Form.Group>
@@ -53,7 +59,7 @@ class Login extends Component {
                         Submit
                 </Button>
                 </Form>
-            </div>
+            </div >
         );
     }
 }

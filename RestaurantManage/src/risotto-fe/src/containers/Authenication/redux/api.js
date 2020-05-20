@@ -8,10 +8,12 @@ export const loginApi = async (params) => {
     };
     try {
         const response = await fetch(API_URL + 'manage/account/login', requestOptions);
+        console.log(response);
         const userInfor = await response.json();
+        console.log(userInfor);
         var result = {
             userInfor: userInfor,
-            Access_Token: response.headers.get("token")
+            Access_Token: response.headers.get("Access_token")
         }
         return result;
     } catch (e) {

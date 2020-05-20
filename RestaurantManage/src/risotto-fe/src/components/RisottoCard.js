@@ -8,7 +8,7 @@ export default class RisottoCard extends Component {
     render() {
         return (
             <Card className="card-risotto">
-                <CardImg onClick={this.handleClick} className={"image-table " + this.props.status} src={this.props.srcImg} />
+                <CardImg onClick={this.props.onClick} className={"image-table " + this.props.status.toLowerCase()} src={this.props.srcImg} />
                 <CardBody>
                     <CardTitle className="card-title-name-table">{this.props.bodyCard}</CardTitle>
                 </CardBody>
