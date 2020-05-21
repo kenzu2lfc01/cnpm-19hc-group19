@@ -25,7 +25,7 @@ public class ReceiptResource {
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody ReceiptCommand.Create command){
         try {
-            command.setStaffId(token.substring(7));
+            command.setStaffId(token);
 
             Receipt.View receipt = receiptApplication.add(command);
 

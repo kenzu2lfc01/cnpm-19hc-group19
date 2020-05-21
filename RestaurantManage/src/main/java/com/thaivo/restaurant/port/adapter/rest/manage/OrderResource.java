@@ -26,7 +26,6 @@ public class OrderResource {
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody OrderCommand.Create command) {
         try {
-            token = token.substring(7);
             command.setStaffId(token);
 
             Order.View order = orderApplication.add(command);
