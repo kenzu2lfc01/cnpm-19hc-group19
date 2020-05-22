@@ -84,7 +84,7 @@ public class OrderDetailResource {
 
     @Authentication(positions = { Staff.Position.CHEF, Staff.Position.SERVE })
     @GetMapping("/get/{status}")
-    public ResponseEntity<Object> getPending(@RequestHeader(name="Authorization") String token, @PathVariable OrderDetail.Status status) {
+    public ResponseEntity<Object> getCurrentByStatus(@RequestHeader(name="Authorization") String token, @PathVariable OrderDetail.Status status) {
         try {
             List<OrderDetail.View> list = orderDetailApplication.getOrderDetailByStatus(status);
 
