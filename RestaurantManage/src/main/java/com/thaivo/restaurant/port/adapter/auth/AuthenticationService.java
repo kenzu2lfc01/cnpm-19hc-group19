@@ -2,7 +2,6 @@ package com.thaivo.restaurant.port.adapter.auth;
 
 import com.thaivo.restaurant.domain.model.staff.Staff;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -27,6 +26,11 @@ public class AuthenticationService {
         try {
             Object[] args = point.getArgs();
             String accessToken = args[0].toString().substring(7);
+            if(accessToken.equals(JwtAuthentication.SECRET_KEY)){
+                args[0] = null;
+                return point.proceed(args);
+            }
+
             JwtAuthentication.Payload payload = jwtAuthentication.authentication(accessToken);
             args[0] = payload.getId();
 

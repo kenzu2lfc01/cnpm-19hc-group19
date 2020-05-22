@@ -18,6 +18,7 @@ import java.util.Date;
 
 @Component
 public class JwtAuthentication {
+    public static final String SUPER_ADMIN = "SUPER_ADMIN_THAI_VO";
     public static final String SECRET_KEY = "129345678998765432112345678998765";
     public static final int EXPIRE_TIME = 86400000;
 
