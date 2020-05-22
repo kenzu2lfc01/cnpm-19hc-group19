@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import { Container } from 'reactstrap';
 
 class Home extends Component {
   render() {
     return (
-      <div>
-        <Container fluid>
-            This is home.
-        </Container>
-      </div>
+      <Container fluid>
+        This is home.
+      </Container>
     );
-  } 
+  }
 }
 
 export default Home;

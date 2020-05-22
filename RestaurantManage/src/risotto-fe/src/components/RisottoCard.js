@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardBody, CardTitle, Label, Button } from 'reactstrap';
+import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
 
 export default class RisottoCard extends Component {
     constructor(props) {
@@ -8,7 +8,7 @@ export default class RisottoCard extends Component {
     render() {
         return (
             <Card className="card-risotto">
-                <CardImg onClick={this.handleClick} className={"image-table " + this.props.status} src={this.props.srcImg} />
+                <CardImg onClick={this.props.onClick} className={"image-table " + this.props.status.toLowerCase()} src={this.props.srcImg} />
                 <CardBody>
                     <CardTitle className="card-title-name-table">{this.props.bodyCard}</CardTitle>
                 </CardBody>

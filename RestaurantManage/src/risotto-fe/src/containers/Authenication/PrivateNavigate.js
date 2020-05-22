@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 class PrivateNavigate extends Component {
     constructor(props) {
         super(props);
-        this.state = { isLogin: localStorage.getItem('isLogin') };
+        this.state = { Access_token: sessionStorage.getItem('token') };
     }
 
     render() {
         return (
-            this.state.isLogin != null && this.state.isLogin
+            this.state.Access_token != null
                 ? <Redirect to='/staff' />
                 : <Redirect to='/login' />
         )
