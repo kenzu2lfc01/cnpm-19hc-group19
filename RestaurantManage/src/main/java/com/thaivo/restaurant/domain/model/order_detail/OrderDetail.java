@@ -47,7 +47,7 @@ public class OrderDetail {
     ////////////////////////////////////////////
 
 
-    public enum Status { PENDING, PROGRESS, FINISH }
+    public enum Status { PENDING, PROGRESS, READY, FINISH }
 
     @Data
     @Builder
@@ -62,8 +62,29 @@ public class OrderDetail {
         private String note;
         private Status status;
         private ReferenceData food;
+        private ReferenceData table;
 
         public static View from(OrderDetail orderDetail){
+            return View.builder()
+                    .id(orderDetail.getId())
+                    .price(orderDetail.getPrice())
+                    .amount(orderDetail.getAmount())
+                    .orderAt(orderDetail.getOrderAt())
+                    .doneAt(orderDetail.getDoneAt())
+                    .note(orderDetail.getNote())
+                    .status(orderDetail.getStatus())
+                    .food(ReferenceData.builder()
+                            .id( orderDetail.getFood().getId())
+                            .name(orderDetail.getFood().getName())
+                            .build())
+                    .table(ReferenceData.builder()
+                            .id(orderDetail.getOrder().getTable().getId())
+                            .name(orderDetail.getOrder().getTable().getId())
+                            .build()
+                    )
+                    .build();
+        }
+        public static View quick(OrderDetail orderDetail){
             return View.builder()
                     .id(orderDetail.getId())
                     .price(orderDetail.getPrice())
