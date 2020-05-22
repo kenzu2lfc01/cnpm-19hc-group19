@@ -73,7 +73,7 @@ public class Order {
                             .build())
                     .orderDetails(order.getOrderDetails() == null? null :
                             order.getOrderDetails().stream()
-                            .map(OrderDetail.View::from)
+                            .map(OrderDetail.View::quick)
                             .collect(Collectors.toList()))
                     .build();
         }

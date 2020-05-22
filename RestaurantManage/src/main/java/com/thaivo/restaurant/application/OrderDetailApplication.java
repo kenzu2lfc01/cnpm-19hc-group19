@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @Transactional
 public class OrderDetailApplication {
@@ -54,5 +57,12 @@ public class OrderDetailApplication {
 
     public void delete(String id){
         orderDetailService.delete(id);
+    }
+
+    public List<OrderDetail.View> getOrderDetailByStatus(OrderDetail.Status status){
+        return tableService.getByStatus(RTable.Status.BUSY).stream()
+                .flatMap(table -> table.getLastOrder().getOrderDetails().stream().map(OrderDetail.View::from))
+                .filter(orderDetail -> orderDetail.getStatus() == status)
+                .collect(Collectors.toList());
     }
 }
