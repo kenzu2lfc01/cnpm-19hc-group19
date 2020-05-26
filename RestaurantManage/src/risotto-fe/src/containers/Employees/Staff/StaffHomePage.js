@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Row, Col, Navbar, NavbarBrand } from 'reactstrap';
 import TableDetail from './TableDetail';
 import RisottoCard from '../../../components/RisottoCard';
-import { requestApiTableData, requestApiTableByIdData } from './redux/actions';
+import { requestApiTableData, requestApiTableByIdData, requestApiFoodData } from './redux/actions';
 import { connect } from 'react-redux';
 import { TABLE_STATUS } from './constants';
 import '../../../assert/styles/staff.scss';
+import OrderDetails from './OrderDetails';
 
 class StaffHomePage extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class StaffHomePage extends Component {
 
     componentWillMount() {
         this.props.requestApiTableData();
+        this.props.requestApiFoodData();
     }
 
     onFetchTableDetailById = (tableId) => {
@@ -21,27 +23,32 @@ class StaffHomePage extends Component {
     }
 
     render() {
+        return (
+            <div className="risotto-container">
+                <div className="form-create-bill">
+                    <Navbar color="light" expand="md">
+                        <NavbarBrand color="black">Thông Tin Bàn</NavbarBrand>
+                        <img width="30px" src="https://www.svgrepo.com/show/177805/right-arrow-arrows.svg" />
+                        <NavbarBrand style={{ paddingLeft: "10px" }} color="black"> Gọi Món</NavbarBrand>
+                    </Navbar>
+                    {
+                        false ?
+                            this.tablesRender() :
+                            <OrderDetails dataFoods={this.props.dataFoods} />
+                    }
+                </div>
+            </div>
+        )
+    }
+
+    tablesRender = () => {
         var { dataTable, dataTables } = this.props;
         var tableDetail = dataTables[0];
         if (dataTable != null && dataTable.id) {
             tableDetail = dataTable;
         }
         return (
-            <div className="risotto-container">
-                <div className="form-create-bill">
-                    {false ? this.tablesRender(dataTables, tableDetail)
-                        : this.orderFormRender()}
-                </div>
-            </div>
-        )
-    }
-
-    tablesRender = (dataTables, tableDetail) => {
-        return (
             <div>
-                <Navbar color="light" expand="md">
-                    <NavbarBrand color="black">Thông Tin Bàn</NavbarBrand>
-                </Navbar>
                 <Row>
                     <Col xs="7">
                         <div style={{ textAlign: "center" }}>
@@ -54,34 +61,6 @@ class StaffHomePage extends Component {
                 </Row>
             </div>
         )
-    }
-
-    orderFormRender = () => {
-        return (
-            <div>
-                <Navbar color="light" expand="md">
-                    <NavbarBrand color="black">Tạo Đơn Hàng</NavbarBrand>
-                </Navbar>
-                <Row>
-                    <Col xs="7">
-                        <div style={{ textAlign: "center" }}>
-                            {this.listfoodsRender()}
-                        </div>
-                    </Col>
-                    <Col xs="5">
-                        <h1>Thông Tin Đặt Món Chi Tiết</h1>
-                    </Col>
-                </Row>
-            </div>
-        )
-    }
-
-    listfoodsRender = () => {
-        var indents = [];
-        for (var i = 0; i < 42; i++) {
-            indents.push(<img style={{ width: "150px" }} src="https://cdn.cet.edu.vn/wp-content/uploads/2018/03/canh-ga-chien-nuoc-mam.jpg" />)
-        }
-        return indents;
     }
 
     listTablesRender = (tables) => {
@@ -114,6 +93,7 @@ class StaffHomePage extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         requestApiTableData: () => dispatch(requestApiTableData()),
+        requestApiFoodData: () => dispatch(requestApiFoodData()),
         requestApiTableByIdData: (payload) => dispatch(requestApiTableByIdData(payload)),
     }
 }
@@ -121,7 +101,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => (
     {
         dataTables: state.dataTables,
-        dataTable: state.dataTable
+        dataTable: state.dataTable,
+        dataFoods: state.dataFoods,
     });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaffHomePage);
