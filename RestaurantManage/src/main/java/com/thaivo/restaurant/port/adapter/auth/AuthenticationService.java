@@ -26,7 +26,7 @@ public class AuthenticationService {
         try {
             Object[] args = point.getArgs();
             String accessToken = args[0].toString().substring(7);
-            if(accessToken.equals(JwtAuthentication.SECRET_KEY)){
+            if(accessToken.equals(JwtAuthentication.SUPER_ADMIN)){
                 args[0] = null;
                 return point.proceed(args);
             }
