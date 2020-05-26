@@ -1,7 +1,7 @@
 import { API_URL } from '../../../../models/risotto-enviroment';
-const access_Token = 'Bearer ' + sessionStorage.getItem('token');
 
 export const getAllTable = async () => {
+    const access_Token = 'Bearer ' + sessionStorage.getItem('token');
     const requestOption = {
         method: 'GET',
         headers: {
@@ -20,6 +20,7 @@ export const getAllTable = async () => {
 }
 
 export const getTableById = async (tableId) => {
+    const access_Token = 'Bearer ' + sessionStorage.getItem('token');
     const requestOption = {
         method: 'GET',
         headers: {

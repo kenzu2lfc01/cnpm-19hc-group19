@@ -26,29 +26,65 @@ class StaffHomePage extends Component {
         if (dataTable != null && dataTable.id) {
             tableDetail = dataTable;
         }
-        console.log(tableDetail);
         return (
             <div className="risotto-container">
                 <div className="form-create-bill">
-                    <Navbar color="light" expand="md">
-                        <NavbarBrand color="black">Tạo Đơn Hàng</NavbarBrand>
-                    </Navbar>
-                    <Row>
-                        <Col xs="7">
-                            <div style={{ textAlign: "center" }}>
-                                {this.imagesRender(dataTables)}
-                            </div>
-                        </Col>
-                        <Col xs="5">
-                            {tableDetail ? <TableDetail tableDetail={tableDetail} /> : <div></div>}
-                        </Col>
-                    </Row>
+                    {false ? this.tablesRender(dataTables, tableDetail)
+                        : this.orderFormRender()}
                 </div>
             </div>
         )
     }
 
-    imagesRender = (tables) => {
+    tablesRender = (dataTables, tableDetail) => {
+        return (
+            <div>
+                <Navbar color="light" expand="md">
+                    <NavbarBrand color="black">Thông Tin Bàn</NavbarBrand>
+                </Navbar>
+                <Row>
+                    <Col xs="7">
+                        <div style={{ textAlign: "center" }}>
+                            {this.listTablesRender(dataTables)}
+                        </div>
+                    </Col>
+                    <Col xs="5">
+                        {tableDetail ? <TableDetail tableDetail={tableDetail} /> : <div></div>}
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+
+    orderFormRender = () => {
+        return (
+            <div>
+                <Navbar color="light" expand="md">
+                    <NavbarBrand color="black">Tạo Đơn Hàng</NavbarBrand>
+                </Navbar>
+                <Row>
+                    <Col xs="7">
+                        <div style={{ textAlign: "center" }}>
+                            {this.listfoodsRender()}
+                        </div>
+                    </Col>
+                    <Col xs="5">
+                        <h1>Thông Tin Đặt Món Chi Tiết</h1>
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+
+    listfoodsRender = () => {
+        var indents = [];
+        for (var i = 0; i < 42; i++) {
+            indents.push(<img style={{ width: "150px" }} src="https://cdn.cet.edu.vn/wp-content/uploads/2018/03/canh-ga-chien-nuoc-mam.jpg" />)
+        }
+        return indents;
+    }
+
+    listTablesRender = (tables) => {
         var indents = [];
         for (var i = 0; i < tables.length; i++) {
             let id = tables[i].id;
@@ -73,7 +109,6 @@ class StaffHomePage extends Component {
         }
         return indents;
     }
-
 }
 
 const mapDispatchToProps = dispatch => {
