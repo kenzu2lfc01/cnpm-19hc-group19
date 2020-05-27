@@ -79,7 +79,7 @@ public class OrderDetail {
                             .build())
                     .table(ReferenceData.builder()
                             .id(orderDetail.getOrder().getTable().getId())
-                            .name(orderDetail.getOrder().getTable().getId())
+                            .name(orderDetail.getOrder().getTable().getName())
                             .build()
                     )
                     .build();
