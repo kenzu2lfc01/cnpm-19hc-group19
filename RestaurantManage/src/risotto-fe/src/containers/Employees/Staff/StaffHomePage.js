@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Row, Col, Navbar, NavbarBrand } from 'reactstrap';
 import TableDetail from './TableDetail';
 import RisottoCard from '../../../components/RisottoCard';
-import { requestApiTableData, requestApiTableByIdData } from './redux/actions';
+import { requestApiTableData, requestApiTableByIdData, requestApiFoodData } from './redux/actions';
 import { connect } from 'react-redux';
 import { TABLE_STATUS } from './constants';
 import '../../../assert/styles/staff.scss';
+import OrderDetails from './OrderDetails';
 
 class StaffHomePage extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class StaffHomePage extends Component {
 
     componentWillMount() {
         this.props.requestApiTableData();
+        this.props.requestApiFoodData();
     }
 
     onFetchTableDetailById = (tableId) => {
@@ -21,34 +23,47 @@ class StaffHomePage extends Component {
     }
 
     render() {
-        var { dataTable, dataTables } = this.props;
-        var tableDetail = dataTables[0];
-        if (dataTable != null && dataTable.id) {
-            tableDetail = dataTable;
-        }
-        console.log(tableDetail);
         return (
             <div className="risotto-container">
                 <div className="form-create-bill">
                     <Navbar color="light" expand="md">
-                        <NavbarBrand color="black">Tạo Đơn Hàng</NavbarBrand>
+                        <NavbarBrand color="black">Thông Tin Bàn</NavbarBrand>
+                        <img width="30px" src="https://www.svgrepo.com/show/177805/right-arrow-arrows.svg" />
+                        <NavbarBrand style={{ paddingLeft: "10px" }} color="black"> Gọi Món</NavbarBrand>
                     </Navbar>
-                    <Row>
-                        <Col xs="7">
-                            <div style={{ textAlign: "center" }}>
-                                {this.imagesRender(dataTables)}
-                            </div>
-                        </Col>
-                        <Col xs="5">
-                            {tableDetail ? <TableDetail tableDetail={tableDetail} /> : <div></div>}
-                        </Col>
-                    </Row>
+                    {
+                        false ?
+                            this.tablesRender() :
+                            <OrderDetails dataFoods={this.props.dataFoods} />
+                    }
                 </div>
             </div>
         )
     }
 
-    imagesRender = (tables) => {
+    tablesRender = () => {
+        var { dataTable, dataTables } = this.props;
+        var tableDetail = dataTables[0];
+        if (dataTable != null && dataTable.id) {
+            tableDetail = dataTable;
+        }
+        return (
+            <div>
+                <Row>
+                    <Col xs="7">
+                        <div style={{ textAlign: "center" }}>
+                            {this.listTablesRender(dataTables)}
+                        </div>
+                    </Col>
+                    <Col xs="5">
+                        {tableDetail ? <TableDetail tableDetail={tableDetail} /> : <div></div>}
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+
+    listTablesRender = (tables) => {
         var indents = [];
         for (var i = 0; i < tables.length; i++) {
             let id = tables[i].id;
@@ -73,12 +88,12 @@ class StaffHomePage extends Component {
         }
         return indents;
     }
-
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         requestApiTableData: () => dispatch(requestApiTableData()),
+        requestApiFoodData: () => dispatch(requestApiFoodData()),
         requestApiTableByIdData: (payload) => dispatch(requestApiTableByIdData(payload)),
     }
 }
@@ -86,7 +101,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => (
     {
         dataTables: state.dataTables,
-        dataTable: state.dataTable
+        dataTable: state.dataTable,
+        dataFoods: state.dataFoods,
     });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaffHomePage);
