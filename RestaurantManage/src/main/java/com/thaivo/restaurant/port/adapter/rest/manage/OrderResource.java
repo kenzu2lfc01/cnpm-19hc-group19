@@ -22,7 +22,7 @@ public class OrderResource {
         this.orderApplication = orderApplication;
     }
 
-    @Authentication(positions = { Staff.Position.SERVE })
+    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody OrderCommand.Create command) {
         try {
@@ -39,7 +39,7 @@ public class OrderResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @ModelAttribute OrderCommand.Get command) {
         try {
@@ -55,7 +55,7 @@ public class OrderResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
     @GetMapping("/get/{id}")
     public ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id) {
         try {

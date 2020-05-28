@@ -22,7 +22,7 @@ public class OrderDetailResource {
         this.orderDetailApplication = orderDetailApplication;
     }
 
-    @Authentication(positions = { Staff.Position.SERVE })
+    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody OrderDetailCommand.Create command) {
         try {
@@ -37,7 +37,7 @@ public class OrderDetailResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.SERVE })
+    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
     @PostMapping("/update/amount")
     public ResponseEntity<Object> updateAmount(@RequestHeader(name="Authorization") String token, @RequestBody OrderDetailCommand.UpdateAmount command) {
         try {
@@ -52,7 +52,7 @@ public class OrderDetailResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.CHEF, Staff.Position.SERVE })
+    @Authentication(positions = { Staff.Position.CHEF, Staff.Position.SERVE, Staff.Position.MANAGER })
     @PostMapping("/update/status")
     public ResponseEntity<Object> updateStatus(@RequestHeader(name="Authorization") String token, @RequestBody OrderDetailCommand.UpdateStatus command) {
         try {
@@ -67,7 +67,7 @@ public class OrderDetailResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.SERVE })
+    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
     @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id) {
         try {
@@ -82,7 +82,7 @@ public class OrderDetailResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.CHEF, Staff.Position.SERVE })
+    @Authentication(positions = { Staff.Position.CHEF, Staff.Position.SERVE, Staff.Position.MANAGER })
     @GetMapping("/get/{status}")
     public ResponseEntity<Object> getCurrentByStatus(@RequestHeader(name="Authorization") String token, @PathVariable OrderDetail.Status status) {
         try {

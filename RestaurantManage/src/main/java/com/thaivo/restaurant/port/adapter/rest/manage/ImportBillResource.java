@@ -23,7 +23,7 @@ public class ImportBillResource {
         this.importBillApplication = importBillApplication;
     }
 
-    @Authentication(positions = { Staff.Position.CHEF })
+    @Authentication(positions = { Staff.Position.CHEF, Staff.Position.MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody ImportBillCommand.Create command){
         try {
@@ -56,7 +56,7 @@ public class ImportBillResource {
 
     @Authentication(positions = { Staff.Position.CHEF, Staff.Position.MANAGER })
     @GetMapping("/get/{staffId}")
-    public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @PathVariable String staffId){
+    public ResponseEntity<Object> getByStaff(@RequestHeader(name="Authorization") String token, @PathVariable String staffId){
         try {
             List<ImportBill.View> list = importBillApplication.getByStaff(staffId);
 

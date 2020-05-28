@@ -21,7 +21,7 @@ public class ReceiptResource {
         this.receiptApplication = receiptApplication;
     }
 
-    @Authentication(positions = { Staff.Position.CASHIER })
+    @Authentication(positions = { Staff.Position.MANAGER, Staff.Position.CASHIER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody ReceiptCommand.Create command){
         try {
