@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/manage/order_detail")
@@ -29,6 +31,21 @@ public class OrderDetailResource {
             OrderDetail.View orderDetail = orderDetailApplication.add(command);
 
             return new ResponseEntity<>(orderDetail, HttpStatus.OK);
+        }
+        catch (Throwable throwable){
+            throwable.printStackTrace();
+            return new ResponseEntity<>(throwable.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
+    @PostMapping("/addList")
+    public ResponseEntity<Object> addList(@RequestHeader(name="Authorization") String token, @RequestBody List<OrderDetailCommand.Create> command) {
+        try {
+            List<OrderDetail.View> list = command.stream()
+                    .map(cmd -> orderDetailApplication.add(cmd)).collect(Collectors.toList());
+
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }
         catch (Throwable throwable){
             throwable.printStackTrace();
