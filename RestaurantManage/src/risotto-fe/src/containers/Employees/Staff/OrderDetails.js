@@ -5,12 +5,13 @@ class OrderDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            orderDetails: []
+            orderDetails: [],
         }
     }
 
     render() {
         var { dataFoods } = this.props;
+        var { orderDetails } = this.state;
         return (
             <Row>
                 <Col className="wrap-grid foods" xs="7">
@@ -27,14 +28,17 @@ class OrderDetails extends Component {
                             <h4 style={{ paddingTop: "2%" }}>Thông Tin Đặt Món Chi Tiết</h4>
                         </Col>
                     </Row>
-                    <Form>
-                        <div className="wrap-grid order">
-                            <div class="grid-order-detail">
-                                {this.showListOrderDetails()}
+                    {orderDetails != null && orderDetails.length != 0 ?
+                        <Form>
+                            <div className="wrap-grid order">
+                                <div class="grid-order-detail">
+                                    {this.showListOrderDetails()}
+                                </div>
                             </div>
-                        </div>
-                        <Button style={{ marginLeft: "23vh", marginTop: "2%", width: "30%" }} type="button" color="success">Xác Nhận</Button>
-                    </Form>
+                            <Button style={{ marginLeft: "23vh", marginTop: "2%", width: "30%" }} type="button" color="success">Xác Nhận</Button>
+                        </Form>
+                        : <div></div>
+                    }
                 </Col >
             </Row >
         )
@@ -53,7 +57,9 @@ class OrderDetails extends Component {
         if (flag) {
             var orderDetail = {
                 foodName,
-                foodPrice
+                foodPrice,
+                numberOfFood: 1,
+                note: ""
             };
             orderDetails.push(orderDetail);
 
@@ -89,7 +95,7 @@ class OrderDetails extends Component {
                         </FormGroup>
                         <FormGroup style={{ width: "15%" }}>
                             <Label>Số Lượng</Label>
-                            <Input type="number"></Input>
+                            <Input type="number" value={orderDetails[i].numberOfFood}></Input>
                         </FormGroup>
                     </Row>
                     <Row>
