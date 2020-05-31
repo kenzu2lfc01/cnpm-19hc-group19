@@ -14,6 +14,8 @@
 
 .card-title-name-table {
     text-align: center;
+    font-weight: bold;
+    color: #848484;
 }
 
 .image-table {
@@ -37,32 +39,6 @@
     display: inline-block !important;
 }
 
-.fixed_header {
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-}
-
-.fixed_header tbody {
-    display: block;
-    width: 100%;
-    overflow: auto;
-    height: 100px;
-}
-
-.fixed_header thead tr {
-    display: block;
-}
-
-.fixed_header thead {
-    color: black;
-}
-
-h4 {
-    text-align: center;
-    padding-top: 1px;
-}
-
 .fixed_header th,
 .fixed_header td {
     padding: 5px;
@@ -79,6 +55,10 @@ h4 {
 
     &.foods {
         height: 80vh;
+    }
+
+    &.table {
+        height: 47vh;
     }
 
     padding-top: 1%;
@@ -143,4 +123,27 @@ h4 {
     &:hover {
         cursor: pointer;
     }
+}
+
+.btn-add-food {
+    text-align: right;
+    margin-left: 55%;
+}
+
+.btn-submit-order {
+    margin-left: 23vh;
+    margin-top: 2%;
+    width: 30%;
+}
+
+.form-table-detail {
+    Label {
+        font-weight: bold;
+        color: #848484;
+    }
+}
+
+h2 {
+    padding-top: 2px;
+    text-align: center;
 }

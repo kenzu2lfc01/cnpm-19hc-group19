@@ -6,14 +6,20 @@ class OrderDetails extends Component {
         super(props);
         this.state = {
             orderDetails: [],
+            amount: 0,
+            note: "",
+            isOrder: false
         }
     }
 
     render() {
-        var { dataFoods } = this.props;
-        var { orderDetails } = this.state;
+        var { dataFoods, onBackToTableDetail, selectedTableName, dataOrderDetails } = this.props;
+        var { orderDetails, isOrder } = this.state;
+        if (dataOrderDetails && isOrder && dataOrderDetails.length > 0) {
+            onBackToTableDetail();
+        }
         return (
-            <Row>
+            < Row >
                 <Col className="wrap-grid foods" xs="7">
                     <div class="grid">
                         {this.showListfoodsRender(dataFoods)}
@@ -22,20 +28,20 @@ class OrderDetails extends Component {
                 <Col xs="5">
                     <Row>
                         <Col xs="1">
-                            <img className="button-back" src="https://img.icons8.com/fluent/48/000000/circled-left-2.png" />
+                            <img onClick={onBackToTableDetail} className="button-back" src="https://img.icons8.com/fluent/48/000000/circled-left-2.png" />
                         </Col>
                         <Col>
-                            <h4 style={{ paddingTop: "2%" }}>Thông Tin Đặt Món Chi Tiết</h4>
+                            <h2>Thông Tin Đặt Món Chi Tiết {selectedTableName}</h2>
                         </Col>
                     </Row>
                     {orderDetails != null && orderDetails.length != 0 ?
                         <Form>
                             <div className="wrap-grid order">
                                 <div class="grid-order-detail">
-                                    {this.showListOrderDetails()}
+                                    {this.showListOrderDetails(orderDetails)}
                                 </div>
                             </div>
-                            <Button style={{ marginLeft: "23vh", marginTop: "2%", width: "30%" }} type="button" color="success">Xác Nhận</Button>
+                            <Button onClick={() => this.onOrder(orderDetails)} className="btn-submit-order" type="button" color="success">Xác Nhận</Button>
                         </Form>
                         : <div></div>
                     }
@@ -44,9 +50,9 @@ class OrderDetails extends Component {
         )
     }
 
-    onSelectfood = (foodName, foodPrice) => {
-        var { orderDetails } = this.state;
+    onSelectfood = (foodName, foodPrice, foodId) => {
         var flag = true;
+        var { orderDetails } = this.state;
         if (orderDetails.length > 0) {
             for (let item of orderDetails) {
                 if (item.foodName == foodName && foodPrice == item.foodPrice) {
@@ -58,8 +64,9 @@ class OrderDetails extends Component {
             var orderDetail = {
                 foodName,
                 foodPrice,
-                numberOfFood: 1,
-                note: ""
+                amount: 1,
+                note: "",
+                foodId
             };
             orderDetails.push(orderDetail);
 
@@ -77,9 +84,47 @@ class OrderDetails extends Component {
         )
     }
 
-    showListOrderDetails = () => {
-        var articles = [];
+    onSaveNote = (e, i) => {
         var { orderDetails } = this.state;
+        orderDetails[i].note = e.target.value;
+        this.setState(
+            {
+                orderDetails
+            }
+        )
+    }
+
+    onSaveAmout = (e, i) => {
+        var { orderDetails } = this.state;
+        orderDetails[i].amount = e.target.value;
+        this.setState(
+            {
+                orderDetails
+            }
+        )
+    }
+
+    onOrder = (orderDetails) => {
+        var { selectedTableId, requestApiPostAddOrderDetails } = this.props;
+        var paramaters = [];
+        for (let item of orderDetails) {
+            paramaters.push({
+                tableId: selectedTableId,
+                foodId: item.foodId,
+                amount: item.amount,
+                note: item.note
+            })
+        }
+        requestApiPostAddOrderDetails(paramaters);
+        this.setState(
+            {
+                isOrder: true
+            }
+        )
+    }
+
+    showListOrderDetails = (orderDetails) => {
+        var articles = [];
         if (orderDetails != null && orderDetails.length > 0) {
             for (let i = 0; i < orderDetails.length; i++) {
                 articles.push(<article>
@@ -95,13 +140,13 @@ class OrderDetails extends Component {
                         </FormGroup>
                         <FormGroup style={{ width: "15%" }}>
                             <Label>Số Lượng</Label>
-                            <Input type="number" value={orderDetails[i].numberOfFood}></Input>
+                            <Input required onChange={(e) => this.onSaveAmout(e, i)} type="number" ></Input>
                         </FormGroup>
                     </Row>
                     <Row>
                         <FormGroup style={{ width: "95%" }}>
                             <Label>Ghi Chú</Label>
-                            <Input type="textarea"></Input>
+                            <Input onChange={(e) => this.onSaveNote(e, i)} type="textarea"></Input>
                         </FormGroup>
                     </Row>
                 </article>
@@ -117,9 +162,10 @@ class OrderDetails extends Component {
             for (let item of listFoods) {
                 let foodName = item.name;
                 let foodPrice = item.price;
+                let foodId = item.id;
                 indents.push(
                     <article>
-                        <img onClick={() => this.onSelectfood(foodName, foodPrice)} src={item.image} alt="Food photo" />
+                        <img onClick={() => this.onSelectfood(foodName, foodPrice, foodId)} src={item.image} alt="Food photo" />
                         <div class="text">
                             <h5>{item.name}</h5>
                             <p>{item.price}</p>

@@ -1,6 +1,12 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { REQUEST_API_TABLE_DATA, receivetApiTableData, REQUEST_API_TABLE_BY_ID_DATA, receivetApiTableByIdData, REQUEST_API_FOODS_DATA, receivetApiFoodData } from './actions';
-import { getAllTable, getTableById, getAllFoods } from './api';
+import {
+    REQUEST_API_TABLE_DATA, receivetApiTableData,
+    REQUEST_API_TABLE_BY_ID_DATA, receivetApiTableByIdData,
+    REQUEST_API_FOODS_DATA, receivetApiFoodData,
+    REQUEST_POST_API_ADD_ORDER, receiveApiPostAddOrder,
+    REQUEST_POST_API_ADD_ORDER_DETAILS, receiveApiPostAddOrderDetails
+} from './actions';
+import { getAllTable, getTableById, getAllFoods, addNewOrder, addOrderDetails } from './api';
 
 function* fetchAllTable(action) {
     try {
@@ -29,8 +35,28 @@ function* fetchAllFoods(action) {
     }
 }
 
+function* postNewOrder(action) {
+    try {
+        const data = yield call(addNewOrder, action.payload);
+        yield put(receiveApiPostAddOrder(data));
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+function* postOrderDetails(action) {
+    try {
+        const data = yield call(addOrderDetails, action.payload);
+        yield put(receiveApiPostAddOrderDetails(data));
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 export default function* fetchTableSaga() {
     yield takeLatest(REQUEST_API_TABLE_DATA, fetchAllTable);
     yield takeLatest(REQUEST_API_TABLE_BY_ID_DATA, fetchTableByID);
     yield takeLatest(REQUEST_API_FOODS_DATA, fetchAllFoods);
+    yield takeLatest(REQUEST_POST_API_ADD_ORDER, postNewOrder);
+    yield takeLatest(REQUEST_POST_API_ADD_ORDER_DETAILS, postOrderDetails);
 }

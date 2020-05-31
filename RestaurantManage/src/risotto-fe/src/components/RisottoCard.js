@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardBody, CardTitle, Label } from 'reactstrap';
 
 export default class RisottoCard extends Component {
     constructor(props) {

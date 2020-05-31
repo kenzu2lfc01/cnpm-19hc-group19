@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Row, Col, Navbar, NavbarBrand } from 'reactstrap';
-import TableDetail from './TableDetail';
-import RisottoCard from '../../../components/RisottoCard';
-import { requestApiTableData, requestApiTableByIdData, requestApiFoodData } from './redux/actions';
+import { Navbar, NavbarBrand } from 'reactstrap';
+import { requestApiTableData, requestApiTableByIdData, requestApiFoodData, requestApiPostAddOrder, requestApiPostAddOrderDetails } from './redux/actions';
 import { connect } from 'react-redux';
-import { TABLE_STATUS } from './constants';
 import '../../../assert/styles/staff.scss';
 import OrderDetails from './OrderDetails';
+import TableDetal from './TableDetail';
 
 class StaffHomePage extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isShowOrderDetails: false
+        }
     }
 
     componentWillMount() {
@@ -18,75 +19,73 @@ class StaffHomePage extends Component {
         this.props.requestApiFoodData();
     }
 
-    onFetchTableDetailById = (tableId) => {
-        this.props.requestApiTableByIdData(tableId);
-    }
-
     render() {
-        return (
-            <div className="risotto-container">
-                <div className="form-create-bill">
-                    <Navbar color="light" expand="md">
-                        <NavbarBrand color="black">Thông Tin Bàn</NavbarBrand>
-                        <img width="30px" src="https://www.svgrepo.com/show/177805/right-arrow-arrows.svg" />
-                        <NavbarBrand style={{ paddingLeft: "10px" }} color="black"> Gọi Món</NavbarBrand>
-                    </Navbar>
-                    {
-                        false ?
-                            this.tablesRender() :
-                            <OrderDetails dataFoods={this.props.dataFoods} />
-                    }
-                </div>
-            </div>
-        )
-    }
-
-    tablesRender = () => {
-        var { dataTable, dataTables } = this.props;
+        var { isShowOrderDetails } = this.state;
+        var { dataTable, dataTables, dataFoods, requestApiPostAddOrderDetails, dataOrderDetails, requestApiTableByIdData } = this.props;
         var tableDetail = dataTables[0];
         if (dataTable != null && dataTable.id) {
             tableDetail = dataTable;
         }
-        return (
-            <div>
-                <Row>
-                    <Col xs="7">
-                        <div style={{ textAlign: "center" }}>
-                            {this.listTablesRender(dataTables)}
-                        </div>
-                    </Col>
-                    <Col xs="5">
-                        {tableDetail ? <TableDetail tableDetail={tableDetail} /> : <div></div>}
-                    </Col>
-                </Row>
-            </div>
-        )
+        if (tableDetail) {
+            return (
+                <div className="risotto-container">
+                    <div className="form-create-bill">
+                        <Navbar color="light" expand="md">
+                            <NavbarBrand color="black">Thông Tin Bàn</NavbarBrand>
+                            {isShowOrderDetails ?
+                                <div>
+                                    <img width="30px" src="https://www.svgrepo.com/show/177805/right-arrow-arrows.svg" />
+                                    <NavbarBrand style={{ paddingLeft: "10px" }} color="black"> Gọi Món</NavbarBrand>
+                                </div>
+                                : <div></div>
+                            }
+                        </Navbar>
+                        {isShowOrderDetails ?
+                            <OrderDetails
+                                dataOrderDetails={dataOrderDetails}
+                                selectedTableId={tableDetail.id}
+                                selectedTableName={tableDetail.name}
+                                requestApiPostAddOrderDetails={requestApiPostAddOrderDetails}
+                                onBackToTableDetail={() => this.onBackToTableDetail(tableDetail.id)}
+                                dataFoods={dataFoods} />
+                            :
+                            <TableDetal
+                                tableDetail={tableDetail}
+                                dataTables={dataTables}
+                                requestApiTableByIdData={requestApiTableByIdData}
+                                onClickShowOrderDetails={() => this.onOnShowOrderDetails(tableDetail.id)}
+                                onGoToOrderDetail={() => this.onOnShowOrderDetails(null)}
+                                selectedTableId={tableDetail.id}
+                            />
+                        }
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return <div></div>;
+        }
     }
 
-    listTablesRender = (tables) => {
-        var indents = [];
-        for (var i = 0; i < tables.length; i++) {
-            let id = tables[i].id;
-            if (tables[i].status == TABLE_STATUS.ready) {
-                indents.push(
-                    <RisottoCard
-                        onClick={() => this.onFetchTableDetailById(id)}
-                        srcImg="https://i0.wp.com/s1.uphinh.org/2020/05/17/15896858521709058.png"
-                        bodyCard={tables[i].name}
-                        status={TABLE_STATUS.ready} />
-                );
-            }
-            else {
-                indents.push(
-                    <RisottoCard
-                        onClick={() => this.onFetchTableDetailById(id)}
-                        srcImg="https://i0.wp.com/s1.uphinh.org/2020/05/17/15896858521709058.png"
-                        bodyCard={tables[i].name}
-                        status={TABLE_STATUS.busy} />
-                );
-            }
+
+    onOnShowOrderDetails = (tableId) => {
+        var { requestApiPostAddOrder } = this.props;
+        if (tableId) {
+            requestApiPostAddOrder(tableId)
         }
-        return indents;
+
+        this.setState({
+            isShowOrderDetails: true
+        })
+    }
+
+    onBackToTableDetail = (tableId) => {
+        var { requestApiTableByIdData, requestApiTableData } = this.props;
+        requestApiTableByIdData(tableId);
+        requestApiTableData();
+        this.setState({
+            isShowOrderDetails: false
+        })
     }
 }
 
@@ -95,6 +94,8 @@ const mapDispatchToProps = dispatch => {
         requestApiTableData: () => dispatch(requestApiTableData()),
         requestApiFoodData: () => dispatch(requestApiFoodData()),
         requestApiTableByIdData: (payload) => dispatch(requestApiTableByIdData(payload)),
+        requestApiPostAddOrder: (payload) => dispatch(requestApiPostAddOrder(payload)),
+        requestApiPostAddOrderDetails: (payload) => dispatch(requestApiPostAddOrderDetails(payload))
     }
 }
 
@@ -103,6 +104,8 @@ const mapStateToProps = state => (
         dataTables: state.dataTables,
         dataTable: state.dataTable,
         dataFoods: state.dataFoods,
+        dataOrderBasic: state.dataOrderBasic,
+        dataOrderDetails: state.dataOrderDetails
     });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaffHomePage);
