@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import AppNavbar from '../../components/AppNavbar';
 
 class PrivateNavigate extends Component {
     constructor(props) {
@@ -8,11 +9,23 @@ class PrivateNavigate extends Component {
     }
 
     render() {
+        var { data } = this.props
+        var { Access_token } = this.state;
         return (
-            this.state.Access_token != null
-                ? <Redirect to='/staff' />
+            Access_token
+                ?
+                <div>
+                    <AppNavbar onClick={() => this.onLogout()} />
+                    <Redirect to='/staff' />
+                </div>
                 : <Redirect to='/login' />
         )
+    }
+
+    onLogout = () => {
+        sessionStorage.removeItem('token');
+        this.setState = { Access_token: null };
+        return <PrivateNavigate />
     }
 }
 
