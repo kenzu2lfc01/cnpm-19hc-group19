@@ -50,15 +50,15 @@
     overflow-y: scroll;
 
     &.order {
-        height: 72vh;
+        height: 62vh;
     }
 
     &.foods {
-        height: 80vh;
+        height: 70vh;
     }
 
     &.table {
-        height: 47vh;
+        height: 37vh;
     }
 
     padding-top: 1%;
@@ -72,7 +72,7 @@
 
 .grid>article {
     width: 80%;
-    height: 90%;
+    height: 70%;
     border: 1px solid #ccc;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
 }

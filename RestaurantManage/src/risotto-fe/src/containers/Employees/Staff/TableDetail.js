@@ -93,7 +93,7 @@ class CreateBill extends Component {
                         <FormGroup style={{ width: "95%" }}>
                             {this.renderFoodDetailOfTable(tableDetail.lastOrder.orderDetails)}
                         </FormGroup>
-                        <FormGroup style={{ width: "95%" }}>
+                        <FormGroup>
                             <h3>Tổng tiền: {totalPrice}</h3>
                         </FormGroup>
                     </Row>

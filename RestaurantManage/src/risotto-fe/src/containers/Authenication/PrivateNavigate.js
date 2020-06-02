@@ -25,7 +25,6 @@ class PrivateNavigate extends Component {
     onLogout = () => {
         sessionStorage.removeItem('token');
         this.setState = { Access_token: null };
-        return <PrivateNavigate />
     }
 }
 
