@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import { Collapse, Nav, NavItem, NavLink , Navbar} from 'reactstrap';
+import { Nav, NavItem, NavLink, Navbar } from 'reactstrap';
 
 export default class AppNavbar extends Component {
     constructor(props) {
         super(props);
-        this.state = { isOpen: false };
     }
 
     render() {
+        var { onClick } = this.props;
         return <Navbar color="dark" dark expand="md">
-            <Collapse isOpen={this.state.isOpen} navbar>
-                <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <NavLink href="/login">Login</NavLink>
-                    </NavItem>
-                </Nav>
-            </Collapse>
-        </Navbar>;
-
+            <Nav className="ml-auto" navbar>
+                <NavItem>
+                    <NavLink className="logout-button" onClick={onClick}>Logout</NavLink>
+                </NavItem>
+            </Nav>
+        </Navbar >
     }
 }

@@ -21,3 +21,9 @@
 h1 {
     text-align: center;
 }
+
+.logout-button {
+    &:hover {
+        cursor: pointer;
+    }
+}

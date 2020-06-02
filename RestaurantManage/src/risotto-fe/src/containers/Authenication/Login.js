@@ -4,7 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { requestApiLogin } from './redux/actions';
 import { connect } from 'react-redux';
-
+import PrivateNavigate from './PrivateNavigate';
 
 class Login extends Component {
     constructor(props) {
@@ -35,8 +35,9 @@ class Login extends Component {
     }
 
     render() {
-        if (this.props.data.Access_Token) {
-            return <Redirect to='/staff' />
+        var { data } = this.props;
+        if (data && data.Access_Token) {
+            return <PrivateNavigate data={data} />
         }
 
         return (
