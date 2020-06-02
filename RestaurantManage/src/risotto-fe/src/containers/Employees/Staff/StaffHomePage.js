@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Navbar, Button } from 'reactstrap';
+import { Navbar, Button, FormGroup, Label, Input } from 'reactstrap';
 import { requestApiTableData, requestApiTableByIdData, requestApiFoodData, requestApiPostAddOrder, requestApiPostAddOrderDetails } from './redux/actions';
 import { connect } from 'react-redux';
 import '../../../assert/styles/staff.scss';
 import OrderDetails from './OrderDetails';
 import TableDetal from './TableDetail';
 import Modal from 'react-bootstrap/Modal';
+import { ORDER_STATUS } from './constants';
 
 class StaffHomePage extends Component {
     constructor(props) {
@@ -59,17 +60,11 @@ class StaffHomePage extends Component {
                     <>
                         <Modal show={isShowTableDetails} onHide={() => this.onShowTableDetails()}>
                             <Modal.Header closeButton>
-                                <Modal.Title>Modal heading</Modal.Title>
+                                <Modal.Title>Danh Sách Món Ăn</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={() => this.onShowTableDetails()}>
-                                    Close
-                                     </Button>
-                                <Button variant="primary" onClick={() => this.onShowTableDetails()}>
-                                    Save Changes
-                                    </Button>
-                            </Modal.Footer>
+                            <Modal.Body>
+                                {this.showReadyFood(dataTables)}
+                            </Modal.Body>
                         </Modal>
                     </>
                 </div>
@@ -89,6 +84,34 @@ class StaffHomePage extends Component {
         this.setState({
             isShowOrderDetails: true
         })
+    }
+
+    showReadyFood = (dataTables) => {
+        var newDataTables = dataTables.filter(x => x.lastOrder && x.lastOrder.orderDetails == ORDER_STATUS.ready)
+        var elements = [];
+        if (dataTables) {
+            for (var item of newDataTables) {
+                for (var orderDetail of item.lastOrder.orderDetails) {
+                    elements.push(
+                        <div>
+                            <FormGroup style={{ width: "40%" }}>
+                                <Label>Tên Món Ăn</Label>
+                                <Input readOnly value={orderDetail.food.name}></Input>
+                            </FormGroup>
+                            <FormGroup style={{ width: "20%" }}>
+                                <Label>Tên Bàn</Label>
+                                <Input readOnly value={item.name}></Input>
+                            </FormGroup>
+                            <FormGroup style={{ width: "20%" }}>
+                                <Label>Status</Label>
+                                <Input readOnly value={orderDetail.status}></Input>
+                            </FormGroup>
+                        </div>
+                    )
+                }
+            }
+        }
+        return elements;
     }
 
     onBackToTableDetail = (tableId) => {

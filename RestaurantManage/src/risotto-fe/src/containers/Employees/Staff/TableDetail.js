@@ -20,7 +20,7 @@ class CreateBill extends Component {
                 <Col xs="5">
                     {tableDetail ?
                         this.renderTableDetails(tableDetail)
-                        : <div></div>
+                        : <></>
                     }
                 </Col>
             </Row>
