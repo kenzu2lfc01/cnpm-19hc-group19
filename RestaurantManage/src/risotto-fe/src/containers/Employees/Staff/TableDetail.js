@@ -135,7 +135,7 @@ class CreateBill extends Component {
                             <Label>Số Lượng</Label>
                             <Input readOnly type="number" value={orderDetail.amount}></Input>
                         </FormGroup>
-                        <FormGroup style={{ width: "15%" }}>
+                        <FormGroup style={{ width: "18%" }}>
                             <Label>Trạng Thái</Label>
                             <Input readOnly value={orderDetail.status}></Input>
                         </FormGroup>
@@ -145,7 +145,7 @@ class CreateBill extends Component {
                             <Label>Khách gọi món lúc</Label>
                             <Input readOnly type="text" value={moment(orderDetail.orderAt).format("HH:mm:ss")}></Input>
                         </FormGroup>
-                        <FormGroup style={{ width: "60%" }}>
+                        <FormGroup style={{ width: "63%" }}>
                             <Label>Ghi Chú</Label>
                             <Input readOnly type="text" value={orderDetail.note}></Input>
                         </FormGroup>

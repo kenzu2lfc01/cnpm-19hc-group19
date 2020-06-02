@@ -4,9 +4,10 @@ import {
     REQUEST_API_TABLE_BY_ID_DATA, receivetApiTableByIdData,
     REQUEST_API_FOODS_DATA, receivetApiFoodData,
     REQUEST_POST_API_ADD_ORDER, receiveApiPostAddOrder,
-    REQUEST_POST_API_ADD_ORDER_DETAILS, receiveApiPostAddOrderDetails
+    REQUEST_POST_API_ADD_ORDER_DETAILS, receiveApiPostAddOrderDetails,
+    REQUEST_API_ORDER_READY_DATA, receiveApiOrderReadyData
 } from './actions';
-import { getAllTable, getTableById, getAllFoods, addNewOrder, addOrderDetails } from './api';
+import { getAllTable, getTableById, getAllFoods, addNewOrder, addOrderDetails, getAllReadyOrder } from './api';
 
 function* fetchAllTable(action) {
     try {
@@ -53,10 +54,19 @@ function* postOrderDetails(action) {
     }
 }
 
+function* fetchAllReadyOrderDetail(action) {
+    try {
+        const data = yield call(getAllReadyOrder);
+        yield put(receiveApiOrderReadyData(data));
+    } catch (e) {
+        console.log(e);
+    }
+}
 export default function* fetchTableSaga() {
     yield takeLatest(REQUEST_API_TABLE_DATA, fetchAllTable);
     yield takeLatest(REQUEST_API_TABLE_BY_ID_DATA, fetchTableByID);
     yield takeLatest(REQUEST_API_FOODS_DATA, fetchAllFoods);
     yield takeLatest(REQUEST_POST_API_ADD_ORDER, postNewOrder);
     yield takeLatest(REQUEST_POST_API_ADD_ORDER_DETAILS, postOrderDetails);
+    yield takeLatest(REQUEST_API_ORDER_READY_DATA, fetchAllReadyOrderDetail);
 }

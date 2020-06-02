@@ -78,7 +78,6 @@ export const addNewOrder = async (tableId) => {
     }
 }
 
-
 export const addOrderDetails = async (orderInformations) => {
     const access_Token = 'Bearer ' + sessionStorage.getItem('token');
     const requestOption = {
@@ -92,6 +91,25 @@ export const addOrderDetails = async (orderInformations) => {
     }
     try {
         const response = await fetch(API_URL + "manage/order_detail/addList", requestOption);
+        const data = await response.json();
+        return data;
+    } catch (ex) {
+        console.log(ex);
+    }
+}
+
+export const getAllReadyOrder = async () => {
+    const access_Token = 'Bearer ' + sessionStorage.getItem('token');
+    const requestOption = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': access_Token
+        },
+        redirect: 'follow',
+    }
+    try {
+        const response = await fetch(API_URL + "/manage/order_detail/get/READY", requestOption);
         const data = await response.json();
         return data;
     } catch (ex) {

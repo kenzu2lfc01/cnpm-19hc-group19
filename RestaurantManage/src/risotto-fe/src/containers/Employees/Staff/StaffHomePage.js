@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
-import { Navbar, Button, FormGroup, Label, Input } from 'reactstrap';
-import { requestApiTableData, requestApiTableByIdData, requestApiFoodData, requestApiPostAddOrder, requestApiPostAddOrderDetails } from './redux/actions';
+import { Navbar, Button, FormGroup, Label, Input, Row } from 'reactstrap';
+import { requestApiTableData, requestApiTableByIdData, requestApiFoodData, requestApiPostAddOrder, requestApiPostAddOrderDetails, requestApiOrderReadyData } from './redux/actions';
 import { connect } from 'react-redux';
 import '../../../assert/styles/staff.scss';
 import OrderDetails from './OrderDetails';
 import TableDetal from './TableDetail';
-import Modal from 'react-bootstrap/Modal';
-import { ORDER_STATUS } from './constants';
+import RisottoModal from '../../../components/RisottoModal'
 
 class StaffHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isShowOrderDetails: false,
-            isShowTableDetails: false
+            isShowModal: false
         }
     }
 
     componentWillMount() {
         this.props.requestApiTableData();
         this.props.requestApiFoodData();
+        this.props.requestApiOrderReadyData();
     }
 
     render() {
-        var { isShowOrderDetails, isShowTableDetails } = this.state;
-        var { dataTable, dataTables, dataFoods, requestApiPostAddOrderDetails, dataOrderDetails, requestApiTableByIdData } = this.props;
+        var { isShowOrderDetails, isShowModal } = this.state;
+        var { dataTable, dataTables, dataFoods, requestApiPostAddOrderDetails, dataOrderDetails, requestApiTableByIdData, dataOrderDetailReady } = this.props;
         var tableDetail = dataTables[0];
         if (dataTable != null && dataTable.id) {
             tableDetail = dataTable;
@@ -35,7 +35,7 @@ class StaffHomePage extends Component {
                     <div className="form-create-bill">
                         <Navbar color="light" expand="md">
                             <Button className="text-primary" style={{ fontWeight: "bold" }} color="black">Thông Tin Bàn</Button>
-                            <Button className="text-primary" style={{ fontWeight: "bold" }} onClick={() => this.onShowTableDetails()} color="black">Thông Tin Món ăn</Button>
+                            <Button className="text-primary" style={{ fontWeight: "bold" }} onClick={() => this.onShowModal()} color="black">Thông Tin Món ăn</Button>
                         </Navbar>
                         {
                             isShowOrderDetails ?
@@ -57,16 +57,12 @@ class StaffHomePage extends Component {
                                 />
                         }
                     </div>
-                    <>
-                        <Modal show={isShowTableDetails} onHide={() => this.onShowTableDetails()}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Danh Sách Món Ăn</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                {this.showReadyFood(dataTables)}
-                            </Modal.Body>
-                        </Modal>
-                    </>
+                    <RisottoModal
+                        isShow={isShowModal}
+                        onHide={() => this.onShowModal()}
+                        body={this.showReadyFood(dataOrderDetailReady)}
+                        title="Thông Tin Món Ăn"
+                    />
                 </div>
             );
         }
@@ -86,29 +82,26 @@ class StaffHomePage extends Component {
         })
     }
 
-    showReadyFood = (dataTables) => {
-        var newDataTables = dataTables.filter(x => x.lastOrder && x.lastOrder.orderDetails == ORDER_STATUS.ready)
+    showReadyFood = (dataOrderDetailReady) => {
         var elements = [];
-        if (dataTables) {
-            for (var item of newDataTables) {
-                for (var orderDetail of item.lastOrder.orderDetails) {
-                    elements.push(
-                        <div>
-                            <FormGroup style={{ width: "40%" }}>
-                                <Label>Tên Món Ăn</Label>
-                                <Input readOnly value={orderDetail.food.name}></Input>
-                            </FormGroup>
-                            <FormGroup style={{ width: "20%" }}>
-                                <Label>Tên Bàn</Label>
-                                <Input readOnly value={item.name}></Input>
-                            </FormGroup>
-                            <FormGroup style={{ width: "20%" }}>
-                                <Label>Status</Label>
-                                <Input readOnly value={orderDetail.status}></Input>
-                            </FormGroup>
-                        </div>
-                    )
-                }
+        if (dataOrderDetailReady && dataOrderDetailReady.length > 0) {
+            for (var item of dataOrderDetailReady) {
+                elements.push(
+                    <Row>
+                        <FormGroup style={{ width: "40%" }}>
+                            <Label>Tên Món Ăn</Label>
+                            <Input readOnly value={item.food.name}></Input>
+                        </FormGroup>
+                        <FormGroup style={{ width: "20%" }}>
+                            <Label>Tên Bàn</Label>
+                            <Input readOnly value={item.table.name}></Input>
+                        </FormGroup>
+                        <FormGroup style={{ width: "20%" }}>
+                            <Label>Status</Label>
+                            <Input readOnly value={item.status}></Input>
+                        </FormGroup>
+                    </Row>
+                )
             }
         }
         return elements;
@@ -123,10 +116,10 @@ class StaffHomePage extends Component {
         })
     }
 
-    onShowTableDetails = () => {
-        var { isShowTableDetails } = this.state;
+    onShowModal = () => {
+        var { isShowModal } = this.state;
         this.setState({
-            isShowTableDetails: !isShowTableDetails
+            isShowModal: !isShowModal
         })
     }
 }
@@ -137,7 +130,9 @@ const mapDispatchToProps = dispatch => {
         requestApiFoodData: () => dispatch(requestApiFoodData()),
         requestApiTableByIdData: (payload) => dispatch(requestApiTableByIdData(payload)),
         requestApiPostAddOrder: (payload) => dispatch(requestApiPostAddOrder(payload)),
-        requestApiPostAddOrderDetails: (payload) => dispatch(requestApiPostAddOrderDetails(payload))
+        requestApiPostAddOrderDetails: (payload) => dispatch(requestApiPostAddOrderDetails(payload)),
+        requestApiOrderReadyData: () => dispatch(requestApiOrderReadyData())
+
     }
 }
 
@@ -147,7 +142,8 @@ const mapStateToProps = state => (
         dataTable: state.dataTable,
         dataFoods: state.dataFoods,
         dataOrderBasic: state.dataOrderBasic,
-        dataOrderDetails: state.dataOrderDetails
+        dataOrderDetails: state.dataOrderDetails,
+        dataOrderDetailReady: state.dataOrderDetailReady
     });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaffHomePage);
