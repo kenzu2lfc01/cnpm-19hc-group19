@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import AppNavbar from '../../components/AppNavbar';
+import { POSITION } from './constants';
 
 class PrivateNavigate extends Component {
     constructor(props) {
         super(props);
-        this.state = { Access_token: sessionStorage.getItem('token') };
+        this.state = {
+            access_token: sessionStorage.getItem('token'),
+            position: sessionStorage.getItem('position'),
+        };
     }
 
     render() {
-        var { data } = this.props
-        var { Access_token } = this.state;
+        var { access_token, position } = this.state;
         return (
-            Access_token
+            access_token && position
                 ?
                 <div>
                     <AppNavbar onClick={() => this.onLogout()} />
-                    <Redirect to='/staff' />
+                    {this.showByRole(position)}
                 </div>
                 : <Redirect to='/login' />
         )
@@ -24,7 +27,17 @@ class PrivateNavigate extends Component {
 
     onLogout = () => {
         sessionStorage.removeItem('token');
-        this.setState = { Access_token: null };
+        this.setState = { access_token: null };
+    }
+
+    showByRole = (position) => {
+        switch (position) {
+            case POSITION.SERVE:
+                return <Redirect to='/staff' />
+            case POSITION.CHEF:
+                return <Redirect to='/chef' />
+        }
+
     }
 }
 

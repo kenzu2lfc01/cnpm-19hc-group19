@@ -31,13 +31,14 @@ class Login extends Component {
     componentWillUpdate(nextProps, prevState) {
         if (nextProps.data.Access_Token) {
             sessionStorage.setItem("token", nextProps.data.Access_Token);
+            sessionStorage.setItem("position", nextProps.data.userInfor.position);
         }
     }
 
     render() {
         var { data } = this.props;
         if (data && data.Access_Token) {
-            return <PrivateNavigate data={data} />
+            return <PrivateNavigate />
         }
 
         return (
