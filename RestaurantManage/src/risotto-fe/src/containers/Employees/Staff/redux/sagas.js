@@ -62,7 +62,7 @@ function* fetchAllReadyOrderDetail(action) {
         console.log(e);
     }
 }
-export default function* fetchTableSaga() {
+export default function* staffSaga() {
     yield takeLatest(REQUEST_API_TABLE_DATA, fetchAllTable);
     yield takeLatest(REQUEST_API_TABLE_BY_ID_DATA, fetchTableByID);
     yield takeLatest(REQUEST_API_FOODS_DATA, fetchAllFoods);

@@ -32,6 +32,7 @@ class Login extends Component {
         if (nextProps.data.Access_Token) {
             sessionStorage.setItem("token", nextProps.data.Access_Token);
             sessionStorage.setItem("position", nextProps.data.userInfor.position);
+            sessionStorage.setItem("name", nextProps.data.userInfor.name);
         }
     }
 
