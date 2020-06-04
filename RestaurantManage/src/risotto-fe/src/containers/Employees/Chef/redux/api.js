@@ -51,8 +51,7 @@ export const updateStatusOrderDetails = async (param) => {
     }
     try {
         const response = await fetch(API_URL + "/manage/order_detail/update/status", requestOption);
-        const data = await response.json();
-        return data;
+        return response;
     }
     catch (ex) {
         console.log(ex);
