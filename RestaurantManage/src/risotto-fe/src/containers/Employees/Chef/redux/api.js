@@ -11,7 +11,7 @@ export const getAllPendingOrder = async () => {
         redirect: 'follow',
     }
     try {
-        const response = await fetch(API_URL + "/manage/order_detail/get/PENDING", requestOption);
+        const response = await fetch(API_URL + "manage/order_detail/get/PENDING", requestOption);
         const data = await response.json();
         return data;
     } catch (ex) {
@@ -30,7 +30,7 @@ export const getAllProcessingOrder = async () => {
         redirect: 'follow',
     }
     try {
-        const response = await fetch(API_URL + "/manage/order_detail/get/PROGRESS", requestOption);
+        const response = await fetch(API_URL + "manage/order_detail/get/PROGRESS", requestOption);
         const data = await response.json();
         return data;
     } catch (ex) {
@@ -50,8 +50,29 @@ export const updateStatusOrderDetails = async (param) => {
         body: JSON.stringify(param)
     }
     try {
-        const response = await fetch(API_URL + "/manage/order_detail/update/status", requestOption);
+        const response = await fetch(API_URL + "manage/order_detail/update/status", requestOption);
         return response;
+    }
+    catch (ex) {
+        console.log(ex);
+    }
+}
+
+export const importBill = async (param) => {
+    const access_Token = 'Bearer ' + sessionStorage.getItem('token')
+    const requestOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': access_Token
+        },
+        redirect: 'follow',
+        body: JSON.stringify(param)
+    }
+    try {
+        const response = await fetch(API_URL + "manage/import_bill/add", requestOption);
+        const data = await response.json();
+        return data;
     }
     catch (ex) {
         console.log(ex);

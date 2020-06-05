@@ -28,6 +28,7 @@ class PrivateNavigate extends Component {
     onLogout = () => {
         sessionStorage.removeItem('token');
         this.setState = { access_token: null };
+        window.location.reload();
     }
 
     showByRole = (position) => {
@@ -36,6 +37,8 @@ class PrivateNavigate extends Component {
                 return <Redirect to='/staff' />
             case POSITION.CHEF:
                 return <Redirect to='/chef' />
+            case POSITION.CASHIER:
+                return <Redirect to='/cashier' />
         }
 
     }

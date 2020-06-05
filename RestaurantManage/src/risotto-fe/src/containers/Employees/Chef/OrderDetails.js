@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Label, Button, Col, Row, FormGroup, Input } from 'reactstrap';
+import { Label, Button, Col, Row, FormGroup, Input } from 'reactstrap';
 import { RESPONSE_STATUS } from '../../../models/constants';
 import { ORDER_STATUS } from './constants';
 
@@ -9,11 +9,6 @@ class OrderDetails extends Component {
         this.state = {
             isLoad: false
         }
-    }
-
-    componentWillMount() {
-        this.props.requestApiOrderPendingData();
-        this.props.requestApiOrderProcessingData();
     }
 
     componentDidUpdate() {
@@ -29,42 +24,30 @@ class OrderDetails extends Component {
     render() {
         var { dataPendingOrders, dataProcessingOrders } = this.props;
         return (
-            <div className="risotto-container">
-                <div className="form-create-bill">
-                    <Navbar color="light" expand="md">
-                        <Col>
-                            <h3 className="text-success" color="black">Đầu Bếp: {sessionStorage.getItem("name")}</h3>
-                        </Col>
-                        <Col xs="3" className="col-wrap-btn">
-                            <Button style={{ fontWeight: "bold", fontSize: "23px" }} className="text-primary" color="black">Nhập Hàng</Button>
-                        </Col>
-                    </Navbar>
-                    < Row >
-                        <Col xs="6">
-                            <h4>Danh Sách Món Ăn Đang Chờ Tiếp Nhận</h4>
-                            {dataPendingOrders && dataPendingOrders.length > 0 ?
-                                <div className="wrap-grid chef">
-                                    <div class="grid-order-pending ">
-                                        {this.showOrders(dataPendingOrders, true)}
-                                    </div>
-                                </div>
-                                : <></>
-                            }
-                        </Col>
-                        <Col xs="6">
-                            <h4>Danh Sách Món Ăn Đang Được Xử Lý</h4>
-                            {dataProcessingOrders && dataProcessingOrders.length > 0 ?
-                                <div className="wrap-grid chef">
-                                    <div class="grid-order-pending ">
-                                        {this.showOrders(dataProcessingOrders, false)}
-                                    </div>
-                                </div>
-                                : <></>
-                            }
-                        </Col >
-                    </Row >
-                </div>
-            </div >
+            < Row >
+                <Col xs="6">
+                    <h4>Danh Sách Món Ăn Đang Chờ Tiếp Nhận</h4>
+                    {dataPendingOrders && dataPendingOrders.length > 0 ?
+                        <div className="wrap-grid chef">
+                            <div class="grid-order-details">
+                                {this.showOrders(dataPendingOrders, true)}
+                            </div>
+                        </div>
+                        : <></>
+                    }
+                </Col>
+                <Col xs="6">
+                    <h4>Danh Sách Món Ăn Đang Được Xử Lý</h4>
+                    {dataProcessingOrders && dataProcessingOrders.length > 0 ?
+                        <div className="wrap-grid chef">
+                            <div class="grid-order-details">
+                                {this.showOrders(dataProcessingOrders, false)}
+                            </div>
+                        </div>
+                        : <></>
+                    }
+                </Col >
+            </Row >
         )
     }
 
