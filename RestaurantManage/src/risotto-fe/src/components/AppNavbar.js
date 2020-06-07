@@ -11,7 +11,7 @@ export default class AppNavbar extends Component {
         return <Navbar color="dark" dark expand="md">
             <Nav className="ml-auto" navbar>
                 <NavItem>
-                    <NavLink className="logout-button" onClick={onClick}>Logout</NavLink>
+                    <NavLink className="logout-button" onClick={onClick}>Đăng Xuất</NavLink>
                 </NavItem>
             </Nav>
         </Navbar >

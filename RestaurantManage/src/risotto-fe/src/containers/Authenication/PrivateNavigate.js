@@ -39,6 +39,10 @@ class PrivateNavigate extends Component {
                 return <Redirect to='/chef' />
             case POSITION.CASHIER:
                 return <Redirect to='/cashier' />
+            case POSITION.MANAGER:
+                return <Redirect to='/manager' />
+            default:
+                return <Redirect to='/login' />
         }
 
     }

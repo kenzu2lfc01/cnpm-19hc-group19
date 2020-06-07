@@ -1,45 +1,59 @@
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import '../assert/styles/style.scss'
 
 export default class LeftMenu extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            onSelect: 0,
+        }
     }
     render() {
+        var { items } = this.props;
+        var { onSelect } = this.state;
+
         return (
-            <Router>
-                <Route render={({ location, history }) => (
-                    <React.Fragment>
-                        <SideNav
-                            onSelect={(selected) => {
-                                const to = '/' + selected;
-                                if (location.pathname !== to) {
-                                    history.push(to);
-                                }
-                            }}
-                        >
-                            <SideNav.Toggle />
-                            <SideNav.Nav defaultSelected="staff">
-                                <NavItem eventKey="staff">
-                                    <NavIcon>
-                                        <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                                    </NavIcon>
-                                    <NavText>Home</NavText>
-                                </NavItem>
-                                <NavItem eventKey="devices">
-                                    <NavIcon>
-                                        <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
-                                    </NavIcon>
-                                    <NavText>Devices</NavText>
-                                </NavItem>
-                            </SideNav.Nav>
-                        </SideNav>
-                    </React.Fragment>
-                )}
-                />
-            </Router>
+            <>
+                <div class="sidebar">
+                    {this.showItems(items)}
+                </div>
+                {this.renderByItem(onSelect)}
+            </>
+        )
+    }
+
+    showItems = (items) => {
+        var { onSelect } = this.state;
+        var elements = [];
+        for (var i = 0; i < items.length; i++) {
+            let index = i;
+            if (onSelect == i) {
+                elements.push(
+                    <a className="active">{items[i]}</a>
+                )
+                continue;
+            }
+            elements.push(
+                <a onClick={() => this.onSelectItem(index)}>{items[i]}</a>
+            )
+        }
+        return elements;
+    }
+
+    renderByItem = (index) => {
+        var { ManageStaff } = this.props;
+        switch (index) {
+            case 0:
+                return <div style={{ marginLeft: "20%" }}>Thống kê doanh thu </div>
+            case 1:
+                return <ManageStaff />
+        }
+    }
+
+    onSelectItem = (index) => {
+        this.setState(
+            { onSelect: index }
         )
     }
 }
