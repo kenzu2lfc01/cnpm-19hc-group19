@@ -5,13 +5,20 @@ import '../../assert/styles/manager.scss';
 import LeftMenu from '../../components/LeftMenu'
 import { leftMenuItems } from './constants';
 import ManageStaff from './ManageStaff';
+import { requestApiGetAllStaff } from './redux/actions';
+import { connect } from 'react-redux';
 
 class ManagerHomePage extends Component {
   constructor(props) {
     super(props)
   }
 
+  componentWillMount() {
+    this.props.requestApiGetAllStaff()
+  }
+
   render() {
+    console.log(this.props.dataStaffs)
     return (
       <div className="risotto-container">
         <div className="form-create-bill">
@@ -30,5 +37,15 @@ class ManagerHomePage extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    requestApiGetAllStaff: () => dispatch(requestApiGetAllStaff()),
+  }
+}
 
-export default ManagerHomePage;
+const mapStateToProps = state => (
+  {
+    dataStaffs: state.managerReducers,
+  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManagerHomePage);

@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import {
-    REQUEST_API_TABLE_DATA, receivetApiTableData,
-    REQUEST_API_TABLE_BY_ID_DATA, receivetApiTableByIdData,
-    REQUEST_API_FOODS_DATA, receivetApiFoodData,
+    REQUEST_API_TABLE_DATA, receiveApiTableData,
+    REQUEST_API_TABLE_BY_ID_DATA, receiveApiTableByIdData,
+    REQUEST_API_FOODS_DATA, receiveApiFoodData,
     REQUEST_POST_API_ADD_ORDER, receiveApiPostAddOrder,
     REQUEST_POST_API_ADD_ORDER_DETAILS, receiveApiPostAddOrderDetails,
     REQUEST_API_ORDER_READY_DATA, receiveApiOrderReadyData
@@ -12,7 +12,7 @@ import { getAllTable, getTableById, getAllFoods, addNewOrder, addOrderDetails, g
 function* fetchAllTable(action) {
     try {
         const data = yield call(getAllTable);
-        yield put(receivetApiTableData(data));
+        yield put(receiveApiTableData(data));
     } catch (e) {
         console.log(e);
     }
@@ -21,7 +21,7 @@ function* fetchAllTable(action) {
 function* fetchTableByID(action) {
     try {
         const data = yield call(getTableById, action.payload);
-        yield put(receivetApiTableByIdData(data));
+        yield put(receiveApiTableByIdData(data));
     } catch (e) {
         console.log(e);
     }
@@ -30,7 +30,7 @@ function* fetchTableByID(action) {
 function* fetchAllFoods(action) {
     try {
         const data = yield call(getAllFoods);
-        yield put(receivetApiFoodData(data));
+        yield put(receiveApiFoodData(data));
     } catch (e) {
         console.log(e);
     }
