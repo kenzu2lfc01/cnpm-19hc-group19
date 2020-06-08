@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import '../../assert/styles/manager.scss';
 import moment from 'moment';
+import { POSITIONS } from './constants';
+import { cloneDeep } from 'lodash';
 
 export default class ManageStaff extends Component {
     constructor(props) {
@@ -17,6 +19,8 @@ export default class ManageStaff extends Component {
 
     render() {
         var { dataStaffs } = this.props;
+        var cloneDataStaffs = cloneDeep(dataStaffs);
+
         return (
             <div className="main-manage-staff">
                 <Row>
@@ -31,8 +35,8 @@ export default class ManageStaff extends Component {
                         </Row>
                         <div className="wrap-grid manage-staff">
                             <Row>
-                                {dataStaffs && dataStaffs.length > 0 ?
-                                    this.renderStaffsInformation(dataStaffs) :
+                                {cloneDataStaffs && cloneDataStaffs.length > 0 ?
+                                    this.renderStaffsInformation(cloneDataStaffs) :
                                     <></>
                                 }
                             </Row>
@@ -72,35 +76,42 @@ export default class ManageStaff extends Component {
         var { isDisable, selectedStaff } = this.state;
         return (
             <>
-                <h2>Thông tin chi tiết nhân viên: {selectedStaff.name}</h2>
+                <h2>Thông tin chi tiết nhân viên</h2>
                 <Row>
                     <FormGroup className="form-group-staff">
                         <Label>Họ và tên: </Label>
-                        <Input disabled={isDisable} value={selectedStaff.name} />
+                        <Input onChange={(e) => this.handleChange(e, 1)} type="text" disabled={isDisable} value={selectedStaff.name} />
                     </FormGroup>
                     <FormGroup className="form-group-staff">
                         <Label>Số điện thoại: </Label>
-                        <Input disabled={isDisable} value={selectedStaff.phone} />
+                        <Input disabled={isDisable} placeholder={selectedStaff.phone} />
                     </FormGroup>
-                    <FormGroup className="form-group-staff">
-                        <Label>Chức vụ: </Label>
-                        <Input disabled={isDisable} value={selectedStaff.position} />
-                    </FormGroup>
+                    {this.renderSelectRole(selectedStaff.position, isDisable)}
                     <FormGroup className="form-group-staff">
                         <Label>Ngày vào làm: </Label>
-                        <Input disabled={isDisable} value={moment(selectedStaff.joinDate).format("DD-MM-YYYY HH:mm:ss")} />
+                        <Input disabled={isDisable} placeholder={moment(selectedStaff.joinDate).format("DD-MM-YYYY HH:mm:ss")} />
                     </FormGroup>
                     <FormGroup className="form-group-staff">
                         <Label>Mức lương: </Label>
-                        <Input disabled={isDisable} value={selectedStaff.salary} />
+                        <Input disabled={isDisable} placeholder={selectedStaff.salary} />
                     </FormGroup>
                     <FormGroup className="form-group-staff">
                         <Label>Phụ Cấp: </Label>
-                        <Input disabled={isDisable} value={selectedStaff.allowance} />
+                        <Input disabled={isDisable} placeholder={selectedStaff.allowance} />
+                    </FormGroup>
+                </Row>
+                <Row>
+                    <FormGroup className="form-group-staff">
+                        <Button onClick={() => this.onSwitchEditStaff()} className="button-edit-delete" color="success">Chỉnh Sửa Nhân Viên</Button>
                     </FormGroup>
                     <FormGroup className="form-group-staff">
+                        <Button className="button-edit-delete" color="danger">Xóa Nhân Viên</Button>
+                    </FormGroup>
+                </Row>
+                <Row>
+                    <FormGroup className="form-group-staff">
                         <Label>Tài khoản đăng nhập: </Label>
-                        <Input disabled={isDisable} value={selectedStaff.account.username} />
+                        <Input disabled={isDisable} placeholder={selectedStaff.account.username} />
                     </FormGroup>
                     {!isDisable ?
                         <FormGroup className="form-group-staff">
@@ -112,14 +123,55 @@ export default class ManageStaff extends Component {
                 </Row>
                 <Row>
                     <FormGroup className="form-group-staff">
-                        <Button onClick={() => this.onSwitchEditStaff()} className="button-edit-delete" color="success">Chỉnh Sửa Nhân Viên</Button>
-                    </FormGroup>
-                    <FormGroup className="form-group-staff">
-                        <Button className="button-edit-delete" color="danger">Xóa Nhân Viên</Button>
+                        <Button className="button-edit-delete" color="success">Chỉnh Sửa Tài Khoản</Button>
                     </FormGroup>
                 </Row>
             </>
         )
+    }
+
+    handleChange(event, type) {
+        var { selectedStaff } = this.state;
+        switch (type) {
+            case 1:
+                selectedStaff.name = event.target.value;
+                break;
+            case 2:
+                selectedStaff.phone = event.target.value;
+                break;
+            case 3:
+                selectedStaff.position = event.target.value;
+                break;
+            case 4:
+                selectedStaff.salary = event.target.value;
+                break;
+            case 5:
+                selectedStaff.allowance = event.target.value;
+                break;
+        }
+        this.setState(selectedStaff)
+    }
+
+    renderSelectRole = (position, isDisable) => {
+        var options = [];
+        for (let item of POSITIONS) {
+            if (position == item.eng) {
+                options.push(
+                    <option selected value={item.eng}>{item.viet}</option>
+                )
+            }
+            options.push(
+                <option value={item.eng}>{item.viet}</option>
+            )
+        }
+        return (
+            <FormGroup className="form-group-staff">
+                <Label>Chức vụ: </Label>
+                <Input type="select" disabled={isDisable} >
+                    {options}
+                </Input>
+            </FormGroup>
+        );
     }
 
     onSwitchEditStaff = () => {

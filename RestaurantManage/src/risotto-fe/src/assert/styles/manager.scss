@@ -33,8 +33,13 @@
 
 .form-group-staff {
     width: 40%;
+
+    &.btn-edit-account {
+        text-align: center;
+    }
 }
 
 .button-edit-delete {
     width: 100%;
+
 }
