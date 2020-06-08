@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.MANAGER;
+
 @RestController
 @RequestMapping("/manage/account")
 public class AccountResource {
@@ -22,7 +24,7 @@ public class AccountResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/update")
     public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody AccountCommand.Update command){
         try {

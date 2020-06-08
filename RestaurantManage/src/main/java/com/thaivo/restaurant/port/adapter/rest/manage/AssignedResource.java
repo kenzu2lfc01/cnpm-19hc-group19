@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.MANAGER;
+
 @RestController
 @RequestMapping("/manage/assigned")
 public class AssignedResource {
@@ -22,7 +24,7 @@ public class AssignedResource {
         this.assignedApplication = assignedApplication;
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody AssignedCommand.Create command){
         try {
@@ -36,7 +38,7 @@ public class AssignedResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/update")
     public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody AssignedCommand.Update command){
         try {
@@ -50,7 +52,7 @@ public class AssignedResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
@@ -64,7 +66,7 @@ public class AssignedResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/get/staff/{staffId}")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @PathVariable String staffId){
         try {
@@ -78,7 +80,7 @@ public class AssignedResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/get/dow/{dayOfWeek}")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @PathVariable Assigned.DayOfWeek dayOfWeek){
         try {

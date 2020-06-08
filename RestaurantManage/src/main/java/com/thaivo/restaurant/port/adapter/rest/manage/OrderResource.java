@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.MANAGER;
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.SERVE;
+
 @RestController
 @RequestMapping("/manage/order")
 public class OrderResource {
@@ -22,7 +25,7 @@ public class OrderResource {
         this.orderApplication = orderApplication;
     }
 
-    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
+    @Authentication(positions = { SERVE, MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody OrderCommand.Create command) {
         try {
@@ -39,7 +42,7 @@ public class OrderResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
+    @Authentication(positions = { SERVE, MANAGER })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @ModelAttribute OrderCommand.Get command) {
         try {
@@ -55,7 +58,7 @@ public class OrderResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
+    @Authentication(positions = { SERVE, MANAGER })
     @GetMapping("/get/{id}")
     public ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id) {
         try {

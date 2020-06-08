@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.MANAGER;
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.SERVE;
+
 @RestController
 @RequestMapping("/manage/order_detail")
 public class OrderDetailResource {
@@ -24,7 +27,7 @@ public class OrderDetailResource {
         this.orderDetailApplication = orderDetailApplication;
     }
 
-    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
+    @Authentication(positions = { SERVE, MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody OrderDetailCommand.Create command) {
         try {
@@ -38,7 +41,7 @@ public class OrderDetailResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
+    @Authentication(positions = { SERVE, MANAGER })
     @PostMapping("/addList")
     public ResponseEntity<Object> addList(@RequestHeader(name="Authorization") String token, @RequestBody List<OrderDetailCommand.Create> command) {
         try {
@@ -54,7 +57,7 @@ public class OrderDetailResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
+    @Authentication(positions = { SERVE, MANAGER })
     @PostMapping("/update/amount")
     public ResponseEntity<Object> updateAmount(@RequestHeader(name="Authorization") String token, @RequestBody OrderDetailCommand.UpdateAmount command) {
         try {
@@ -69,7 +72,7 @@ public class OrderDetailResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.CHEF, Staff.Position.SERVE, Staff.Position.MANAGER })
+    @Authentication(positions = { Staff.Position.CHEF, SERVE, MANAGER })
     @PostMapping("/update/status")
     public ResponseEntity<Object> updateStatus(@RequestHeader(name="Authorization") String token, @RequestBody OrderDetailCommand.UpdateStatus command) {
         try {
@@ -84,7 +87,7 @@ public class OrderDetailResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.SERVE, Staff.Position.MANAGER })
+    @Authentication(positions = { SERVE, MANAGER })
     @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id) {
         try {
@@ -99,7 +102,7 @@ public class OrderDetailResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.CHEF, Staff.Position.SERVE, Staff.Position.MANAGER })
+    @Authentication(positions = { Staff.Position.CHEF, SERVE, MANAGER })
     @GetMapping("/get/{status}")
     public ResponseEntity<Object> getCurrentByStatus(@RequestHeader(name="Authorization") String token, @PathVariable OrderDetail.Status status) {
         try {

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.MANAGER;
+
 @RestController
 @RequestMapping("/manage/food")
 public class FoodResource {
@@ -23,7 +25,7 @@ public class FoodResource {
         this.foodApplication = foodApplication;
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody FoodCommand.Create command){
         try {
@@ -37,7 +39,7 @@ public class FoodResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/update")
     public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody FoodCommand.Update command){
         try {
@@ -51,7 +53,7 @@ public class FoodResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
@@ -65,7 +67,7 @@ public class FoodResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER, Staff.Position.SERVE, Staff.Position.CHEF })
+    @Authentication(positions = { MANAGER, Staff.Position.SERVE, Staff.Position.CHEF })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token){
         try {

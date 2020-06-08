@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.CHEF;
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.MANAGER;
+
 @RestController
 @RequestMapping("manage/import_bill")
 public class ImportBillResource {
@@ -23,7 +26,7 @@ public class ImportBillResource {
         this.importBillApplication = importBillApplication;
     }
 
-    @Authentication(positions = { Staff.Position.CHEF, Staff.Position.MANAGER })
+    @Authentication(positions = { CHEF, MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody ImportBillCommand.Create command){
         try {
@@ -39,7 +42,7 @@ public class ImportBillResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER, Staff.Position.CHEF })
+    @Authentication(positions = { MANAGER, CHEF })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @ModelAttribute ImportBillCommand.GetByTime command){
         try {
@@ -54,7 +57,7 @@ public class ImportBillResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.CHEF, Staff.Position.MANAGER })
+    @Authentication(positions = { CHEF, MANAGER })
     @GetMapping("/get/{staffId}")
     public ResponseEntity<Object> getByStaff(@RequestHeader(name="Authorization") String token, @PathVariable String staffId){
         try {

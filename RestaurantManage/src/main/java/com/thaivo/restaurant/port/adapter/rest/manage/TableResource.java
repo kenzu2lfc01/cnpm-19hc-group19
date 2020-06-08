@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.*;
+
 @RestController
 @RequestMapping("/manage/table")
 public class TableResource {
@@ -24,7 +26,7 @@ public class TableResource {
     }
 
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/add")
     ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody TableCommand.Create command){
         try {
@@ -37,7 +39,7 @@ public class TableResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/update")
     ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody TableCommand.Update command){
         try {
@@ -50,7 +52,7 @@ public class TableResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/delete/{id}")
     ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
@@ -63,7 +65,7 @@ public class TableResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER, CASHIER, SERVE })
     @GetMapping("/get")
     ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @RequestParam(required = false) RTable.Status status){
         try {
@@ -79,7 +81,7 @@ public class TableResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER, CASHIER, SERVE })
     @GetMapping("/get/{id}")
     ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.MANAGER;
+
 @RestController
 @RequestMapping("/manage/staff")
 public class StaffResource {
@@ -22,7 +24,7 @@ public class StaffResource {
         this.staffApplication = staffApplication;
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody StaffCommand.Create command){
         try {
@@ -36,7 +38,7 @@ public class StaffResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/update")
     public ResponseEntity<Object> update(@RequestHeader(name="Authorization") String token, @RequestBody StaffCommand.Update command){
         try {
@@ -50,7 +52,7 @@ public class StaffResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {
@@ -64,7 +66,7 @@ public class StaffResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token){
         try {
@@ -78,7 +80,7 @@ public class StaffResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/get/{id}")
     public ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {

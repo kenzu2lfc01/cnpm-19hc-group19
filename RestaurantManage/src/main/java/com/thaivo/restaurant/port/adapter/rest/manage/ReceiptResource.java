@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.CASHIER;
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.MANAGER;
+
 @RestController
 @RequestMapping("/manage/receipt")
 public class ReceiptResource {
@@ -21,7 +24,7 @@ public class ReceiptResource {
         this.receiptApplication = receiptApplication;
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER, Staff.Position.CASHIER })
+    @Authentication(positions = { MANAGER, CASHIER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody ReceiptCommand.Create command){
         try {
@@ -37,7 +40,7 @@ public class ReceiptResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER, Staff.Position.CASHIER })
+    @Authentication(positions = { MANAGER, CASHIER })
     @GetMapping("/get")
     public ResponseEntity<Object> get(@RequestHeader(name="Authorization") String token, @ModelAttribute ReceiptCommand.GetByTime command){
         try {
@@ -51,7 +54,7 @@ public class ReceiptResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER, Staff.Position.CASHIER })
+    @Authentication(positions = { MANAGER, CASHIER })
     @GetMapping("/get/{id}")
     public ResponseEntity<Object> getById(@RequestHeader(name="Authorization") String token, @PathVariable String id){
         try {

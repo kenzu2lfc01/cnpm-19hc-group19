@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.thaivo.restaurant.domain.model.staff.Staff.Position.MANAGER;
+
 @RestController
 @RequestMapping("/manage/payroll")
 public class PayrollResource {
@@ -23,7 +25,7 @@ public class PayrollResource {
         this.payrollApplication = payrollApplication;
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestHeader(name="Authorization") String token, @RequestBody PayrollCommand.Create command){
         try {
@@ -37,7 +39,7 @@ public class PayrollResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/getByStaff/{staffId}")
     public ResponseEntity<Object> getByStaff(@RequestHeader(name="Authorization") String token, @PathVariable String staffId){
         try {
@@ -51,7 +53,7 @@ public class PayrollResource {
         }
     }
 
-    @Authentication(positions = { Staff.Position.MANAGER })
+    @Authentication(positions = { MANAGER })
     @GetMapping("/getByTime")
     public ResponseEntity<Object> getByTime(@RequestHeader(name="Authorization") String token, @ModelAttribute PayrollCommand.GetByTime command){
         try {
