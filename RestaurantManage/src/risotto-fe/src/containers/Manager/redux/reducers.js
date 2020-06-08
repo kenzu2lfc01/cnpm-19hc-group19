@@ -5,7 +5,7 @@ import {
 export const managerReducers = (state = {}, { type, data }) => {
     switch (type) {
         case RECEIVE_API_GET_ALL_STAFF:
-            return data;
+            return [...data];
         default:
             return state;
     }

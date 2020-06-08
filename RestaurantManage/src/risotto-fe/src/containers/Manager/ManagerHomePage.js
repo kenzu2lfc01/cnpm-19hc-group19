@@ -3,7 +3,6 @@ import '../../App.css';
 import { Navbar, Col } from 'reactstrap';
 import '../../assert/styles/manager.scss';
 import LeftMenu from '../../components/LeftMenu'
-import { leftMenuItems } from './constants';
 import ManageStaff from './ManageStaff';
 import { requestApiGetAllStaff } from './redux/actions';
 import { connect } from 'react-redux';
@@ -18,7 +17,6 @@ class ManagerHomePage extends Component {
   }
 
   render() {
-    console.log(this.props.dataStaffs)
     return (
       <div className="risotto-container">
         <div className="form-create-bill">
@@ -28,14 +26,55 @@ class ManagerHomePage extends Component {
             </Col>
           </Navbar>
           <LeftMenu
-            items={leftMenuItems}
-            ManageStaff={ManageStaff}
+            items={this.getLeftItems()}
           />
-
         </div>
       </div >
     );
   }
+
+  getLeftItems = () => {
+    var { dataStaffs } = this.props;
+    return [
+      {
+        name: "Thống Kê Doanh Thu",
+        component: <div style={{ marginLeft: "16%" }}>Đây là thống kê doanh thu</div>
+      },
+      {
+        name: "Quản lý nhân viên",
+        component: <ManageStaff dataStaffs={dataStaffs} />
+      },
+      {
+        name: "Quản lý bàn ăn",
+        component: null
+      },
+      {
+        name: "Quản lý món ăn",
+        component: null
+      },
+      {
+        name: "Quản lý phiếu nhập",
+        component: null
+      },
+      {
+        name: "Quản lý đơn hàng",
+        component: null
+      },
+      {
+        name: "Quản lý hóa đơn",
+        component: null
+      },
+      {
+        name: "Phân công ca làm",
+        component: null
+      },
+      {
+        name: "Bảng lương nhân viên",
+        component: null
+      },
+    ];
+  }
+
 }
 const mapDispatchToProps = dispatch => {
   return {
