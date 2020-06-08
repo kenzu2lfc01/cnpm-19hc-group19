@@ -23,7 +23,7 @@ const CashierHomePage = (props) => {
 
                 <Row style={{height: 'calc(100% - 57px)'}}>
                     <Col xs="7" style={{height: '100%', position: 'relative'}}>
-                        <ListTable onClick={onClickTable}/>
+                        <ListTable onClick={onClickTable} selected={selectedTable}/>
                     </Col>
                     <Col xs="5">
                         <BillTable tableId={selectedTable} onPayment={onPaymentTable}/>

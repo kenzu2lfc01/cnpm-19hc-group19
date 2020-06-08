@@ -5,17 +5,17 @@ import RisottoCard from '../../../components/RisottoCard';
 
 const imageTableURL = "https://i0.wp.com/s1.uphinh.org/2020/05/17/15896858521709058.png"; 
 
-const ListTable = ({onClick}) => { 
+const ListTable = ({onClick, selected}) => { 
    const dispatch = useDispatch();
    const tableListResponse = useSelector(state => state.tableListResponse);
 
     useEffect(() => {
         dispatch(requestApiAllTable());
-    }, [])
+    }, [selected])
  
 
     return (
-        <div style={{height: '100%', overflowY: 'scroll', padding: 10, boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
+        <div style={{height: '100%', overflowY: 'auto', padding: 10, boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
             { 
                 tableListResponse.map(table => 
                     <RisottoCard 
