@@ -31,6 +31,7 @@ public class OrderDetailService {
     }
 
     public Double getTotalPrice(String orderId){
-        return repository.getTotalPrice(orderId);
+        Double price = repository.getTotalPrice(orderId);
+        return price == null? 0 : price;
     }
 }
