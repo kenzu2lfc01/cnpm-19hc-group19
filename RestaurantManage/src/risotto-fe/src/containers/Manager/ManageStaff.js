@@ -18,6 +18,7 @@ export default class ManageStaff extends Component {
                     position: POSITIONS[0].eng
                 },
                 isDisable: true,
+                isAccountDisable: true,
                 isShowModal: false,
                 isShowConfirmModal: false
             }
@@ -190,7 +191,7 @@ export default class ManageStaff extends Component {
     }
 
     renderStaffDetailInformation = () => {
-        var { isDisable, selectedStaff } = this.state;
+        var { isDisable, selectedStaff, isAccountDisable } = this.state;
         return (
             <>
                 <h2>Thông tin chi tiết nhân viên</h2>
@@ -239,23 +240,41 @@ export default class ManageStaff extends Component {
                 <Row>
                     <FormGroup className="form-group-staff">
                         <Label>Tài khoản đăng nhập: </Label>
-                        <Input disabled={isDisable} placeholder={selectedStaff.account.username} />
+                        <Input disabled={isAccountDisable} placeholder={selectedStaff.account.username} />
                     </FormGroup>
-                    {/* {!isDisable ?
+                    {!isAccountDisable ?
                         <FormGroup className="form-group-staff">
                             <Label>Mật khẩu: </Label>
                             <Input type="password" />
                         </FormGroup> :
                         <></>
-                    } */}
+                    }
                 </Row>
                 <Row>
-                    <FormGroup className="form-group-staff">
-                        <Button className="button-edit-delete" color="success">Chỉnh Sửa Tài Khoản</Button>
-                    </FormGroup>
+                    {
+                        isAccountDisable ?
+                            <FormGroup className="form-group-staff">
+                                <Button onClick={() => this.onEditAcount()} className="button-edit-delete" color="success">Chỉnh Sửa Tài Khoản</Button>
+                            </FormGroup> :
+                            <div>
+                                <FormGroup className="form-group-staff">
+                                    <Button className="button-edit-delete" color="success">Xác Nhận</Button>
+                                </FormGroup>
+                                <FormGroup className="form-group-staff">
+                                    <Button className="button-edit-delete" color="danger">Hủy Bỏ</Button>
+                                </FormGroup>
+                            </div>
+                    }
                 </Row>
             </>
         )
+    }
+
+    onEditAcount = () => {
+        var { isAccountDisable } = this.state;
+        this.setState({
+            isAccountDisable: !isAccountDisable
+        })
     }
 
     onShowModalConfrim = () => {
