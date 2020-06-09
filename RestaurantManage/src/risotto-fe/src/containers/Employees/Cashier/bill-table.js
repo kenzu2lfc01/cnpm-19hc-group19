@@ -19,6 +19,7 @@ const calcTotalPrice = (tableDetail) => {
 }
 
 const BillTable = ({ tableId, onPayment }) => {
+    const [isRequest, setIsRequest] = useState(false);
     const [isOpenModel, setIsOpenModel] = useState(false);
     const [surcharge, setSurcharge] = useState(0);
     const tableDetail = useSelector(state => state.tableDetailResponse);
@@ -28,7 +29,8 @@ const BillTable = ({ tableId, onPayment }) => {
     useEffect(() => {
         if(receiptResponse.id){
             setIsOpenModel(false);
-            onPayment(tableId); 
+            onPayment(tableId);
+            setIsRequest(false);
         }
     },[receiptResponse])
 
@@ -45,6 +47,7 @@ const BillTable = ({ tableId, onPayment }) => {
     }
 
     const onSubmitBill = () => {
+        setIsRequest(true);
         let data = { tableId, surcharge };
         dispatch(requestApiCreateReceipt(data));
     }
@@ -161,7 +164,7 @@ const BillTable = ({ tableId, onPayment }) => {
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button color="primary" onClick={onSubmitBill}>
+                    <Button color="primary" onClick={onSubmitBill} disabled={isRequest}>
                         Xác nhận thanh toán
                     </Button>{' '}
                     <Button color="secondary" onClick={() => setIsOpenModel(false)}>Quay lại</Button>
