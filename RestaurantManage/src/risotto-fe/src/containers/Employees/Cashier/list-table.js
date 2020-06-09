@@ -17,7 +17,11 @@ const ListTable = ({onClick, selected}) => {
     return (
         <div style={{height: '100%', overflowY: 'auto', padding: 10, boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
             { 
-                tableListResponse.map(table => 
+                tableListResponse.sort((a,b) => {
+                    a = a.name.split(" ").pop();
+                    b = b.name.split(" ").pop();
+                    return new Number(a) - new Number(b);
+                }).map(table => 
                     <RisottoCard 
                         key={table.id}
                         onClick={() => onClick(table.id)}

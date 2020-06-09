@@ -3,7 +3,7 @@ import { requestApiTableById, requestApiCreateReceipt } from './redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, FormGroup, Row, Label, Input, Col, Button,
     Table, Modal, ModalHeader, ModalBody, ModalFooter,
-    Alert
+    Spinner
 } from 'reactstrap';
 
 
@@ -84,20 +84,20 @@ const BillTable = ({ tableId, onPayment }) => {
                 <Table style={{tableLayout: 'fixed'}}>
                     <thead>
                     <tr style={{tableLayout: 'fixed', display: 'table', width: '100%'}}>
-                        <th width='50'>STT</th>
+                        <th style={{width: 50, textAlign: "center"}}>STT</th>
                         <th>Món ăn</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
+                        <th style={{width: 100, textAlign: "center"}}>Số lượng</th>
+                        <th style={{width: 100, textAlign: "center"}}>Đơn giá</th>
                     </tr>
                     </thead>    
-                    <tbody style={{maxHeight: 350, overflowY: 'auto', display: 'block'}}>  
+                    <tbody style={{maxHeight: 300, overflowY: 'auto', display: 'block'}}>  
                         {
                             tableDetail.lastOrder.orderDetails.map((order, index) => (
                                 <tr  style={{tableLayout: 'fixed', display: 'table', width: '100%'}}>
-                                    <td  width='50'>{index}</td>
+                                    <td style={{width: 50, textAlign: "center"}}>{index+1}</td>
                                     <td>{order.food.name}</td>
-                                    <td>{order.amount}</td>
-                                    <td>{order.price}</td> 
+                                    <td style={{width: 100, textAlign: "center"}}>{order.amount}</td>
+                                    <td style={{width: 100, textAlign: "center"}}>{order.price}</td> 
                                 </tr>
                             ))
                         }
@@ -128,23 +128,23 @@ const BillTable = ({ tableId, onPayment }) => {
 
                 <ModalBody >
                     <div> 
-                        <Table style={{ tableLayout: 'fixed', minHeight: '50vh'}}>
+                        <Table style={{ tableLayout: 'fixed', height: '50vh'}}>
                             <thead>
                             <tr style={{tableLayout: 'fixed', display: 'table', width: '100%'}}>
-                                <th  width='100'>STT</th>
+                                <th  style={{width: 100, textAlign: "center"}}>STT</th>
                                 <th>Món ăn</th>
-                                <th>Số lượng</th>
-                                <th>Đơn giá</th>
+                                <th style={{width: 100, textAlign: "center"}}>Số lượng</th>
+                                <th style={{width: 100, textAlign: "center"}}>Đơn giá</th>
                             </tr>
                             </thead>    
                             <tbody style={{maxHeight: 350, overflowY: 'auto', display: 'block'}}>  
                                 {
                                     tableDetail.lastOrder.orderDetails.map((order, index) => (
                                         <tr  style={{tableLayout: 'fixed', display: 'table', width: '100%'}}>
-                                            <td  width='100'>{index}</td>
+                                            <td  style={{width: 100, textAlign: "center"}}>{index+1}</td>
                                             <td>{order.food.name}</td>
-                                            <td>{order.amount}</td>
-                                            <td>{order.price}</td> 
+                                            <td style={{width: 100, textAlign: "center"}}>{order.amount}</td>
+                                            <td style={{width: 100, textAlign: "center"}}>{order.price}</td> 
                                         </tr>
                                     ))
                                 }
@@ -161,7 +161,9 @@ const BillTable = ({ tableId, onPayment }) => {
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button color="primary" onClick={onSubmitBill}>Xác nhận thanh toán</Button>{' '}
+                    <Button color="primary" onClick={onSubmitBill}>
+                        Xác nhận thanh toán
+                    </Button>{' '}
                     <Button color="secondary" onClick={() => setIsOpenModel(false)}>Quay lại</Button>
                 </ModalFooter>
             </Modal>
