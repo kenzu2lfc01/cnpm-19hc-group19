@@ -20,7 +20,8 @@ export default class ManageStaff extends Component {
                 isDisable: true,
                 isAccountDisable: true,
                 isShowModal: false,
-                isShowConfirmModal: false
+                isShowConfirmModal: false,
+                password: ""
             }
         }
 
@@ -240,12 +241,12 @@ export default class ManageStaff extends Component {
                 <Row>
                     <FormGroup className="form-group-staff">
                         <Label>Tài khoản đăng nhập: </Label>
-                        <Input disabled={isAccountDisable} placeholder={selectedStaff.account.username} />
+                        <Input onChange={(e) => this.handleChange(e, 6)} disabled={isAccountDisable} value={selectedStaff.account.username} />
                     </FormGroup>
                     {!isAccountDisable ?
                         <FormGroup className="form-group-staff">
                             <Label>Mật khẩu: </Label>
-                            <Input type="password" />
+                            <Input onChange={(e) => this.handleChange(e, 7)} type="password" />
                         </FormGroup> :
                         <></>
                     }
@@ -254,26 +255,37 @@ export default class ManageStaff extends Component {
                     {
                         isAccountDisable ?
                             <FormGroup className="form-group-staff">
-                                <Button onClick={() => this.onEditAcount()} className="button-edit-delete" color="success">Chỉnh Sửa Tài Khoản</Button>
+                                <Button onClick={() => this.onEditAcount(false, false)} className="button-edit-delete" color="success">Chỉnh Sửa Tài Khoản</Button>
                             </FormGroup> :
-                            <div>
+                            <>
                                 <FormGroup className="form-group-staff">
-                                    <Button className="button-edit-delete" color="success">Xác Nhận</Button>
+                                    <Button onClick={() => this.onEditAcount(true, true)} className="button-edit-delete" color="success">Xác Nhận</Button>
                                 </FormGroup>
                                 <FormGroup className="form-group-staff">
-                                    <Button className="button-edit-delete" color="danger">Hủy Bỏ</Button>
+                                    <Button onClick={() => this.onEditAcount(true, false)} className="button-edit-delete" color="danger">Hủy Bỏ</Button>
                                 </FormGroup>
-                            </div>
+                            </>
                     }
                 </Row>
             </>
         )
     }
 
-    onEditAcount = () => {
-        var { isAccountDisable } = this.state;
+    onEditAcount = (isDisable, isEdit) => {
+        if (isEdit) {
+            var { requestApiUpdateAccount } = this.props;
+            var { selectedStaff, password } = this.state;
+
+            requestApiUpdateAccount(
+                {
+                    id: selectedStaff.account.id,
+                    username: selectedStaff.account.username,
+                    password
+                }
+            )
+        }
         this.setState({
-            isAccountDisable: !isAccountDisable
+            isAccountDisable: isDisable
         })
     }
 
@@ -307,7 +319,7 @@ export default class ManageStaff extends Component {
     }
 
     handleChange(event, type) {
-        var { selectedStaff } = this.state;
+        var { selectedStaff, password } = this.state;
 
         switch (type) {
             case 1:
@@ -325,8 +337,14 @@ export default class ManageStaff extends Component {
             case 5:
                 selectedStaff.allowance = event.target.value;
                 break;
+            case 6:
+                selectedStaff.account.username = event.target.value;
+                break;
+            case 7:
+                password = event.target.value;
+                break;
         }
-        this.setState(selectedStaff)
+        this.setState({ selectedStaff, password })
     }
 
     renderSelectRole = (position) => {

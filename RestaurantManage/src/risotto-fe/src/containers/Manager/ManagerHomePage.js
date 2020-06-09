@@ -6,7 +6,8 @@ import LeftMenu from '../../components/LeftMenu'
 import ManageStaff from './ManageStaff';
 import {
   requestApiGetAllStaff, requestApiUpdateStaff,
-  requestApiAddStaff, requestApiDeleteStaff
+  requestApiAddStaff, requestApiDeleteStaff,
+  requestApiUpdateAccount
 } from './redux/actions';
 import { connect } from 'react-redux';
 
@@ -39,7 +40,8 @@ class ManagerHomePage extends Component {
   getLeftItems = () => {
     var { dataStaffs, requestApiUpdateStaff,
       requestApiGetAllStaff, requestApiAddStaff,
-      requestApiDeleteStaff } = this.props;
+      requestApiDeleteStaff,
+      requestApiUpdateAccount } = this.props;
     return [
       {
         name: "Thống Kê Doanh Thu",
@@ -53,6 +55,7 @@ class ManagerHomePage extends Component {
           requestApiUpdateStaff={requestApiUpdateStaff}
           requestApiAddStaff={requestApiAddStaff}
           requestApiDeleteStaff={requestApiDeleteStaff}
+          requestApiUpdateAccount={requestApiUpdateAccount}
         />
       },
       {
@@ -93,6 +96,7 @@ const mapDispatchToProps = dispatch => {
     requestApiUpdateStaff: (payload) => dispatch(requestApiUpdateStaff(payload)),
     requestApiAddStaff: (payload) => dispatch(requestApiAddStaff(payload)),
     requestApiDeleteStaff: (payload) => dispatch(requestApiDeleteStaff(payload)),
+    requestApiUpdateAccount: (payload) => dispatch(requestApiUpdateAccount(payload)),
   }
 }
 
@@ -102,6 +106,7 @@ const mapStateToProps = state => (
     dataUpdateStaff: state.managerReducers,
     managerReducers: state.managerReducers,
     deleteMessage: state.managerReducers,
+    updateAccountData: state.managerReducers,
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManagerHomePage);
