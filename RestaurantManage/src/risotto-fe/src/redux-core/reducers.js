@@ -5,13 +5,15 @@ import { dataTables, dataTable, dataFoods, dataOrderDetails, dataOrderBasic, dat
 import { dataPendingOrders, dataProcessingOrders, dataUpdateOrders, dataImportBill } from "../containers/Employees/Chef/redux/reducers";
 import { managerReducers } from '../containers/Manager/redux/reducers';
 import {tableListResponse, tableDetailResponse, createReceiptResponse} from '../containers/Employees/Cashier/redux/reducer'
+import { aggregateAllTimeResponse, aggregateByTimeResponse } from '../containers/Manager/aggregate/redux/reducers'
 
 const rootReducer = combineReducers({
     loginReduder, dataTables, dataTable, dataFoods,
     dataOrderBasic, dataOrderDetails, dataOrderDetailReady,
     dataPendingOrders, dataProcessingOrders, dataUpdateOrders,
     dataImportBill, managerReducers,
-    tableListResponse, tableDetailResponse, createReceiptResponse
+    tableListResponse, tableDetailResponse, createReceiptResponse,
+    aggregateAllTimeResponse, aggregateByTimeResponse
 })
 
 export default rootReducer;

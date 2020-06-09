@@ -6,6 +6,7 @@ import LeftMenu from '../../components/LeftMenu'
 import ManageStaff from './ManageStaff';
 import { requestApiGetAllStaff } from './redux/actions';
 import { connect } from 'react-redux';
+import Aggregate from './aggregate/aggregate';
 
 class ManagerHomePage extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class ManagerHomePage extends Component {
     return [
       {
         name: "Thống Kê Doanh Thu",
-        component: <div style={{ marginLeft: "16%" }}>Đây là thống kê doanh thu</div>
+        component: <Aggregate />
       },
       {
         name: "Quản lý nhân viên",

@@ -4,6 +4,7 @@ import staffSaga from '../containers/Employees/Staff/redux/sagas'
 import chefSaga from '../containers/Employees/Chef/redux/sagas'
 import managerSaga from '../containers/Manager/redux/sagas'
 import cashierSaga from '../containers/Employees/Cashier/redux/sagas'
+import aggregateSaga from '../containers/Manager/aggregate/redux/sagas'
 
 export default function* rootSaga() {
     yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
         fork(chefSaga),
         fork(managerSaga),
         fork(cashierSaga),
+        fork(aggregateSaga)
     ]);
 }

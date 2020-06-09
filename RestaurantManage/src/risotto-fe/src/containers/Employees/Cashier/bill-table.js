@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { requestApiTableById, requestApiCreateReceipt } from './redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, FormGroup, Row, Label, Input, Col, Button,
-    Table, Modal, ModalHeader, ModalBody, ModalFooter,
-    Spinner
+    Table, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 
 
@@ -72,7 +71,7 @@ const BillTable = ({ tableId, onPayment }) => {
                         <Input readOnly value={tableDetail.status}></Input>
                     </FormGroup>
                     <FormGroup style={{ width: "45%" }}>
-                        <Label>No order add table</Label> 
+                        <Label>Bàn này đang trống</Label>
                     </FormGroup>
                 </Row>
             </Form>
