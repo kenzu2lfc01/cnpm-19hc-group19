@@ -18,7 +18,7 @@ export default class LeftMenu extends Component {
                 <div class="sidebar">
                     {this.showItems(items)}
                 </div>
-                {this.renderByItem(onSelect)}
+                {items[onSelect].component}
             </>
         )
     }
@@ -30,25 +30,15 @@ export default class LeftMenu extends Component {
             let index = i;
             if (onSelect == i) {
                 elements.push(
-                    <a className="active">{items[i]}</a>
+                    <a className="active">{items[i].name}</a>
                 )
                 continue;
             }
             elements.push(
-                <a onClick={() => this.onSelectItem(index)}>{items[i]}</a>
+                <a onClick={() => this.onSelectItem(index)}>{items[i].name}</a>
             )
         }
         return elements;
-    }
-
-    renderByItem = (index) => {
-        var { ManageStaff } = this.props;
-        switch (index) {
-            case 0:
-                return <div style={{ marginLeft: "20%" }}>Thống kê doanh thu </div>
-            case 1:
-                return <ManageStaff />
-        }
     }
 
     onSelectItem = (index) => {

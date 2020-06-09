@@ -1,6 +1,6 @@
 .main-manage-staff {
-    margin-left: 15%;
     padding-top: 1%;
+    margin-left: 205px
 }
 
 .wrap-grid {
@@ -11,6 +11,35 @@
     margin: 2% 0% 0% 0%;
 
     &.manage-staff {
-        height: 65vh;
+        height: 60vh;
     }
+}
+
+.card {
+    &.staff-infor {
+        height: 10rem;
+        width: 11rem;
+        margin: 0% 0% 1% 1%;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.active {
+        background-color: skyblue;
+    }
+}
+
+.form-group-staff {
+    width: 40%;
+
+    &.btn-edit-account {
+        text-align: center;
+    }
+}
+
+.button-edit-delete {
+    width: 100%;
+
 }
