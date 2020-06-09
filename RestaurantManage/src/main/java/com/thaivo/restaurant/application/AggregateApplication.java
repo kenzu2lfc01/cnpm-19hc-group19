@@ -59,7 +59,7 @@ public class AggregateApplication {
             result.add(Aggregate.builder()
                     .label(DateTimeFormat.forPattern("dd/MM/yyyy").print(from))
                     .totalImport(totalImport)
-                    .totalSalary(null)
+                    .totalSalary(0d)
                     .totalReceipt(totalReceipt)
                     .totalProfit(totalReceipt - totalImport)
                     .build());
@@ -68,7 +68,59 @@ public class AggregateApplication {
         return result;
     }
 
+    public List<Aggregate> getLast7month(){
+        List<Aggregate> result = new ArrayList<>();
 
+
+        DateTime date = DateTime.now().withDayOfMonth(1).minusMonths(6).withTimeAtStartOfDay();
+
+        for(int i = 0; i < 7; ++i) {
+            long from = date.getMillis();
+            date = date.plusMonths(1);
+            long to = date.getMillis() - 1;
+
+            double totalImport = importBillService.getTotalCostByTime(from, to);
+            double totalReceipt = receiptService.getTotalCostByTime(from, to);
+            double totalSalary = payrollService.getTotalSalaryByTime(from, to);
+
+            result.add(Aggregate.builder()
+                    .label(DateTimeFormat.forPattern("MM/yyyy").print(from))
+                    .totalImport(totalImport)
+                    .totalSalary(totalSalary)
+                    .totalReceipt(totalReceipt)
+                    .totalProfit(totalReceipt - totalImport - totalSalary)
+                    .build());
+        }
+
+        return result;
+    }
+
+    public List<Aggregate> getLast7year(){
+        List<Aggregate> result = new ArrayList<>();
+
+
+        DateTime date = DateTime.now().withMonthOfYear(1).withDayOfMonth(1).minusYears(6).withTimeAtStartOfDay();
+
+        for(int i = 0; i < 7; ++i) {
+            long from = date.getMillis();
+            date = date.plusYears(1);
+            long to = date.getMillis() - 1;
+
+            double totalImport = importBillService.getTotalCostByTime(from, to);
+            double totalReceipt = receiptService.getTotalCostByTime(from, to);
+            double totalSalary = payrollService.getTotalSalaryByTime(from, to);
+
+            result.add(Aggregate.builder()
+                    .label(DateTimeFormat.forPattern("yyyy").print(from))
+                    .totalImport(totalImport)
+                    .totalSalary(totalSalary)
+                    .totalReceipt(totalReceipt)
+                    .totalProfit(totalReceipt - totalImport - totalSalary)
+                    .build());
+        }
+
+        return result;
+    }
 
 
     @Data

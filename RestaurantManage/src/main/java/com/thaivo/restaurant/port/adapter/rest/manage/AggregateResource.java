@@ -20,7 +20,7 @@ public class AggregateResource {
     }
 
 
-    @RequestMapping("")
+    @RequestMapping("/allTime")
     public ResponseEntity<Object> getAllTime(){
         try {
             Aggregate aggregate = aggregateApplication.getAllTime();
@@ -37,6 +37,32 @@ public class AggregateResource {
     public ResponseEntity<Object> getLast7Day(){
         try {
             List<Aggregate> last7day = aggregateApplication.getLast7day();
+
+            return new ResponseEntity<>(last7day, HttpStatus.OK);
+        }
+        catch (Throwable throwable){
+            throwable.printStackTrace();
+            return new ResponseEntity<>(throwable.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping("/last7month")
+    public ResponseEntity<Object> getLast7Month(){
+        try {
+            List<Aggregate> last7day = aggregateApplication.getLast7month();
+
+            return new ResponseEntity<>(last7day, HttpStatus.OK);
+        }
+        catch (Throwable throwable){
+            throwable.printStackTrace();
+            return new ResponseEntity<>(throwable.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping("/last7year")
+    public ResponseEntity<Object> getLast7Year(){
+        try {
+            List<Aggregate> last7day = aggregateApplication.getLast7year();
 
             return new ResponseEntity<>(last7day, HttpStatus.OK);
         }
