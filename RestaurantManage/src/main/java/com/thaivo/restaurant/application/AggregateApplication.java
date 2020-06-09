@@ -53,15 +53,14 @@ public class AggregateApplication {
             date = date.plusDays(1);
             long to = date.getMillis() - 1;
 
-            double totalImport = importBillService.getTotalCostByTime(from, to);
             double totalReceipt = receiptService.getTotalCostByTime(from, to);
 
             result.add(Aggregate.builder()
                     .label(DateTimeFormat.forPattern("dd/MM/yyyy").print(from))
-                    .totalImport(totalImport)
+                    .totalImport(0d)
                     .totalSalary(0d)
                     .totalReceipt(totalReceipt)
-                    .totalProfit(totalReceipt - totalImport)
+                    .totalProfit(0d)
                     .build());
         }
 
