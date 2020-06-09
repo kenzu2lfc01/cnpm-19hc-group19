@@ -4,7 +4,10 @@ import { Navbar, Col } from 'reactstrap';
 import '../../assert/styles/manager.scss';
 import LeftMenu from '../../components/LeftMenu'
 import ManageStaff from './ManageStaff';
-import { requestApiGetAllStaff } from './redux/actions';
+import {
+  requestApiGetAllStaff, requestApiUpdateStaff,
+  requestApiAddStaff, requestApiDeleteStaff
+} from './redux/actions';
 import { connect } from 'react-redux';
 
 class ManagerHomePage extends Component {
@@ -34,7 +37,9 @@ class ManagerHomePage extends Component {
   }
 
   getLeftItems = () => {
-    var { dataStaffs } = this.props;
+    var { dataStaffs, requestApiUpdateStaff,
+      requestApiGetAllStaff, requestApiAddStaff,
+      requestApiDeleteStaff } = this.props;
     return [
       {
         name: "Thống Kê Doanh Thu",
@@ -42,7 +47,13 @@ class ManagerHomePage extends Component {
       },
       {
         name: "Quản lý nhân viên",
-        component: <ManageStaff dataStaffs={dataStaffs} />
+        component: <ManageStaff
+          dataStaffs={dataStaffs}
+          requestApiGetAllStaff={requestApiGetAllStaff}
+          requestApiUpdateStaff={requestApiUpdateStaff}
+          requestApiAddStaff={requestApiAddStaff}
+          requestApiDeleteStaff={requestApiDeleteStaff}
+        />
       },
       {
         name: "Quản lý bàn ăn",
@@ -79,12 +90,18 @@ class ManagerHomePage extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     requestApiGetAllStaff: () => dispatch(requestApiGetAllStaff()),
+    requestApiUpdateStaff: (payload) => dispatch(requestApiUpdateStaff(payload)),
+    requestApiAddStaff: (payload) => dispatch(requestApiAddStaff(payload)),
+    requestApiDeleteStaff: (payload) => dispatch(requestApiDeleteStaff(payload)),
   }
 }
 
 const mapStateToProps = state => (
   {
     dataStaffs: state.managerReducers,
+    dataUpdateStaff: state.managerReducers,
+    managerReducers: state.managerReducers,
+    deleteMessage: state.managerReducers,
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManagerHomePage);
