@@ -5,6 +5,7 @@ import com.thaivo.restaurant.application.AggregateApplication.Aggregate;
 import com.thaivo.restaurant.port.adapter.auth.Authentication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ public class AggregateResource {
 
     @RequestMapping("/allTime")
     @Authentication(positions = {MANAGER})
-    public ResponseEntity<Object> getAllTime(){
+    public ResponseEntity<Object> getAllTime(@RequestHeader(name="Authorization") String token){
         try {
             Aggregate aggregate = aggregateApplication.getAllTime();
 
@@ -39,7 +40,7 @@ public class AggregateResource {
 
     @RequestMapping("/last7day")
     @Authentication(positions = {MANAGER})
-    public ResponseEntity<Object> getLast7Day(){
+    public ResponseEntity<Object> getLast7Day(@RequestHeader(name="Authorization") String token){
         try {
             List<Aggregate> last7day = aggregateApplication.getLast7day();
 
@@ -53,7 +54,7 @@ public class AggregateResource {
 
     @RequestMapping("/last7month")
     @Authentication(positions = {MANAGER})
-    public ResponseEntity<Object> getLast7Month(){
+    public ResponseEntity<Object> getLast7Month(@RequestHeader(name="Authorization") String token){
         try {
             List<Aggregate> last7day = aggregateApplication.getLast7month();
 
@@ -67,7 +68,7 @@ public class AggregateResource {
 
     @RequestMapping("/last7year")
     @Authentication(positions = {MANAGER})
-    public ResponseEntity<Object> getLast7Year(){
+    public ResponseEntity<Object> getLast7Year(@RequestHeader(name="Authorization") String token){
         try {
             List<Aggregate> last7day = aggregateApplication.getLast7year();
 
