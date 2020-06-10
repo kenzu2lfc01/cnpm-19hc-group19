@@ -18,7 +18,9 @@ export default class LeftMenu extends Component {
                 <div class="sidebar">
                     {this.showItems(items)}
                 </div>
-                {items[onSelect].component}
+                <div className="main-manage-staff">
+                    {items[onSelect].component}
+                </div>
             </>
         )
     }

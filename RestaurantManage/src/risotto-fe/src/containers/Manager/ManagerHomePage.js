@@ -4,10 +4,9 @@ import { Navbar, Col } from 'reactstrap';
 import '../../assert/styles/manager.scss';
 import LeftMenu from '../../components/LeftMenu'
 import ManageStaff from './ManageStaff';
+import ManageTable from './ManageTable';
 import {
-  requestApiGetAllStaff, requestApiUpdateStaff,
-  requestApiAddStaff, requestApiDeleteStaff,
-  requestApiUpdateAccount
+  requestApiGetAllStaff
 } from './redux/actions';
 import { connect } from 'react-redux';
 import Aggregate from './aggregate/aggregate';
@@ -39,10 +38,7 @@ class ManagerHomePage extends Component {
   }
 
   getLeftItems = () => {
-    var { dataStaffs, requestApiUpdateStaff,
-      requestApiGetAllStaff, requestApiAddStaff,
-      requestApiDeleteStaff,
-      requestApiUpdateAccount } = this.props;
+    var { dataStaffs } = this.props;
     return [
       {
         name: "Thống Kê Doanh Thu",
@@ -53,15 +49,11 @@ class ManagerHomePage extends Component {
         component: <ManageStaff
           dataStaffs={dataStaffs}
           requestApiGetAllStaff={requestApiGetAllStaff}
-          requestApiUpdateStaff={requestApiUpdateStaff}
-          requestApiAddStaff={requestApiAddStaff}
-          requestApiDeleteStaff={requestApiDeleteStaff}
-          requestApiUpdateAccount={requestApiUpdateAccount}
         />
       },
       {
         name: "Quản lý bàn ăn",
-        component: null
+        component: <ManageTable />
       },
       {
         name: "Quản lý món ăn",
@@ -94,20 +86,12 @@ class ManagerHomePage extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     requestApiGetAllStaff: () => dispatch(requestApiGetAllStaff()),
-    requestApiUpdateStaff: (payload) => dispatch(requestApiUpdateStaff(payload)),
-    requestApiAddStaff: (payload) => dispatch(requestApiAddStaff(payload)),
-    requestApiDeleteStaff: (payload) => dispatch(requestApiDeleteStaff(payload)),
-    requestApiUpdateAccount: (payload) => dispatch(requestApiUpdateAccount(payload)),
   }
 }
 
 const mapStateToProps = state => (
   {
     dataStaffs: state.managerReducers,
-    dataUpdateStaff: state.managerReducers,
-    managerReducers: state.managerReducers,
-    deleteMessage: state.managerReducers,
-    updateAccountData: state.managerReducers,
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManagerHomePage);

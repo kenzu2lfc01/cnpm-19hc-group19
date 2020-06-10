@@ -5,8 +5,14 @@ import moment from 'moment';
 import { POSITIONS } from './constants';
 import { isEqual, cloneDeep } from 'lodash';
 import RisottoModal from '../../components/RisottoModal';
+import {
+    requestApiUpdateStaff,
+    requestApiAddStaff, requestApiDeleteStaff,
+    requestApiUpdateAccount
+} from './redux/actions';
+import { connect } from 'react-redux';
 
-export default class ManageStaff extends Component {
+class ManageStaff extends Component {
     constructor(props) {
         super(props);
 
@@ -41,7 +47,7 @@ export default class ManageStaff extends Component {
         var cloneDataStaffs = cloneDeep(dataStaffs);
 
         return (
-            <div className="main-manage-staff">
+            <>
                 <RisottoModal
                     isShow={isShowModal}
                     title="Thêm Nhân viên"
@@ -78,7 +84,7 @@ export default class ManageStaff extends Component {
                         {this.renderStaffDetailInformation()}
                     </Col>
                 </Row>
-            </div>
+            </>
         )
     }
 
@@ -394,3 +400,22 @@ export default class ManageStaff extends Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        requestApiUpdateStaff: (payload) => dispatch(requestApiUpdateStaff(payload)),
+        requestApiAddStaff: (payload) => dispatch(requestApiAddStaff(payload)),
+        requestApiDeleteStaff: (payload) => dispatch(requestApiDeleteStaff(payload)),
+        requestApiUpdateAccount: (payload) => dispatch(requestApiUpdateAccount(payload)),
+    }
+}
+
+const mapStateToProps = state => (
+    {
+        dataUpdateStaff: state.managerReducers,
+        managerReducers: state.managerReducers,
+        deleteMessage: state.managerReducers,
+        updateAccountData: state.managerReducers,
+    });
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageStaff);
