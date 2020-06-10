@@ -13,7 +13,7 @@ class PrivateNavigate extends Component {
     }
 
     render() {
-        var { access_token, position } = this.state;
+        var { access_token, position } = this.state; 
         return (
             access_token && position
                 ?
