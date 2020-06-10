@@ -17,8 +17,8 @@
 
 .card {
     &.staff-infor {
-        height: 10rem;
-        width: 11rem;
+        height: 11rem;
+        width: 13rem;
         margin: 0% 0% 1% 1%;
     }
 
@@ -37,9 +37,21 @@
     &.btn-edit-account {
         text-align: center;
     }
+
+    &.btn-add-staff {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.btn-add-saff {
+    width: 40%;
 }
 
 .button-edit-delete {
     width: 100%;
+}
 
+.button-confirm-delete {
+    width: 100%;
 }
