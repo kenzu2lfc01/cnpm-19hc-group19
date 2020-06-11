@@ -30,3 +30,9 @@ export const RECEIVE_API_UPDATE_ACCOUNT = "RECEIVE_API_UPDATE_ACCOUNT";
 export const requestApiUpdateAccount = (payload) => ({ type: REQUEST_API_UPDATE_ACCOUNT, payload });
 export const receiveApiUpdateAccount = data => ({ type: RECEIVE_API_UPDATE_ACCOUNT, data });
 
+export const REQUEST_API_ADD_TABLE = "REQUEST_API_ADD_TABLE";
+export const RECEIVE_API_ADD_TABLE = "RECEIVE_API_ADD_TABLE";
+
+export const requestApiAddTable = (payload) => ({ type: REQUEST_API_ADD_TABLE, payload });
+export const receiveApiAddTable = data => ({ type: RECEIVE_API_ADD_TABLE, data });
+
