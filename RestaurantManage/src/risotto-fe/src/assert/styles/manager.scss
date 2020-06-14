@@ -51,37 +51,12 @@
     width: 100%;
 }
 
-.tableFixHead {
-    overflow-y: auto;
-    height: 80%;
-}
-
-.tableFixHead thead th {
-    position: sticky;
-    top: 0;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th,
-td {
-    padding: 8px 16px;
-}
-
-th {
-    background: #5DADE2;
-}
-
 Input {
     position: unset !important;
     width: 20px;
 }
 
 .icon-option {
-
     &:hover {
         cursor: pointer;
     }
@@ -89,24 +64,69 @@ Input {
     &.edit {
         width: 25px;
         height: 25px;
-        margin: 4% 0% 0% 2%
+        margin: 5% 0% 0% 2%
+    }
+
+    &.edit-food {
+        width: 25px;
+        height: 25px;
+        margin: 3% 0% 0% 2%
     }
 
     &.delete {
-        width: 30%;
+        width: 50px;
+        margin-left: 60%;
     }
+
+    &.image {
+        width: 25px;
+    }
+
+    &.select {
+        width: 70px;
+        margin-left: 60%;
+    }
+
 }
 
 .row {
     &.row-warp-option {
         margin-left: 10%;
     }
-
-    &.wrap-icon-delete-option {
-        margin-left: 73%;
-    }
 }
 
 .title-alight-center {
     text-align: center;
+    width: 100%;
+}
+
+.img-food {
+    width: 60vh;
+    margin-left: 13%;
+}
+
+.wrap-add-food {
+    width: 100%;
+    margin-left: 30vh;
+}
+
+.img-edit-food {
+    width: 100%;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.h1-margin-left {
+    margin-left: 30vh;
+}
+
+.date-picker {
+    width: 40%;
+}
+
+
+.wrap-date-picker {
+    margin: 0% 0% 0% 6%;
 }
