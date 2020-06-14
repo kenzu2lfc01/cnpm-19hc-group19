@@ -10,6 +10,7 @@ import {
 } from './redux/actions';
 import { connect } from 'react-redux';
 import Aggregate from './aggregate/aggregate';
+import Assigned from './assigned/assigned';
 
 class ManagerHomePage extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class ManagerHomePage extends Component {
       },
       {
         name: "Phân công ca làm",
-        component: null
+        component: <Assigned />
       },
       {
         name: "Bảng lương nhân viên",
