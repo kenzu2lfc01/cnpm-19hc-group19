@@ -5,6 +5,8 @@ import '../../assert/styles/manager.scss';
 import LeftMenu from '../../components/LeftMenu'
 import ManageStaff from './ManageStaff';
 import ManageTable from './ManageTable';
+import ManageFood from './ManageFood';
+import ManageImportBill from './ManageImportBill';
 import {
   requestApiGetAllStaff
 } from './redux/actions';
@@ -58,11 +60,11 @@ class ManagerHomePage extends Component {
       },
       {
         name: "Quản lý món ăn",
-        component: null
+        component: <ManageFood />
       },
       {
         name: "Quản lý phiếu nhập",
-        component: null
+        component: <ManageImportBill />
       },
       {
         name: "Quản lý đơn hàng",

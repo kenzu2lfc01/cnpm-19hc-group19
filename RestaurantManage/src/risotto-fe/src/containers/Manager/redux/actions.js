@@ -36,3 +36,33 @@ export const RECEIVE_API_ADD_TABLE = "RECEIVE_API_ADD_TABLE";
 export const requestApiAddTable = (payload) => ({ type: REQUEST_API_ADD_TABLE, payload });
 export const receiveApiAddTable = data => ({ type: RECEIVE_API_ADD_TABLE, data });
 
+export const REQUEST_API_DELETE_TABLE = "REQUEST_API_DELETE_TABLE";
+export const RECEIVE_API_DELETE_TABLE = "RECEIVE_API_DELETE_TABLE";
+
+export const requestApiDeleteTable = (payload) => ({ type: REQUEST_API_DELETE_TABLE, payload });
+export const receiveApiDeleteTable = data => ({ type: RECEIVE_API_DELETE_TABLE, data });
+
+export const REQUEST_API_UPDATE_TABLE = "REQUEST_API_UPDATE_TABLE";
+export const RECEIVE_API_UPDATE_TABLE = "RECEIVE_API_UPDATE_TABLE";
+
+export const requestApiUpdateTable = (payload) => ({ type: REQUEST_API_UPDATE_TABLE, payload });
+export const receiveApiUpdateTable = data => ({ type: RECEIVE_API_UPDATE_TABLE, data });
+
+export const REQUEST_API_ADD_FOOD = "REQUEST_API_ADD_FOOD";
+export const RECEIVE_API_ADD_FOOD = "RECEIVE_API_ADD_FOOD";
+
+export const requestApiAddFood = (payload) => ({ type: REQUEST_API_ADD_FOOD, payload });
+export const receiveApiAddFood = data => ({ type: RECEIVE_API_ADD_FOOD, data });
+
+export const REQUEST_API_DELETE_FOOD = "REQUEST_API_DELETE_FOOD";
+export const RECEIVE_API_DELETE_FOOD = "RECEIVE_API_DELETE_FOOD";
+
+export const requestApiDeleteFood = (payload) => ({ type: REQUEST_API_DELETE_FOOD, payload });
+export const receiveApiDeleteFood = data => ({ type: RECEIVE_API_DELETE_FOOD, data });
+
+
+export const REQUEST_API_GET_IMPORT_BILL_BY_DATE = "REQUEST_API_GET_IMPORT_BILL_BY_DATE";
+export const RECEIVE_API_GET_IMPORT_BILL_BY_DATE = "RECEIVE_API_GET_IMPORT_BILL_BY_DATE";
+
+export const requestApiGetImportBillByDate = (payload) => ({ type: REQUEST_API_GET_IMPORT_BILL_BY_DATE, payload });
+export const receiveApiGetImportBillByDate = data => ({ type: RECEIVE_API_GET_IMPORT_BILL_BY_DATE, data });

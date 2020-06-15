@@ -17,20 +17,21 @@ class ManageStaff extends Component {
         super(props);
 
         var { dataStaffs } = this.props;
+        var cloneDataStaff = {}
         if (dataStaffs && dataStaffs.length > 0) {
-            this.state = {
-                selectedStaff: { ...dataStaffs[0] },
-                newDataStaff: {
-                    position: POSITIONS[0].eng
-                },
-                isDisable: true,
-                isAccountDisable: true,
-                isShowModal: false,
-                isShowConfirmModal: false,
-                password: ""
-            }
+            cloneDataStaff = { ...dataStaffs[0] };
         }
-
+        this.state = {
+            selectedStaff: cloneDataStaff,
+            newDataStaff: {
+                position: POSITIONS[0].eng
+            },
+            isDisable: true,
+            isAccountDisable: true,
+            isShowModal: false,
+            isShowConfirmModal: false,
+            password: ""
+        }
     }
 
     componentDidUpdate(prevProps) {

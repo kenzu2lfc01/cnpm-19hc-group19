@@ -1,4 +1,5 @@
 import { API_URL } from '../../../../models/risotto-enviroment';
+import { sortByName } from '../../../../assert/js/sort';
 
 export const getAllTable = async () => {
     const access_Token = 'Bearer ' + sessionStorage.getItem('token');
@@ -13,6 +14,7 @@ export const getAllTable = async () => {
     try {
         const response = await fetch(API_URL + "manage/table/get", requestOption);
         const data = await response.json();
+        sortByName(data);
         return data;
     } catch (ex) {
         console.log(ex);

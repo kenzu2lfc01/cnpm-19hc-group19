@@ -1,7 +1,9 @@
 import {
     RECEIVE_API_GET_ALL_STAFF, RECEIVE_API_UPDATE_STAFF,
     RECEIVE_API_ADD_STAFF, RECEIVE_API_DELETE_STAFF,
-    RECEIVE_API_UPDATE_ACCOUNT, RECEIVE_API_ADD_TABLE
+    RECEIVE_API_UPDATE_ACCOUNT, RECEIVE_API_ADD_TABLE,
+    RECEIVE_API_DELETE_TABLE, RECEIVE_API_UPDATE_TABLE,
+    RECEIVE_API_DELETE_FOOD, RECEIVE_API_GET_IMPORT_BILL_BY_DATE
 } from './actions';
 
 export const managerReducers = (state = {}, { type, data }) => {
@@ -12,9 +14,12 @@ export const managerReducers = (state = {}, { type, data }) => {
         case RECEIVE_API_ADD_STAFF:
         case RECEIVE_API_UPDATE_ACCOUNT:
         case RECEIVE_API_ADD_TABLE:
+        case RECEIVE_API_UPDATE_TABLE:
+        case RECEIVE_API_GET_IMPORT_BILL_BY_DATE:
             return { ...data };
-
         case RECEIVE_API_DELETE_STAFF:
+        case RECEIVE_API_DELETE_TABLE:
+        case RECEIVE_API_DELETE_FOOD:
             return data;
         default:
             return state;
