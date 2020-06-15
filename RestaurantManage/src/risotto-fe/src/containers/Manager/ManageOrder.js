@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RisottoScrollTable from '../../components/RisottoScrollTable';
-import { requestApiFoodData } from '../Employees/Staff/redux/actions';
-import RisottoModal from '../../components/RisottoModal';
-import { requestApiGetImportBillByDate } from './redux/actions';
+import { requestApiGetOrderByDate, requestApiGetOrderById } from './redux/actions';
 import { isEqual } from 'lodash';
-import { DatePicker, Row, Col, Modal } from 'antd';
+import { DatePicker, Row, Col, Modal, Form, Input } from 'antd';
 import 'antd/dist/antd.css';
 import { MinusOutlined } from '@ant-design/icons';
 import { toast } from 'react-toastify';
-import { FormGroup, Label } from 'reactstrap';
+import moment from 'moment';
 
-class ManageImportBill extends Component {
+class ManageOrder extends Component {
     constructor(props) {
         super(props)
         this.state = {
             dateFrom: null,
             dateTo: null,
             visible: false,
-            selectedDescription: ""
+            selectedDescription: null
         }
     }
 
@@ -32,12 +30,17 @@ class ManageImportBill extends Component {
     }
 
     render() {
+        var { dataOrder } = this.props;
+
         return (
             <>
-                {this.renderModalBody()}
+                {dataOrder && dataOrder.id ?
+                    this.renderModalBody(dataOrder) :
+                    <></>
+                }
                 <Row>
                     <Col span={16}>
-                        <h1 className="h1-margin-left">Quản Lý Danh Sách Phiếu Nhập</h1>
+                        <h1 className="h1-margin-left">Quản Lý Danh Sách Đơn Hàng</h1>
                     </Col>
                     <Col span={6} className="wrap-date-picker">
                         <Row>
@@ -79,32 +82,61 @@ class ManageImportBill extends Component {
                     toast.error("Ngày sau không thể nhỏ hơn ngày trước.", "Thông báo", { displayDuration: 3000 });
                     return;
                 }
-                this.props.requestApiGetImportBillByDate({ dateFrom: dateFrom, dateTo: dateTo })
+                this.props.requestApiGetOrderByDate({ dateFrom: dateFrom, dateTo: dateTo })
             }
         }
     }
 
-    renderModalBody = () => {
-        var { selectedDescription } = this.state;
-        return (
-            <Modal
-                title="Thông Tin Món ăn Chi Tiết"
-                visible={this.state.visible}
-                onOk={this.hideModal}
-                onCancel={this.hideModal}
-                okText="Ok"
-                cancelText="Cancel"
-            >
-                <FormGroup>
-                    <Label>{selectedDescription}</Label>
-                </FormGroup>
-            </Modal>
-        )
+    renderModalBody = (dataOrder) => {
+        const layout = {
+            labelCol: { span: 5 },
+            wrapperCol: { span: 20 },
+        };
+        if (dataOrder && dataOrder.orderDetails && dataOrder.orderDetails.length > 0) {
+            var elements = [];
+            dataOrder.orderDetails.forEach(element => {
+                elements.push(
+                    <article>
+                        <Form className="form" {...layout}>
+                            <Form.Item label="Tên Món Ăn">
+                                <Input readOnly value={element.food.name} />
+                            </Form.Item>
+                            <Form.Item label="Giá Tiền">
+                                <Input readOnly value={element.price} />
+                            </Form.Item>
+                            <Form.Item label="Số Lượng">
+                                <Input readOnly value={element.amount} />
+                            </Form.Item>
+                            <Form.Item label="Ghi Chú">
+                                <Input.TextArea readOnly value={element.note} />
+                            </Form.Item>
+                        </Form>
+                    </article>
+                )
+            })
+            return (
+                <Modal
+                    title="Thông Tin Đơn Hàng Chi Tiết"
+                    visible={this.state.visible}
+                    onOk={this.hideModal}
+                    onCancel={this.hideModal}
+                    okText="Ok"
+                    cancelText="Cancel"
+                >
+                    <div className="wrap-grid manage-order">
+                        <div class="modal-order-details">
+                            {elements}
+                        </div>
+                    </div>
+                </Modal >
+            )
+        }
     }
-    showModal = (description) => {
+    showModal = (id) => {
+        this.props.requestApiGetOrderById(id);
         this.setState({
             visible: true,
-            selectedDescription: description
+
         });
     };
 
@@ -116,19 +148,22 @@ class ManageImportBill extends Component {
 
 
     renderContentTable = () => {
-        var { dataImportBills } = this.props;
+        var { dataOrders } = this.props;
         var elements = [];
-        if (dataImportBills && dataImportBills.content && dataImportBills.content.length > 0) {
-            dataImportBills.content.forEach((element, index) => {
+        if (dataOrders && dataOrders.content && dataOrders.content.length > 0) {
+            dataOrders.content.forEach((element, index) => {
                 let stt = ++index;
+                let id = element.id;
+                let createdTime = moment(element.createdAt).format("DD-MM-YYYY h:mm:ss")
                 elements.push(
                     <tr>
                         <td>{stt}</td>
-                        <td>{element.food.name}</td>
-                        <td>{element.totalCost}</td>
+                        <td>{element.staff.name}</td>
+                        <td>{element.table.name}</td>
+                        <td>{createdTime}</td>
                         <td>
                             <img
-                                onClick={() => this.showModal(element.description)}
+                                onClick={() => this.showModal(id)}
                                 className="icon-option details"
                                 src="https://img.pngio.com/icon-detail-icon-png-and-vector-for-free-download-pngtree-detail-png-512_512.png" />
                         </td>
@@ -140,8 +175,9 @@ class ManageImportBill extends Component {
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Tên Món Ăn</th>
-                            <th>Tổng Tiền</th>
+                            <th>Tên Nhân Viên</th>
+                            <th>Tên Bàn</th>
+                            <th>Ngày Tạo</th>
                             <th>Chi Tiết</th>
                         </tr>
                     </thead>
@@ -158,13 +194,15 @@ class ManageImportBill extends Component {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        requestApiGetImportBillByDate: (payload) => dispatch(requestApiGetImportBillByDate(payload)),
+        requestApiGetOrderByDate: (payload) => dispatch(requestApiGetOrderByDate(payload)),
+        requestApiGetOrderById: (payload) => dispatch(requestApiGetOrderById(payload)),
     }
 }
 
 const mapStateToProps = state => (
     {
-        dataImportBills: state.managerImportBillReducers,
+        dataOrders: state.managerOrderByDateReducers,
+        dataOrder: state.managerOrderByIdReducers,
     });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageImportBill);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageOrder);

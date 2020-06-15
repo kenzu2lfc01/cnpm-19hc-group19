@@ -6,6 +6,7 @@ import LeftMenu from '../../components/LeftMenu'
 import ManageStaff from './ManageStaff';
 import ManageTable from './ManageTable';
 import ManageFood from './ManageFood';
+import ManageOrder from './ManageOrder';
 import ManageImportBill from './ManageImportBill';
 import {
   requestApiGetAllStaff
@@ -67,7 +68,7 @@ class ManagerHomePage extends Component {
       },
       {
         name: "Quản lý đơn hàng",
-        component: null
+        component: <ManageOrder />
       },
       {
         name: "Quản lý hóa đơn",

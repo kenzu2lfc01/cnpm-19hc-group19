@@ -60,9 +60,20 @@ export const RECEIVE_API_DELETE_FOOD = "RECEIVE_API_DELETE_FOOD";
 export const requestApiDeleteFood = (payload) => ({ type: REQUEST_API_DELETE_FOOD, payload });
 export const receiveApiDeleteFood = data => ({ type: RECEIVE_API_DELETE_FOOD, data });
 
-
 export const REQUEST_API_GET_IMPORT_BILL_BY_DATE = "REQUEST_API_GET_IMPORT_BILL_BY_DATE";
 export const RECEIVE_API_GET_IMPORT_BILL_BY_DATE = "RECEIVE_API_GET_IMPORT_BILL_BY_DATE";
 
 export const requestApiGetImportBillByDate = (payload) => ({ type: REQUEST_API_GET_IMPORT_BILL_BY_DATE, payload });
 export const receiveApiGetImportBillByDate = data => ({ type: RECEIVE_API_GET_IMPORT_BILL_BY_DATE, data });
+
+export const REQUEST_API_GET_ORDER_BY_DATE = "REQUEST_API_GET_ORDER_BY_DATE";
+export const RECEIVE_API_GET_ORDER_BY_DATE = "RECEIVE_API_GET_ORDER_BY_DATE";
+
+export const requestApiGetOrderByDate = (payload) => ({ type: REQUEST_API_GET_ORDER_BY_DATE, payload });
+export const receiveApiGetOrderByDate = data => ({ type: RECEIVE_API_GET_ORDER_BY_DATE, data });
+
+export const REQUEST_API_GET_ORDER_BY_ID = "REQUEST_API_GET_ORDER_BY_ID";
+export const RECEIVE_API_GET_ORDER_BY_ID = "RECEIVE_API_GET_ORDER_BY_ID";
+
+export const requestApiGetOrderById = (payload) => ({ type: REQUEST_API_GET_ORDER_BY_ID, payload });
+export const receiveApiGetOrderById = data => ({ type: RECEIVE_API_GET_ORDER_BY_ID, data });
