@@ -8,8 +8,8 @@ const Assigned = (props) => {
 
     const [selected, setSelected] = useState();
 
-    const onSelectedStaff = (staffId) => {
-        setSelected(staffId);
+    const onSelectedStaff = (staff) => {
+        setSelected(staff);
     }
 
     return (

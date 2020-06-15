@@ -5,7 +5,7 @@ import { requestGetAllStaff } from './redux/actions'
 const StaffItem = ({staff, onClick, selected}) => {
 
     return(
-        <div onClick={() => onClick(staff.id)}
+        <div onClick={() => selected != staff.id && onClick(staff)}
             style={{padding: 5, border: '1px solid #000', fontSize: 13,
                     margin: 5, cursor: 'pointer', 
                     backgroundColor: selected == staff.id? 'rgb(241, 112, 112)' : '#fff' }}>
@@ -27,9 +27,9 @@ const StaffList = ({onSelected}) => {
         dispatch(requestGetAllStaff());
     }, [])
     
-    const onSelectStaff = (staffId) => {
-        onSelected(staffId);
-        setSelected(staffId);
+    const onSelectStaff = (staff) => {
+        onSelected(staff);
+        setSelected(staff.id);
     }
     
 
@@ -40,7 +40,8 @@ const StaffList = ({onSelected}) => {
                 display: 'grid', gridTemplateColumns: 'auto auto auto auto auto'}}>
                 {
                     staffList.map(staff => 
-                        <StaffItem staff={staff} 
+                        <StaffItem key={staff.id} 
+                            staff={staff} 
                             onClick={onSelectStaff}
                             selected={selected} />)
                 }
