@@ -7,6 +7,7 @@ import ManageStaff from './ManageStaff';
 import ManageTable from './ManageTable';
 import ManageFood from './ManageFood';
 import ManageOrder from './ManageOrder';
+import ManageReceipt from './ManageReceipt';
 import ManageImportBill from './ManageImportBill';
 import {
   requestApiGetAllStaff
@@ -72,7 +73,7 @@ class ManagerHomePage extends Component {
       },
       {
         name: "Quản lý hóa đơn",
-        component: null
+        component: <ManageReceipt />
       },
       {
         name: "Phân công ca làm",

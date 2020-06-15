@@ -16,7 +16,6 @@ class ManageOrder extends Component {
             dateFrom: null,
             dateTo: null,
             visible: false,
-            selectedDescription: null
         }
     }
 

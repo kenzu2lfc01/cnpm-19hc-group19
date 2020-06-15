@@ -279,8 +279,6 @@ export const getAllOrders = async (param) => {
     }
 }
 
-
-
 export const getOrderById = async (param) => {
     const access_Token = 'Bearer ' + sessionStorage.getItem('token');
     const requestOption = {
@@ -293,6 +291,44 @@ export const getOrderById = async (param) => {
     }
     try {
         const response = await fetch(API_URL + "manage/order/get/" + param, requestOption);
+        const data = await response.json();
+        return data;
+    } catch (ex) {
+        console.log(ex);
+    }
+}
+
+export const getAllReceipt = async (param) => {
+    const access_Token = 'Bearer ' + sessionStorage.getItem('token');
+    const requestOption = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': access_Token
+        },
+        redirect: 'follow',
+    }
+    try {
+        const response = await fetch(API_URL + "manage/receipt/get?page=1&size=99999999&from=" + param.dateFrom + "&to=" + param.dateTo, requestOption);
+        const data = await response.json();
+        return data;
+    } catch (ex) {
+        console.log(ex);
+    }
+}
+
+export const getReceiptById = async (param) => {
+    const access_Token = 'Bearer ' + sessionStorage.getItem('token');
+    const requestOption = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': access_Token
+        },
+        redirect: 'follow',
+    }
+    try {
+        const response = await fetch(API_URL + "manage/receipt/get/" + param, requestOption);
         const data = await response.json();
         return data;
     } catch (ex) {

@@ -77,3 +77,16 @@ export const RECEIVE_API_GET_ORDER_BY_ID = "RECEIVE_API_GET_ORDER_BY_ID";
 
 export const requestApiGetOrderById = (payload) => ({ type: REQUEST_API_GET_ORDER_BY_ID, payload });
 export const receiveApiGetOrderById = data => ({ type: RECEIVE_API_GET_ORDER_BY_ID, data });
+
+export const REQUEST_API_GET_RECEIPT_BY_DATE = "REQUEST_API_GET_RECEIPT_BY_DATE";
+export const RECEIVE_API_GET_RECEIPT_BY_DATE = "RECEIVE_API_GET_RECEIPT_BY_DATE";
+
+export const requestApiGetReceiptByDate = (payload) => ({ type: REQUEST_API_GET_RECEIPT_BY_DATE, payload });
+export const receiveApiGetReceiptByDate = data => ({ type: RECEIVE_API_GET_RECEIPT_BY_DATE, data });
+
+export const REQUEST_API_GET_RECEIPT_BY_ID = "REQUEST_API_GET_RECEIPT_BY_ID";
+export const RECEIVE_API_GET_RECEIPT_BY_ID = "RECEIVE_API_GET_RECEIPT_BY_ID";
+
+export const requestApiGetReceiptById = (payload) => ({ type: REQUEST_API_GET_RECEIPT_BY_ID, payload });
+export const receiveApiGetReceiptById = data => ({ type: RECEIVE_API_GET_RECEIPT_BY_ID, data });
+

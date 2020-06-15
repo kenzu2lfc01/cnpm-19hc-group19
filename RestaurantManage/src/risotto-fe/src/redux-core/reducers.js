@@ -3,7 +3,11 @@ import { combineReducers } from "redux";
 import loginReduder from "../containers/Authenication/redux/reducers";
 import { dataTables, dataTable, dataFoods, dataOrderDetails, dataOrderBasic, dataOrderDetailReady, } from "../containers/Employees/Staff/redux/reducers";
 import { dataPendingOrders, dataProcessingOrders, dataUpdateOrders, dataImportBill } from "../containers/Employees/Chef/redux/reducers";
-import { managerReducers, managerImportBillReducers, managerOrderByIdReducers, managerOrderByDateReducers } from '../containers/Manager/redux/reducers';
+import {
+    managerReducers, managerImportBillReducers,
+    managerOrderByIdReducers, managerOrderByDateReducers,
+    managerReceiptIdReducers, managerReceiptReducers
+} from '../containers/Manager/redux/reducers';
 import { tableListResponse, tableDetailResponse, createReceiptResponse } from '../containers/Employees/Cashier/redux/reducer'
 import { aggregateAllTimeResponse, aggregateByTimeResponse } from '../containers/Manager/aggregate/redux/reducers'
 
@@ -14,7 +18,8 @@ const rootReducer = combineReducers({
     dataImportBill, managerReducers,
     tableListResponse, tableDetailResponse, createReceiptResponse,
     aggregateAllTimeResponse, aggregateByTimeResponse, managerImportBillReducers,
-    managerOrderByIdReducers, managerOrderByDateReducers
+    managerOrderByIdReducers, managerOrderByDateReducers,
+    managerReceiptReducers, managerReceiptIdReducers
 })
 
 export default rootReducer;
