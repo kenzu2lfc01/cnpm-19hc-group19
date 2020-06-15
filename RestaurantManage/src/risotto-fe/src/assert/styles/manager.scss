@@ -8,6 +8,32 @@
     &.manage-staff {
         height: 60vh;
     }
+
+    &.manage-order {
+        margin-top: 0%;
+        height: 40vh;
+        box-shadow: none;
+    }
+}
+
+.modal-order-details {
+    display: grid;
+    align-items: stretch;
+}
+
+.modal-order-details>article {
+    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    padding-left: 15px;
+    height: 22vh;
+}
+
+.modal-order-details .text {
+    text-align: center;
+    font-weight: bold;
+}
+.modal-order-details .form{
+    padding: 5% 5% 0% 0%;
 }
 
 .card {
@@ -87,6 +113,11 @@ Input {
         margin-left: 60%;
     }
 
+    &.details {
+        width: 45px;
+        background-color: transparent;
+    }
+
 }
 
 .row {
@@ -125,7 +156,6 @@ Input {
 .date-picker {
     width: 40%;
 }
-
 
 .wrap-date-picker {
     margin: 0% 0% 0% 6%;

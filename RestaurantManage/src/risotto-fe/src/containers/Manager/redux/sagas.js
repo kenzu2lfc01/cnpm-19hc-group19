@@ -10,7 +10,9 @@ import {
     REQUEST_API_UPDATE_TABLE, receiveApiUpdateTable,
     REQUEST_API_ADD_FOOD, receiveApiAddFood,
     REQUEST_API_DELETE_FOOD, receiveApiDeleteFood,
-    REQUEST_API_GET_IMPORT_BILL_BY_DATE, receiveApiGetImportBillByDate
+    REQUEST_API_GET_IMPORT_BILL_BY_DATE, receiveApiGetImportBillByDate,
+    REQUEST_API_GET_ORDER_BY_DATE, receiveApiGetOrderByDate,
+    REQUEST_API_GET_ORDER_BY_ID, receiveApiGetOrderById
 } from './actions';
 import {
     getAllStaffs, updateStaff,
@@ -18,7 +20,8 @@ import {
     updateAccount, createNewTable,
     deleteTables, updateTable,
     addFood, deleteFoods,
-    getAllImportBills
+    getAllImportBills, getAllOrders,
+    getOrderById
 } from './api';
 
 function* fetchAllDataStaffsSaga(action) {
@@ -120,6 +123,24 @@ function* getAllImportBillSaga(action) {
     }
 }
 
+function* getAllOrderSaga(action) {
+    try {
+        const dataOrders = yield call(getAllOrders, action.payload);
+        yield put(receiveApiGetOrderByDate(dataOrders));
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+function* getOrderByIdSaga(action) {
+    try {
+        const dataOrder = yield call(getOrderById, action.payload);
+        yield put(receiveApiGetOrderById(dataOrder));
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 export default function* managerSaga() {
     yield takeLatest(REQUEST_API_GET_ALL_STAFF, fetchAllDataStaffsSaga);
     yield takeLatest(REQUEST_API_UPDATE_STAFF, updateStaffInforSaga);
@@ -132,4 +153,6 @@ export default function* managerSaga() {
     yield takeLatest(REQUEST_API_ADD_FOOD, addFoodSaga);
     yield takeLatest(REQUEST_API_DELETE_FOOD, deleteFoodSaga);
     yield takeLatest(REQUEST_API_GET_IMPORT_BILL_BY_DATE, getAllImportBillSaga);
+    yield takeLatest(REQUEST_API_GET_ORDER_BY_DATE, getAllOrderSaga);
+    yield takeLatest(REQUEST_API_GET_ORDER_BY_ID, getOrderByIdSaga);
 }
