@@ -6,11 +6,12 @@ import { dataPendingOrders, dataProcessingOrders, dataUpdateOrders, dataImportBi
 import {
     managerReducers, managerImportBillReducers,
     managerOrderByIdReducers, managerOrderByDateReducers,
-    managerReceiptIdReducers, managerReceiptReducers
+    managerReceiptIdReducers, managerReceiptReducers,
+    managerPayRollIdReducers
 } from '../containers/Manager/redux/reducers';
 import { tableListResponse, tableDetailResponse, createReceiptResponse } from '../containers/Employees/Cashier/redux/reducer'
 import { aggregateAllTimeResponse, aggregateByTimeResponse } from '../containers/Manager/aggregate/redux/reducers'
-import { listStaffResponse, assignedToStaffResponse, listAssignedOfStaffResponse, deleteAssignedToStaffResponse} from '../containers/Manager/assigned/redux/reducers'
+import { listStaffResponse, assignedToStaffResponse, listAssignedOfStaffResponse, deleteAssignedToStaffResponse } from '../containers/Manager/assigned/redux/reducers'
 
 const rootReducer = combineReducers({
     loginReduder, dataTables, dataTable, dataFoods,
@@ -23,7 +24,7 @@ const rootReducer = combineReducers({
     managerReceiptReducers, managerReceiptIdReducers,
     listStaffResponse, assignedToStaffResponse, listAssignedOfStaffResponse, deleteAssignedToStaffResponse,
     managerImportBillReducers,
-    managerOrderByIdReducers, managerOrderByDateReducers 
+    managerOrderByIdReducers, managerPayRollIdReducers
 })
 
 export default rootReducer;

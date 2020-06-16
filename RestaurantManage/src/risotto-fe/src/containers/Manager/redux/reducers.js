@@ -5,7 +5,8 @@ import {
     RECEIVE_API_DELETE_TABLE, RECEIVE_API_UPDATE_TABLE,
     RECEIVE_API_DELETE_FOOD, RECEIVE_API_GET_IMPORT_BILL_BY_DATE,
     RECEIVE_API_GET_ORDER_BY_DATE, RECEIVE_API_GET_ORDER_BY_ID,
-    RECEIVE_API_GET_RECEIPT_BY_DATE, RECEIVE_API_GET_RECEIPT_BY_ID
+    RECEIVE_API_GET_RECEIPT_BY_DATE, RECEIVE_API_GET_RECEIPT_BY_ID,
+    RECEIVE_API_GET_PAYROLL_BY_ID
 } from './actions';
 
 export const managerReducers = (state = {}, { type, data }) => {
@@ -74,3 +75,11 @@ export const managerReceiptIdReducers = (state = {}, { type, data }) => {
     }
 }
 
+export const managerPayRollIdReducers = (state = {}, { type, data }) => {
+    switch (type) {
+        case RECEIVE_API_GET_PAYROLL_BY_ID:
+            return [...data];
+        default:
+            return state;
+    }
+}

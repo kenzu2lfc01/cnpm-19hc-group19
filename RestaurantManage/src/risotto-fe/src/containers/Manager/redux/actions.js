@@ -90,3 +90,9 @@ export const RECEIVE_API_GET_RECEIPT_BY_ID = "RECEIVE_API_GET_RECEIPT_BY_ID";
 export const requestApiGetReceiptById = (payload) => ({ type: REQUEST_API_GET_RECEIPT_BY_ID, payload });
 export const receiveApiGetReceiptById = data => ({ type: RECEIVE_API_GET_RECEIPT_BY_ID, data });
 
+export const REQUEST_API_GET_PAYROLL_BY_ID = "REQUEST_API_GET_PAYROLL_BY_ID";
+export const RECEIVE_API_GET_PAYROLL_BY_ID = "RECEIVE_API_GET_PAYROLL_BY_ID";
+
+export const requestApiGetPayRollById = (payload) => ({ type: REQUEST_API_GET_PAYROLL_BY_ID, payload });
+export const receiveApiGetPayRollById = data => ({ type: RECEIVE_API_GET_PAYROLL_BY_ID, data });
+

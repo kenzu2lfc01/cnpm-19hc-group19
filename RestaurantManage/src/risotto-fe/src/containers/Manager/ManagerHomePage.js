@@ -9,6 +9,7 @@ import ManageFood from './ManageFood';
 import ManageOrder from './ManageOrder';
 import ManageReceipt from './ManageReceipt';
 import ManageImportBill from './ManageImportBill';
+import StaffSalary from './StaffSalary';
 import {
   requestApiGetAllStaff
 } from './redux/actions';
@@ -82,7 +83,7 @@ class ManagerHomePage extends Component {
       },
       {
         name: "Bảng lương nhân viên",
-        component: null
+        component: <StaffSalary />
       },
     ];
   }

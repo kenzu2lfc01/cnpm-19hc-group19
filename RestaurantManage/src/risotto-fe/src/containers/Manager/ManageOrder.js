@@ -43,9 +43,17 @@ class ManageOrder extends Component {
                     </Col>
                     <Col span={6} className="wrap-date-picker">
                         <Row>
-                            <DatePicker onChange={(date) => this.onChange(date, true)} className="date-picker" size="large" />
+                            <DatePicker
+                                onChange={(date) => this.onChange(date, true)}
+                                className="date-picker" size="large"
+                                disabledDate={d => d.isAfter(Date.now())}
+                            />
                             <MinusOutlined style={{ marginTop: "5%", padding: "0px 3px 0px 4px" }} />
-                            <DatePicker onChange={(date) => this.onChange(date, false)} className="date-picker" size="large" />
+                            <DatePicker
+                                onChange={(date) => this.onChange(date, false)}
+                                className="date-picker" size="large"
+                                disabledDate={d => d.isAfter(Date.now())}
+                            />
                         </Row>
                     </Col>
                 </Row>
@@ -58,29 +66,16 @@ class ManageOrder extends Component {
 
     onChange = (date, isDateFrom) => {
         var { dateFrom, dateTo } = this.state;
-        var dateNow = Date.now();
         if (date) {
             if (isDateFrom) {
                 dateFrom = date.toDate().getTime();
-                if (dateFrom > dateNow) {
-                    toast.error("Ngày bắt đầu không thể lớn hơn ngày hiện tại.", "Thông báo", { displayDuration: 3000 });
-                    return;
-                }
                 this.setState({ dateFrom });
             }
             else {
                 dateTo = date.toDate().getTime();
-                if (dateTo > dateNow) {
-                    toast.error("Ngày kết thúc không thể lớn hơn ngày hiện tại.", "Thông báo", { displayDuration: 3000 });
-                    return;
-                }
                 this.setState({ dateTo });
             }
             if (dateFrom, dateTo) {
-                if (dateFrom > dateTo) {
-                    toast.error("Ngày sau không thể nhỏ hơn ngày trước.", "Thông báo", { displayDuration: 3000 });
-                    return;
-                }
                 this.props.requestApiGetOrderByDate({ dateFrom: dateFrom, dateTo: dateTo })
             }
         }

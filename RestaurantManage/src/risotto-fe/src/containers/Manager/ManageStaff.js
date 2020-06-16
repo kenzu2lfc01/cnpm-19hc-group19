@@ -44,7 +44,7 @@ class ManageStaff extends Component {
 
     render() {
         var { dataStaffs } = this.props;
-        var { isShowModal, isShowConfirmModal } = this.state;
+        var { isShowModal, isShowConfirmModal, selectedStaff } = this.state;
         var cloneDataStaffs = cloneDeep(dataStaffs);
 
         return (
@@ -82,7 +82,11 @@ class ManageStaff extends Component {
                         </div>
                     </Col>
                     <Col xs="6">
-                        {this.renderStaffDetailInformation()}
+                        {
+                            selectedStaff && selectedStaff.account ?
+                                this.renderStaffDetailInformation(selectedStaff) :
+                                <></>
+                        }
                     </Col>
                 </Row>
             </>
@@ -198,8 +202,8 @@ class ManageStaff extends Component {
         this.setState(newDataStaff)
     }
 
-    renderStaffDetailInformation = () => {
-        var { isDisable, selectedStaff, isAccountDisable } = this.state;
+    renderStaffDetailInformation = (selectedStaff) => {
+        var { isDisable, isAccountDisable } = this.state;
         return (
             <>
                 <h2>Thông tin chi tiết nhân viên</h2>
