@@ -8,21 +8,15 @@ import RisottoModal from '../../components/RisottoModal';
 import {
     requestApiUpdateStaff,
     requestApiAddStaff, requestApiDeleteStaff,
-    requestApiUpdateAccount
+    requestApiUpdateAccount, requestApiGetAllStaff
 } from './redux/actions';
 import { connect } from 'react-redux';
 
 class ManageStaff extends Component {
     constructor(props) {
         super(props);
-
-        var { dataStaffs } = this.props;
-        var cloneDataStaff = {}
-        if (dataStaffs && dataStaffs.length > 0) {
-            cloneDataStaff = { ...dataStaffs[0] };
-        }
         this.state = {
-            selectedStaff: cloneDataStaff,
+            selectedStaff: null,
             newDataStaff: {
                 position: POSITIONS[0].eng
             },
@@ -30,15 +24,31 @@ class ManageStaff extends Component {
             isAccountDisable: true,
             isShowModal: false,
             isShowConfirmModal: false,
-            password: ""
+            password: "",
+            checker: false,
         }
     }
 
-    componentDidUpdate(prevProps) {
-        var { requestApiGetAllStaff } = this.props;
+    componentDidMount() {
+        this.props.requestApiGetAllStaff();
+    }
 
-        if (!isEqual(prevProps, this.props)) {
-            requestApiGetAllStaff();
+    componentDidUpdate(prevProps) {
+        var { checker, selectedStaff } = this.state;
+        var { dataStaffs } = this.props;
+
+        if (checker) {
+            this.props.requestApiGetAllStaff()
+            if (!isEqual(prevProps.dataStaffs, dataStaffs)) {
+                this.setState({
+                    checker: false
+                })
+            }
+        }
+
+        if (dataStaffs && dataStaffs.length > 0 && selectedStaff == null) {
+            selectedStaff = { ...dataStaffs[0] };
+            this.setState({ selectedStaff });
         }
     }
 
@@ -74,8 +84,8 @@ class ManageStaff extends Component {
                         </Row>
                         <div className="wrap-grid manage-staff">
                             <Row>
-                                {cloneDataStaffs && cloneDataStaffs.length > 0 ?
-                                    this.renderStaffsInformation(cloneDataStaffs) :
+                                {cloneDataStaffs && selectedStaff && cloneDataStaffs.length > 0 ?
+                                    this.renderStaffsInformation(cloneDataStaffs, selectedStaff) :
                                     <></>
                                 }
                             </Row>
@@ -93,9 +103,8 @@ class ManageStaff extends Component {
         )
     }
 
-    renderStaffsInformation = (dataStaffs) => {
+    renderStaffsInformation = (dataStaffs, selectedStaff) => {
         var elements = [];
-        var { selectedStaff } = this.state;
         for (var item of dataStaffs) {
             let dataStaff = item;
             if (selectedStaff.id == dataStaff.id) {
@@ -123,18 +132,19 @@ class ManageStaff extends Component {
     onAddNewStaff = () => {
         var { newDataStaff } = this.state;
         var { requestApiAddStaff } = this.props;
+        this.setState({
+            newDataStaff: {
+                position: POSITIONS[0].eng
+            },
+            checker: true,
+            isShowModal: false
+        });
         requestApiAddStaff({
             name: newDataStaff.name,
             phone: newDataStaff.phone,
             salary: newDataStaff.salary,
             allowance: newDataStaff.allowance,
             position: newDataStaff.position
-        });
-        this.setState({
-            newDataStaff: {
-                position: POSITIONS[0].eng
-            },
-            isShowModal: false
         });
     }
 
@@ -296,7 +306,8 @@ class ManageStaff extends Component {
             )
         }
         this.setState({
-            isAccountDisable: isDisable
+            isAccountDisable: isDisable,
+            checker: true,
         })
     }
 
@@ -325,7 +336,8 @@ class ManageStaff extends Component {
     onDeleteStaff = (id) => {
         this.props.requestApiDeleteStaff(id);
         this.setState({
-            isShowConfirmModal: false
+            isShowConfirmModal: false,
+            checker: true,
         })
     }
 
@@ -376,13 +388,14 @@ class ManageStaff extends Component {
     onUpdateStaffInfo = (isUpdate) => {
         var { requestApiUpdateStaff } = this.props;
         var { isDisable, selectedStaff } = this.state;
+        this.setState({
+            isDisable: !isDisable,
+        })
+
         if (isUpdate) {
+            this.setState({ checker: true })
             requestApiUpdateStaff(selectedStaff);
         }
-
-        this.setState({
-            isDisable: !isDisable
-        })
     }
 
     renderCardBody = (item) => {
@@ -408,6 +421,7 @@ class ManageStaff extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        requestApiGetAllStaff: () => dispatch(requestApiGetAllStaff()),
         requestApiUpdateStaff: (payload) => dispatch(requestApiUpdateStaff(payload)),
         requestApiAddStaff: (payload) => dispatch(requestApiAddStaff(payload)),
         requestApiDeleteStaff: (payload) => dispatch(requestApiDeleteStaff(payload)),
@@ -421,6 +435,7 @@ const mapStateToProps = state => (
         managerReducers: state.managerReducers,
         deleteMessage: state.managerReducers,
         updateAccountData: state.managerReducers,
+        dataStaffs: state.managerAllStaffReducers,
     });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageStaff);

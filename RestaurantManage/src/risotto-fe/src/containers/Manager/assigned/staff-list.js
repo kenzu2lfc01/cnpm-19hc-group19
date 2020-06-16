@@ -8,7 +8,7 @@ const StaffItem = ({ staff, onClick, selected }) => {
         <div onClick={() => selected != staff.id && onClick(staff)}
             style={{
                 padding: 5, border: '1px solid #000', fontSize: 13,
-                margin: 5, cursor: 'pointer', height: 100,
+                margin: 5, cursor: 'pointer',
                 backgroundColor: selected == staff.id ? 'rgb(241, 112, 112)' : '#fff'
             }}>
             <div>{staff.name}</div>
@@ -39,7 +39,7 @@ const StaffList = ({ onSelected }) => {
         <div>
             <h2 style={{ textAlign: "left" }}>Danh sách nhân viên</h2>
             <div style={{
-                height: 300, border: '1px solid #000', overflowY: 'auto',
+                height: 200, border: '1px solid #000', overflowY: 'auto',
                 display: 'grid', gridTemplateColumns: 'auto auto auto auto auto',
                 paddingBottom: '0%'
             }}>

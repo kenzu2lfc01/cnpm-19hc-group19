@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RisottoScrollTable from '../../components/RisottoScrollTable';
-import { requestApiFoodData } from '../Employees/Staff/redux/actions';
-import RisottoModal from '../../components/RisottoModal';
 import { requestApiGetImportBillByDate } from './redux/actions';
 import { isEqual } from 'lodash';
 import { DatePicker, Row, Col, Modal } from 'antd';

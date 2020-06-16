@@ -10,20 +10,12 @@ import ManageOrder from './ManageOrder';
 import ManageReceipt from './ManageReceipt';
 import ManageImportBill from './ManageImportBill';
 import StaffSalary from './StaffSalary';
-import {
-  requestApiGetAllStaff
-} from './redux/actions';
-import { connect } from 'react-redux';
 import Aggregate from './aggregate/aggregate';
 import Assigned from './assigned/assigned';
 
 class ManagerHomePage extends Component {
   constructor(props) {
     super(props)
-  }
-
-  componentWillMount() {
-    this.props.requestApiGetAllStaff()
   }
 
   render() {
@@ -44,7 +36,6 @@ class ManagerHomePage extends Component {
   }
 
   getLeftItems = () => {
-    var { dataStaffs } = this.props;
     return [
       {
         name: "Thống Kê Doanh Thu",
@@ -52,10 +43,7 @@ class ManagerHomePage extends Component {
       },
       {
         name: "Quản lý nhân viên",
-        component: <ManageStaff
-          dataStaffs={dataStaffs}
-          requestApiGetAllStaff={requestApiGetAllStaff}
-        />
+        component: <ManageStaff />
       },
       {
         name: "Quản lý bàn ăn",
@@ -87,17 +75,6 @@ class ManagerHomePage extends Component {
       },
     ];
   }
-
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    requestApiGetAllStaff: () => dispatch(requestApiGetAllStaff()),
-  }
 }
 
-const mapStateToProps = state => (
-  {
-    dataStaffs: state.managerReducers,
-  });
-
-export default connect(mapStateToProps, mapDispatchToProps)(ManagerHomePage);
+export default ManagerHomePage;

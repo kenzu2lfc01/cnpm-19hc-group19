@@ -7,7 +7,8 @@ import {
     managerReducers, managerImportBillReducers,
     managerOrderByIdReducers, managerOrderByDateReducers,
     managerReceiptIdReducers, managerReceiptReducers,
-    managerPayRollIdReducers
+    managerPayRollIdReducers, managerAddPayRollIdReducers,
+    managerAllStaffReducers
 } from '../containers/Manager/redux/reducers';
 import { tableListResponse, tableDetailResponse, createReceiptResponse } from '../containers/Employees/Cashier/redux/reducer'
 import { aggregateAllTimeResponse, aggregateByTimeResponse } from '../containers/Manager/aggregate/redux/reducers'
@@ -23,8 +24,8 @@ const rootReducer = combineReducers({
     managerOrderByIdReducers, managerOrderByDateReducers,
     managerReceiptReducers, managerReceiptIdReducers,
     listStaffResponse, assignedToStaffResponse, listAssignedOfStaffResponse, deleteAssignedToStaffResponse,
-    managerImportBillReducers,
-    managerOrderByIdReducers, managerPayRollIdReducers
+    managerImportBillReducers, managerAllStaffReducers,
+    managerOrderByIdReducers, managerPayRollIdReducers, managerAddPayRollIdReducers
 })
 
 export default rootReducer;

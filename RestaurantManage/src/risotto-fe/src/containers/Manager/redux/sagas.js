@@ -15,7 +15,8 @@ import {
     REQUEST_API_GET_ORDER_BY_ID, receiveApiGetOrderById,
     REQUEST_API_GET_RECEIPT_BY_ID, receiveApiGetReceiptById,
     REQUEST_API_GET_RECEIPT_BY_DATE, receiveApiGetReceiptByDate,
-    REQUEST_API_GET_PAYROLL_BY_ID, receiveApiGetPayRollById
+    REQUEST_API_GET_PAYROLL_BY_ID, receiveApiGetPayRollById,
+    REQUEST_API_ADD_PAYROLL, receiveApiAddPayRoll
 } from './actions';
 import {
     getAllStaffs, updateStaff,
@@ -25,7 +26,8 @@ import {
     addFood, deleteFoods,
     getAllImportBills, getAllOrders,
     getOrderById, getReceiptById,
-    getAllReceipt, getPayRollById
+    getAllReceipt, getPayRollById,
+    addPayRoll
 } from './api';
 
 function* fetchAllDataStaffsSaga(action) {
@@ -172,6 +174,15 @@ function* getPayRollByIdSaga(action) {
     }
 }
 
+function* addPayRollSaga(action) {
+    try {
+        const dataAddPayRoll = yield call(addPayRoll, action.payload);
+        yield put(receiveApiAddPayRoll(dataAddPayRoll));
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 export default function* managerSaga() {
     yield takeLatest(REQUEST_API_GET_ALL_STAFF, fetchAllDataStaffsSaga);
     yield takeLatest(REQUEST_API_UPDATE_STAFF, updateStaffInforSaga);
@@ -189,4 +200,5 @@ export default function* managerSaga() {
     yield takeLatest(REQUEST_API_GET_RECEIPT_BY_ID, getReceiptByIdSaga);
     yield takeLatest(REQUEST_API_GET_PAYROLL_BY_ID, getPayRollByIdSaga);
     yield takeLatest(REQUEST_API_GET_RECEIPT_BY_DATE, getAllReceiptSaga);
+    yield takeLatest(REQUEST_API_ADD_PAYROLL, addPayRollSaga);
 }

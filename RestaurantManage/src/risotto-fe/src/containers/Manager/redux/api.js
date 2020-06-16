@@ -354,3 +354,23 @@ export const getPayRollById = async (param) => {
         console.log(ex);
     }
 }
+
+export const addPayRoll = async (param) => {
+    const access_Token = 'Bearer ' + sessionStorage.getItem('token');
+    const requestOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': access_Token
+        },
+        redirect: 'follow',
+        body: JSON.stringify(param)
+    }
+    try {
+        const response = await fetch(API_URL + "manage/payroll/add", requestOption);
+        const data = await response.json();
+        return data;
+    } catch (ex) {
+        console.log(ex);
+    }
+}

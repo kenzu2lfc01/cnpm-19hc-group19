@@ -96,3 +96,9 @@ export const RECEIVE_API_GET_PAYROLL_BY_ID = "RECEIVE_API_GET_PAYROLL_BY_ID";
 export const requestApiGetPayRollById = (payload) => ({ type: REQUEST_API_GET_PAYROLL_BY_ID, payload });
 export const receiveApiGetPayRollById = data => ({ type: RECEIVE_API_GET_PAYROLL_BY_ID, data });
 
+export const REQUEST_API_ADD_PAYROLL = "REQUEST_API_ADD_PAYROLL";
+export const RECEIVE_API_ADD_PAYROLL = "RECEIVE_API_ADD_PAYROLL";
+
+export const requestApiAddPayRoll = (payload) => ({ type: REQUEST_API_ADD_PAYROLL, payload });
+export const receiveApiAddPayRoll = data => ({ type: RECEIVE_API_ADD_PAYROLL, data });
+

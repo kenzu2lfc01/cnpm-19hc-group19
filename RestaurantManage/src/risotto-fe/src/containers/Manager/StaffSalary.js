@@ -2,16 +2,33 @@ import React, { Component } from 'react'
 import StaffList from './assigned/staff-list';
 import { DatePicker, Row, Col } from 'antd';
 import RisottoScrollTable from '../../components/RisottoScrollTable';
-import { requestApiGetPayRollById } from './redux/actions';
+import { requestApiGetPayRollById, requestApiAddPayRoll } from './redux/actions';
 import { connect } from 'react-redux';
 import { Label, FormGroup, Button } from 'reactstrap';
-import { MinusOutlined } from '@ant-design/icons';
+import { isEqual } from 'lodash';
 
 class StaffSalary extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedStaff: null
+            selectedStaff: null,
+            month: 0,
+            year: 0,
+            checker: true
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        var { selectedStaff, checker } = this.state;
+        if (checker) {
+            if (selectedStaff && selectedStaff.id) {
+                this.props.requestApiGetPayRollById(selectedStaff.id)
+                if (!isEqual(prevProps, this.props)) {
+                    this.setState({
+                        checker: false
+                    })
+                }
+            }
         }
     }
 
@@ -30,7 +47,7 @@ class StaffSalary extends Component {
                                 content={this.renderContentTable(dataPayRoll)} />
                         </Col>
                         <Col span={8}>
-                            <Row style={{ margin: "40px 0px 0px 65px" }}>
+                            <Row style={{ margin: "0px 0px 0px 45px" }}>
                                 <h2 style={{ fontWeight: "bold", color: "#5DADE2", textAlign: "left" }}>Phiếu Tính Lương</h2>
                                 <FormGroup>
                                     <Label>Họ và tên: {selectedStaff.name}</Label>
@@ -53,10 +70,9 @@ class StaffSalary extends Component {
                                 <DatePicker
                                     size="large"
                                     renderExtraFooter={() => 'extra footer'}
-                                    picker="month" />
-                                <MinusOutlined style={{ marginTop: "5%", padding: "0px 3px 0px 4px" }} />
-                                <DatePicker size="large" renderExtraFooter={() => 'extra footer'} picker="year" />
-                                <Button style={{ marginLeft: "2%" }} color="primary">Xác Nhận</Button>
+                                    picker="month"
+                                    onChange={(date) => this.onChange(date)} />
+                                <Button onClick={() => this.onAddPayRoll(selectedStaff.id)} style={{ width: "40%", marginLeft: "2%" }} color="primary">Xác Nhận</Button>
                             </Row>
                         </Col>
                     </Row> :
@@ -66,8 +82,27 @@ class StaffSalary extends Component {
         )
     }
 
+    onChange = (date) => {
+        if (date) {
+            this.setState({
+                month: date.toDate().getMonth() + 1,
+                year: date.toDate().getFullYear(),
+            })
+        }
+    }
+
+    onAddPayRoll = (id) => {
+        var { month, year } = this.state;
+        this.setState({
+            checker: true
+        })
+        this.props.requestApiAddPayRoll({
+            staffId: id,
+            month, year
+        })
+    }
+
     onSelectedStaff = (staff) => {
-        debugger;
         this.props.requestApiGetPayRollById(staff.id)
         this.setState({ selectedStaff: staff })
     }
@@ -109,12 +144,14 @@ class StaffSalary extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         requestApiGetPayRollById: (payload) => dispatch(requestApiGetPayRollById(payload)),
+        requestApiAddPayRoll: (payload) => dispatch(requestApiAddPayRoll(payload)),
     }
 }
 
 const mapStateToProps = state => (
     {
         dataPayRoll: state.managerPayRollIdReducers,
+        dataAddPayRoll: state.managerAddPayRollIdReducers,
     });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaffSalary);
