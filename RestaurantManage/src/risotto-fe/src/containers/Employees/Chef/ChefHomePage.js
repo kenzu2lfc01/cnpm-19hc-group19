@@ -82,7 +82,6 @@ const mapStateToProps = state => (
         dataUpdateOrders: state.dataUpdateOrders,
         dataFoods: state.dataFoods,
         dataImportBill: state.dataImportBill,
-
     });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChefHomePage);

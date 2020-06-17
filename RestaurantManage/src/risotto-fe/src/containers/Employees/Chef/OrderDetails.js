@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Label, Button, Col, Row, FormGroup, Input } from 'reactstrap';
-import { RESPONSE_STATUS } from '../../../models/constants';
 import { ORDER_STATUS } from './constants';
+import { isEqual } from 'lodash';
 
 class OrderDetails extends Component {
     constructor(props) {
@@ -11,13 +11,19 @@ class OrderDetails extends Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
+        this.props.requestApiOrderPendingData();
+        this.props.requestApiOrderProcessingData();
+    }
+
+    componentDidUpdate(prevProps) {
         var { isLoad } = this.state;
-        var { dataUpdateOrders } = this.props;
-        if (dataUpdateOrders.status == RESPONSE_STATUS.success && !isLoad) {
+        if (isLoad) {
             this.props.requestApiOrderPendingData();
             this.props.requestApiOrderProcessingData();
-            isLoad = true;
+            if (!isEqual(prevProps, this.props)) {
+                this.setState({ isLoad: false });
+            }
         }
     }
 
@@ -93,7 +99,7 @@ class OrderDetails extends Component {
         var { requestApiPostUpdateStatus } = this.props;
         requestApiPostUpdateStatus({ id, status });
         this.setState({
-            isLoad: false
+            isLoad: true
         })
     }
 }

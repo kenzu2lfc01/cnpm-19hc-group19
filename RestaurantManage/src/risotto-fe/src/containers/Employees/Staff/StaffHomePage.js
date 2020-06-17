@@ -1,25 +1,44 @@
 import React, { Component } from 'react';
 import { Navbar, Button, FormGroup, Label, Input, Row } from 'reactstrap';
-import { requestApiTableData, requestApiTableByIdData, requestApiFoodData, requestApiPostAddOrder, requestApiPostAddOrderDetails, requestApiOrderReadyData } from './redux/actions';
+import {
+    requestApiTableData, requestApiTableByIdData,
+    requestApiFoodData, requestApiPostAddOrder,
+    requestApiPostAddOrderDetails, requestApiOrderReadyData
+} from './redux/actions';
+import { requestApiPostUpdateStatus } from '../Chef/redux/actions';
 import { connect } from 'react-redux';
 import '../../../assert/styles/staff.scss';
 import OrderDetails from './OrderDetails';
 import TableDetal from './TableDetail';
 import RisottoModal from '../../../components/RisottoModal'
+import { ORDER_STATUS } from '../Chef/constants';
+import { isEqual } from 'lodash';
 
 class StaffHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isShowOrderDetails: false,
-            isShowModal: false
+            isShowModal: false,
+            isLoad: false
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.requestApiTableData();
         this.props.requestApiFoodData();
         this.props.requestApiOrderReadyData();
+    }
+
+    componentDidUpdate(prevProps) {
+        var { isLoad } = this.state;
+        if (isLoad) {
+            this.props.requestApiOrderReadyData();
+            this.props.requestApiFoodData();
+            if (!isEqual(prevProps, this.props)) {
+                this.setState({ isLoad: false });
+            }
+        }
     }
 
     render() {
@@ -86,9 +105,10 @@ class StaffHomePage extends Component {
         var elements = [];
         if (dataOrderDetailReady && dataOrderDetailReady.length > 0) {
             for (var item of dataOrderDetailReady) {
+                let id = item.id;
                 elements.push(
                     <Row>
-                        <FormGroup style={{ width: "40%" }}>
+                        <FormGroup style={{ width: "30%" }}>
                             <Label>Tên Món Ăn</Label>
                             <Input readOnly value={item.food.name}></Input>
                         </FormGroup>
@@ -100,11 +120,20 @@ class StaffHomePage extends Component {
                             <Label>Status</Label>
                             <Input readOnly value={item.status}></Input>
                         </FormGroup>
+                        <FormGroup style={{ width: "20%" }}>
+                            <Button onClick={() => this.updateStatus(id)} color="success" style={{ width: "100%", marginTop: "35px" }}>Cập Nhật</Button>
+                        </FormGroup>
                     </Row>
                 )
             }
         }
         return elements;
+    }
+
+    updateStatus = (id) => {
+        var status = ORDER_STATUS.finish;
+        this.props.requestApiPostUpdateStatus({ id, status })
+        this.setState({ isLoad: true });
     }
 
     onBackToTableDetail = (tableId) => {
@@ -131,8 +160,8 @@ const mapDispatchToProps = dispatch => {
         requestApiTableByIdData: (payload) => dispatch(requestApiTableByIdData(payload)),
         requestApiPostAddOrder: (payload) => dispatch(requestApiPostAddOrder(payload)),
         requestApiPostAddOrderDetails: (payload) => dispatch(requestApiPostAddOrderDetails(payload)),
-        requestApiOrderReadyData: () => dispatch(requestApiOrderReadyData())
-
+        requestApiOrderReadyData: () => dispatch(requestApiOrderReadyData()),
+        requestApiPostUpdateStatus: (payload) => dispatch(requestApiPostUpdateStatus(payload)),
     }
 }
 
@@ -143,7 +172,8 @@ const mapStateToProps = state => (
         dataFoods: state.dataFoods,
         dataOrderBasic: state.dataOrderBasic,
         dataOrderDetails: state.dataOrderDetails,
-        dataOrderDetailReady: state.dataOrderDetailReady
+        dataOrderDetailReady: state.dataOrderDetailReady,
+        dataUpdateOrders: state.dataUpdateOrders,
     });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaffHomePage);

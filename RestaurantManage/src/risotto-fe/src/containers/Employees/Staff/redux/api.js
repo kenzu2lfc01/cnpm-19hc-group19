@@ -1,5 +1,6 @@
 import { API_URL } from '../../../../models/risotto-enviroment';
 import { sortByName } from '../../../../assert/js/sort';
+import { toast } from 'react-toastify';
 
 export const getAllTable = async () => {
     const access_Token = 'Bearer ' + sessionStorage.getItem('token');
@@ -94,8 +95,12 @@ export const addOrderDetails = async (orderInformations) => {
     try {
         const response = await fetch(API_URL + "manage/order_detail/addList", requestOption);
         const data = await response.json();
+        if (data) {
+            toast.success("Đặt món thành công.", "Thông báo", { displayDuration: 3000 });
+        }
         return data;
     } catch (ex) {
+        toast.error("Đặt món thất bại.", "Thông báo", { displayDuration: 3000 });
         console.log(ex);
     }
 }

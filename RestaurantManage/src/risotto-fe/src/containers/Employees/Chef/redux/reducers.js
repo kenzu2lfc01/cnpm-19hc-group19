@@ -6,7 +6,7 @@ import {
 export const dataPendingOrders = (state = {}, { type, data }) => {
     switch (type) {
         case RECEIVE_API_ORDER_PENDING_DATA:
-            return data;
+            return [...data];
         default:
             return state;
     }
@@ -15,7 +15,7 @@ export const dataPendingOrders = (state = {}, { type, data }) => {
 export const dataProcessingOrders = (state = {}, { type, data }) => {
     switch (type) {
         case RECEIVE_API_ORDER_PROCESSING_DATA:
-            return {...data};
+            return [...data];
         default:
             return state;
     }

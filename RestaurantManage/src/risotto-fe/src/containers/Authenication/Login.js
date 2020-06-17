@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../../assert/styles/login.scss';
 import { Button, Form } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
 import { requestApiLogin } from './redux/actions';
 import { connect } from 'react-redux';
 import PrivateNavigate from './PrivateNavigate';
@@ -11,7 +10,7 @@ class Login extends Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
         };
     }
     onLogin = () => {
@@ -38,13 +37,13 @@ class Login extends Component {
 
     render() {
         var { data } = this.props;
+
         if (data && data.Access_Token) {
             return <PrivateNavigate />
         }
 
         return (
             < div className="risotto-container" >
-
                 <Form className="form-login">
                     <h1>Login</h1>
                     <Form.Group>
@@ -54,9 +53,6 @@ class Login extends Component {
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" onChange={e => this.onSavePassword(e)} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
                     </Form.Group>
                     <Button onClick={this.onLogin} className="form-button-login" variant="primary" type="button">
                         Submit

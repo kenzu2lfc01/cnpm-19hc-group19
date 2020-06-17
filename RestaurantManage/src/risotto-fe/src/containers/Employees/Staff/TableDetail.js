@@ -13,7 +13,7 @@ class CreateBill extends Component {
         return (
             <Row>
                 <Col xs="7">
-                    <div style={{ textAlign: "center" }}>
+                    <div className="wrap-table-list ">
                         {this.listTablesRender(dataTables)}
                     </div>
                 </Col>
