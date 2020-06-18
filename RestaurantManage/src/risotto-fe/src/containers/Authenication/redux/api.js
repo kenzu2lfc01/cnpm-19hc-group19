@@ -15,6 +15,7 @@ export const loginApi = async (params) => {
         }
         return result;
     } catch (e) {
+        return { isFail: true };
         console.log(e);
     }
 }

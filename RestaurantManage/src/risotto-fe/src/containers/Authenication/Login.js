@@ -11,9 +11,11 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            isFail: false
         };
     }
-    onLogin = () => {
+    onLogin = (event) => {
+        event.preventDefault();
         if (this.state.username != null && this.state.password != null) {
             this.props.requestApiLogin({ username: this.state.username, password: this.state.password });
         }
@@ -27,11 +29,15 @@ class Login extends Component {
         this.setState({ password: event.target.value })
     }
 
-    componentWillUpdate(nextProps, prevState) {
+    componentWillReceiveProps(nextProps, prevState) {  
         if (nextProps.data.Access_Token) {
             sessionStorage.setItem("token", nextProps.data.Access_Token);
             sessionStorage.setItem("position", nextProps.data.userInfor.position);
             sessionStorage.setItem("name", nextProps.data.userInfor.name);
+        }
+        else if(nextProps.data.isFail === true) {   
+            this.setState({ isFail: true });
+            setTimeout(() => this.setState({ isFail: false }), 1500);
         }
     }
 
@@ -43,21 +49,25 @@ class Login extends Component {
         }
 
         return (
-            < div className="risotto-container" >
-                <Form className="form-login">
-                    <h1>Login</h1>
-                    <Form.Group>
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" placeholder="Enter Username" onChange={e => this.onSaveUsername(e)} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" onChange={e => this.onSavePassword(e)} />
-                    </Form.Group>
-                    <Button onClick={this.onLogin} className="form-button-login" variant="primary" type="button">
-                        Submit
-                </Button>
-                </Form>
+            < div className="risotto-container" style={{ background: 'teal'}} >
+                <div className='containerForm'> 
+                    <form className={this.state.isFail? 'loginForm shake' : 'loginForm'} onSubmit={this.onLogin}>
+                            <h3 className='titleForm'>Đăng nhập để truy cập hệ thống</h3>
+                            <div>
+                                <label className="shadow-text">Tài khoản: </label>
+                                <input type='text' onChange={e => this.onSaveUsername(e)} />
+                            </div>
+
+                            <div>
+                                <label  className="shadow-text">Mật khẩu: </label>
+                                <input type='password' onChange={e => this.onSavePassword(e)} />
+                            </div>
+
+                            <div>
+                                <input type='submit' value='Log in'/>
+                            </div>
+                    </form>
+                </div> 
             </div >
         );
     }
