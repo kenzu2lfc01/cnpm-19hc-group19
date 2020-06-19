@@ -11,11 +11,14 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            isFail: false
+            isFail: false,
+            isLoading: false
         };
     }
     onLogin = (event) => {
         event.preventDefault();
+
+        this.setState({ isLoading: true });
         if (this.state.username != null && this.state.password != null) {
             this.props.requestApiLogin({ username: this.state.username, password: this.state.password });
         }
@@ -30,6 +33,7 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(nextProps, prevState) {  
+        this.setState({ isLoading: false });
         if (nextProps.data.Access_Token) {
             sessionStorage.setItem("token", nextProps.data.Access_Token);
             sessionStorage.setItem("position", nextProps.data.userInfor.position);
@@ -51,7 +55,8 @@ class Login extends Component {
         return (
             < div className="risotto-container" style={{ background: 'teal'}} >
                 <div className='containerForm'> 
-                    <form className={this.state.isFail? 'loginForm shake' : 'loginForm'} onSubmit={this.onLogin}>
+                    <form className={(this.state.isLoading?  'loading ' : '') + (this.state.isFail? 'loginForm shake ' : 'loginForm ')} 
+                        onSubmit={this.onLogin}>
                             <h3 className='titleForm'>Đăng nhập để truy cập hệ thống</h3>
                             <div>
                                 <label className="shadow-text">Tài khoản: </label>
